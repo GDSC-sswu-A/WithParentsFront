@@ -12,6 +12,7 @@ import FamilyComponent from '../component/FamilyComponent'
 import HomeMedicineComponent from '../component/HomeMedicineComponent'
 import RecentPhotoComponent from '../component/RecentPhotoComponent'
 
+
 export default function HomeScreen({navigation}) {
     const today = new Date();
     console.log(today)
@@ -40,6 +41,7 @@ export default function HomeScreen({navigation}) {
 const styles = StyleSheet.create({
    container : {
     flex : 1,
-    backgroundColor : "white"
+    backgroundColor : "white",
+    padding : 100
    }
 });
