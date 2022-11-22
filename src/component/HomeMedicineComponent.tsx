@@ -49,7 +49,7 @@ function MedicineItem(medi) {
 const styles = StyleSheet.create({
     container : {
         backgroundColor : "#F4F5F3",
-        margin: 20,
+        margin: 15,
         padding : 20,
         borderRadius : 10,
         flexDirection : 'row'

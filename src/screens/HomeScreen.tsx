@@ -47,11 +47,12 @@ const styles = StyleSheet.create({
    container : {
     flex : 1,
     backgroundColor : "white",
-    padding : 100
+    padding : 100,
    },
    top : {
     flexDirection : 'row',
-    margin : 10
+    margin : 15,
+    marginTop : 20
    },
    setting : {
     width : 30,
