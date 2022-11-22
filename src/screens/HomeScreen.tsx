@@ -5,7 +5,9 @@ import {
     Text, 
     Button, 
     SafeAreaView,
-    StyleSheet
+    StyleSheet,
+    Image,
+    TouchableOpacity
 } from 'react-native'
 
 import FamilyComponent from '../component/FamilyComponent'
@@ -19,14 +21,20 @@ export default function HomeScreen({navigation}) {
 
     return (
     <SafeAreaView style={styles.container}>
-        <Text>
-            {date}
-        </Text>
-        <Button 
-        title="Setting"
-        onPress={()=>navigation.navigate('Setting')}
-        />
+        <View style={styles.top}>
+        
+       
+        <TouchableOpacity
+        onPress={() => navigation.navigate('Setting')}>
+        <Image
+        style={styles.setting} 
+        source = {require('../img/settingIcon.png')}/>
+        </TouchableOpacity>
  
+        <Text>{date}</Text>
+
+        </View>
+        
         <FamilyComponent/>
         <HomeMedicineComponent date = {date}/>
         <RecentPhotoComponent/>
@@ -40,5 +48,13 @@ const styles = StyleSheet.create({
     flex : 1,
     backgroundColor : "white",
     padding : 100
+   },
+   top : {
+    flexDirection : 'row',
+    margin : 10
+   },
+   setting : {
+    width : 30,
+    height : 30
    }
 });
