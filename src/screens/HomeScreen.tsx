@@ -15,15 +15,12 @@ import RecentPhotoComponent from '../component/RecentPhotoComponent'
 
 export default function HomeScreen({navigation}) {
     const today = new Date();
-    console.log(today)
-    const year = today.getFullYear();
-    const month = today.getMonth() +1;
-    const day = today.getDate();
+    const date = `${today.getMonth()+1}. ${today.getDate()} ${today.getFullYear()}`
 
     return (
     <SafeAreaView style={styles.container}>
         <Text>
-            {month}. {day} {year}
+            {date}
         </Text>
         <Button 
         title="Setting"
@@ -31,7 +28,7 @@ export default function HomeScreen({navigation}) {
         />
  
         <FamilyComponent/>
-        <HomeMedicineComponent/>
+        <HomeMedicineComponent date = {date}/>
         <RecentPhotoComponent/>
     </SafeAreaView>
 
