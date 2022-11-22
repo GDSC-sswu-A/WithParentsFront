@@ -17,7 +17,7 @@ import RecentPhotoComponent from '../component/RecentPhotoComponent'
 
 export default function HomeScreen({navigation}) {
     const today = new Date();
-    const date = `${today.getMonth()+1}. ${today.getDate()} ${today.getFullYear()}`
+    const date = `${today.getFullYear()}. ${today.getMonth()+1}. ${today.getDate()}`
 
     return (
     <SafeAreaView style={styles.container}>
@@ -31,7 +31,8 @@ export default function HomeScreen({navigation}) {
         source = {require('../img/settingIcon.png')}/>
         </TouchableOpacity>
  
-        <Text>{date}</Text>
+        <Text style={styles.date}
+        >{date}</Text>
 
         </View>
         
@@ -52,10 +53,15 @@ const styles = StyleSheet.create({
    top : {
     flexDirection : 'row',
     margin : 15,
-    marginTop : 20
+    marginTop : 20,
+    justifyContent: 'space-between'
    },
    setting : {
     width : 30,
     height : 30
+   },
+   date : {
+    fontWeight: 'bold',
+    fontSize : 20
    }
 });
