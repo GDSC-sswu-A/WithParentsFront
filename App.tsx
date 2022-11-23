@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import SettingScreen from "./src/screens/SettingScreen";
+import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -52,7 +53,17 @@ function App() {
         headerStyle : {
           backgroundColor :'#AEC195',
         },
-
+      })}
+      />
+      <Stack.Screen
+      name="CreateFamily"
+      component={CreateFamilyScreen}
+      options={({navigation})=>({
+        title : 'Creating a New Family',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
       })}
       />
       </Stack.Navigator>

@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-export default function SettingScreen() {
+export default function SettingScreen({navigation}) {
   return (
     <View style={styles.container}>
       {/* <Text style={styles.top}>Setting</Text> */}
@@ -23,7 +23,8 @@ export default function SettingScreen() {
 
       <View style={styles.menus}>
         <Text style={styles.title}>Family setting</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('CreateFamily')}> 
           <Text style={styles.menu}>Creating a New Family</Text>
         </TouchableOpacity>
         <TouchableOpacity>
