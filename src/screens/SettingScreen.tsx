@@ -27,7 +27,8 @@ export default function SettingScreen({navigation}) {
         onPress={() => navigation.navigate('CreateFamily')}> 
           <Text style={styles.menu}>Creating a New Family</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+        onPress={() => navigation.navigate('JoinFamily')}>
           <Text style={styles.menu}>Family registration</Text>
 
         </TouchableOpacity>
