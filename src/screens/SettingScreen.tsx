@@ -9,7 +9,7 @@ import {
 export default function SettingScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.top}>Setting</Text>
+      {/* <Text style={styles.top}>Setting</Text> */}
 
       <View style={styles.menus}>
         <Text style={styles.title}>System setting</Text>
