@@ -11,7 +11,6 @@ const recentPonto = {url : "../img/moon.jpeg"}
 
 export default function RecentPhotoComponent() {
     let image = recentPonto.url
-    console.log(image)
     return (
     <View style={styles.container}>
         <Text style={styles.title}>recently Photo</Text>
