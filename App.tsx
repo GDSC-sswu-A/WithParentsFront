@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./src/screens/HomeScreen";
 import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
+import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,17 @@ function App() {
       component={CreateFamilyScreen}
       options={({navigation})=>({
         title : 'Creating a New Family',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+       <Stack.Screen
+      name="JoinFamily"
+      component={JoinFamilyScreen}
+      options={({navigation})=>({
+        title : 'Family registration',
         headerTintColor: '#FFFFFF',
         headerStyle : {
           backgroundColor :'#AEC195',
