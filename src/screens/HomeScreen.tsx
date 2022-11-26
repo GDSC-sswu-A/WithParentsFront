@@ -1,4 +1,5 @@
 import React from 'react'
+import { format} from 'date-fns'
 import { NavigationContainer } from '@react-navigation/native'
 import { 
     View, 
@@ -16,8 +17,8 @@ import RecentPhotoComponent from '../component/RecentPhotoComponent'
 
 
 export default function HomeScreen({navigation}) {
-    const today = new Date();
-    const date = `${today.getFullYear()}. ${today.getMonth()+1}. ${today.getDate()}`
+    var today = new Date();
+    var date = format(new Date(), "MMM.dd yyyy")
 
     return (
     <SafeAreaView style={styles.container}>
@@ -33,6 +34,7 @@ export default function HomeScreen({navigation}) {
  
         <Text style={styles.date}
         >{date}</Text>
+        {/* <Text>{today}</Text> */}
 
         </View>
         
