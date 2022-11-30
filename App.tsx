@@ -5,16 +5,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "./src/screens/Nav/HomeScreen";
 import SettingScreen from "./src/screens/SettingScreen";
+import GlobalNav from "./src/screens/GlobalNav";
 
 const Stack = createNativeStackNavigator();
-
-function LogoTitle() {
-  return (
-  <Image 
-  source={require('./src/img/withParents.png')} 
-  style={{width:120,resizeMode:'contain'}} /> 
-  ); 
-}
 
 function App() {
   
@@ -30,18 +23,15 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
       screenOptions={{
-
+        
       }}
       initialRouteName="Home">
       <Stack.Screen
       name="Home"
-      component={HomeScreen}
-      options={({navigation})=>({
-        headerTitle : props => <LogoTitle {...props}/>,
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        }
-      })}
+      component={GlobalNav}
+      options={{
+        headerShown : false
+      }}
       />
       <Stack.Screen
       name="Setting"
@@ -51,8 +41,7 @@ function App() {
         headerTintColor: '#FFFFFF',
         headerStyle : {
           backgroundColor :'#AEC195',
-        },
-
+        }
       })}
       />
       </Stack.Navigator>

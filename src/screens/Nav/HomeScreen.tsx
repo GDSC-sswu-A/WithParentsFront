@@ -14,7 +14,7 @@ import {
 import FamilyComponent from '../../component/FamilyComponent'
 import HomeMedicineComponent from '../../component/HomeMedicineComponent'
 import RecentPhotoComponent from '../../component/RecentPhotoComponent'
-
+  
 
 export default function HomeScreen({navigation}) {
     var today = new Date();
