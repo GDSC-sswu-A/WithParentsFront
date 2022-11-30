@@ -25,9 +25,9 @@ function App() {
       screenOptions={{
         
       }}
-      initialRouteName="Home">
+      initialRouteName="Nav">
       <Stack.Screen
-      name="Home"
+      name="Nav"
       component={GlobalNav}
       options={{
         headerShown : false
