@@ -11,9 +11,9 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-import FamilyComponent from '../component/FamilyComponent'
-import HomeMedicineComponent from '../component/HomeMedicineComponent'
-import RecentPhotoComponent from '../component/RecentPhotoComponent'
+import FamilyComponent from '../../component/FamilyComponent'
+import HomeMedicineComponent from '../../component/HomeMedicineComponent'
+import RecentPhotoComponent from '../../component/RecentPhotoComponent'
 
 
 export default function HomeScreen({navigation}) {
@@ -29,7 +29,7 @@ export default function HomeScreen({navigation}) {
         onPress={() => navigation.navigate('Setting')}>
         <Image
         style={styles.setting} 
-        source = {require('../img/settingIcon.png')}/>
+        source = {require('../../img/settingIcon.png')}/>
         </TouchableOpacity>
  
         <Text style={styles.date}
