@@ -1,6 +1,8 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Icon from 'react-native-vector-icons/Ionicons';
+Icon.loadFont()
 
 import HomeScreen from './Nav/HomeScreen'
 import Calender from './Nav/Calender'
@@ -23,12 +25,20 @@ export default function GlobalNav({navigation}) {
     <Tab.Navigator
     initialRouteName="Home"
     screenOptions={{
+      tabBarStyle : {
+        backgroundColor: '#AEC195'
+      },
       tabBarShowLabel: false,
+      tabBarInactiveTintColor: 'white',
+      tabBarActiveTintColor: '#6A7759',
     }}>
       <Tab.Screen
       name='Map'
       component={Map}
       options={({navigation})=>({
+        tabBarIcon: ({color, size})=>{
+          return <Icon name="location-outline" color={color} size={size}/>
+        },
         title : 'Map',
         headerTintColor: '#FFFFFF',
         headerStyle : {
@@ -39,6 +49,9 @@ export default function GlobalNav({navigation}) {
       name='Medicine'
       component={Medicine}
       options={({navigation})=>({
+        tabBarIcon: ({color, size})=>{
+          return <Icon name="alarm-outline" color={color} size={size}/>
+        },
         title : 'Medicine',
         headerTintColor: '#FFFFFF',
         headerStyle : {
@@ -49,6 +62,9 @@ export default function GlobalNav({navigation}) {
       name='Home'
       component={HomeScreen}
       options={({navigation})=>({
+        tabBarIcon: ({color, size})=>{
+          return <Icon name="home-outline" color={color} size={size}/>
+        },
         headerTitle : props => <LogoTitle {...props}/>,
         headerStyle : {
           backgroundColor :'#AEC195',
@@ -58,6 +74,9 @@ export default function GlobalNav({navigation}) {
       name='Calender'
       component={Calender}
       options={({navigation})=>({
+        tabBarIcon: ({color, size})=>{
+          return <Icon name="calendar-outline" color={color} size={size}/>
+        },
         title : 'Calender',
         headerTintColor: '#FFFFFF',
         headerStyle : {
@@ -68,6 +87,9 @@ export default function GlobalNav({navigation}) {
       name='Gallery'
       component={Gallery}
       options={({navigation})=>({
+        tabBarIcon: ({color, size})=>{
+          return <Icon name="images-outline" color={color} size={size}/>
+        },
         title : 'Gallery',
         headerTintColor: '#FFFFFF',
         headerStyle : {
