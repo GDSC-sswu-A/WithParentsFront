@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 Icon.loadFont()
 
 import HomeScreen from './Nav/HomeScreen'
-import Calender from './Nav/Calender'
+import Calendar from './Nav/CalendarScreen'
 import Map from './Nav/Map'
 import Medicine from './Nav/Medicine'
 import Gallery from './Nav/Gallery'
@@ -71,13 +71,13 @@ export default function GlobalNav({navigation}) {
         }
       })}/>
       <Tab.Screen
-      name='Calender'
-      component={Calender}
+      name='Calendar'
+      component={Calendar}
       options={({navigation})=>({
         tabBarIcon: ({color, size})=>{
           return <Icon name="calendar-outline" color={color} size={size}/>
         },
-        title : 'Calender',
+        title : 'Calendar',
         headerTintColor: '#FFFFFF',
         headerStyle : {
           backgroundColor :'#AEC195',
