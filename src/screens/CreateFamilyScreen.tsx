@@ -37,15 +37,13 @@ export default function CreateFamilyScreen({navigation}) {
         <View style={styles.passwd}>
         <Text style={styles.txt}>Enter the Password</Text>
 
-        <View style={styles.Green}>
         <TextInput 
         style={styles.input}
         value={text}
         onChangeText={setText}
         onSubmitEditing={Input}
         returnKeyType="done"
-        />
-        </View>        
+        />   
         </View>
 
 
@@ -93,15 +91,12 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         justifyContent: 'space-between'
     },
-    Green : {
+    input : {
+        padding : 10,
         alignItems : 'center',
         borderRadius : 10,
         width : 208,
         height : 40,
         backgroundColor : "#EFF3EA",
-    },
-    input : {
-        width : 180,
-        height : 40,
     }
 })

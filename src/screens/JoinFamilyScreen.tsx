@@ -26,7 +26,7 @@ const Cancle = ()=>{
 
       <Text style={styles.txt}>Enter the code</Text>
 
-      <View style={styles.Green}>
+      
         <TextInput 
         style={styles.input}
         value={text}
@@ -34,8 +34,6 @@ const Cancle = ()=>{
         onSubmitEditing={Input}
         returnKeyType="done"
         />
-        </View>    
-      
 
     <View style={styles.btn}>
       <GreenButton text='Cacle' on={Cancle}/>
@@ -68,15 +66,13 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         justifyContent: 'space-between'
     },
-    Green : {
+
+  input : {
+      padding : 10,
       alignItems : 'center',
       borderRadius : 10,
       width : 208,
       height : 40,
       backgroundColor : "#EFF3EA",
-  },
-  input : {
-      width : 180,
-      height : 40,
   }
 })
