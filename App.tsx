@@ -3,14 +3,11 @@ import {StatusBar, Platform, Image} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from "./src/screens/Nav/HomeScreen";
 import SettingScreen from "./src/screens/SettingScreen";
-<<<<<<< HEAD
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
-=======
 import GlobalNav from "./src/screens/GlobalNav";
->>>>>>> dev
+
 
 const Stack = createNativeStackNavigator();
 

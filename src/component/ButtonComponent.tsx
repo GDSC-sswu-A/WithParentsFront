@@ -6,9 +6,10 @@ import {
 } from 'react-native';
 
 
-export function GreenButton({text}) {
+export function GreenButton({text, on}) {
   return (
     <TouchableOpacity
+    onPress = {on}
     style={styles.GreenButton}>
     <Text style={styles.white}>{text}</Text>
     </TouchableOpacity>

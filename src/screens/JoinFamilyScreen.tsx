@@ -1,19 +1,45 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, {useState} from 'react'
+import { StyleSheet, Text, View, Keyboard, TextInput } from 'react-native'
 
 import { GreenButton } from '../component/ButtonComponent'
-import { GreenInput } from '../component/InputComponent'
 
-const JoinFamilyScreen = () => {
+const JoinFamilyScreen = ({navigation}) => {
+
+  const [text, setText] = useState('');
+
+  const Input = ()=>{
+    setText('');
+    Keyboard.dismiss();
+    console.log(text)
+}
+
+const Cancle = ()=>{
+    if (navigation?.canGoBack()){
+        navigation.goBack()
+        return true
+    }
+    return false
+}
+
   return (
     <View style={styles.container}>
 
       <Text style={styles.txt}>Enter the code</Text>
-      <GreenInput/>
+
+      <View style={styles.Green}>
+        <TextInput 
+        style={styles.input}
+        value={text}
+        onChangeText={setText}
+        onSubmitEditing={Input}
+        returnKeyType="done"
+        />
+        </View>    
+      
 
     <View style={styles.btn}>
-        <GreenButton text='Cacle'/>
-        <GreenButton text='OK'/>
+      <GreenButton text='Cacle' on={Cancle}/>
+        <GreenButton text='OK' on={Input}/>
         </View>
     </View>
     
@@ -41,5 +67,16 @@ const styles = StyleSheet.create({
         width : 250,
         flexDirection : 'row',
         justifyContent: 'space-between'
-    }
+    },
+    Green : {
+      alignItems : 'center',
+      borderRadius : 10,
+      width : 208,
+      height : 40,
+      backgroundColor : "#EFF3EA",
+  },
+  input : {
+      width : 180,
+      height : 40,
+  }
 })

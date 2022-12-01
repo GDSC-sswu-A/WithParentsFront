@@ -1,12 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { 
+    StyleSheet, 
+    Text, 
+    View, 
+    TextInput,
+    Keyboard,
+    BackHandler,
+} from 'react-native'
 
-import { GreenButton, WhiteButton } from '../component/ButtonComponent';
-
+import { GreenButton } from '../component/ButtonComponent';
 
 const code = { code : 'dsawr'};
 
-export default function CreateFamilyScreen() {
+export default function CreateFamilyScreen({navigation}) {
+    const [text, setText] = useState('');
+
+    const Input = ()=>{
+        setText('');
+        Keyboard.dismiss();
+    }
+
+    const Cancle = ()=>{
+        if (navigation?.canGoBack()){
+            navigation.goBack()
+            return true
+        }
+        return false
+    }
   return (
     <View style={styles.container}>
 
@@ -15,16 +36,26 @@ export default function CreateFamilyScreen() {
 
         <View style={styles.passwd}>
         <Text style={styles.txt}>Enter the Password</Text>
-        <Text>input 자리</Text>
+
+        <View style={styles.Green}>
+        <TextInput 
+        style={styles.input}
+        value={text}
+        onChangeText={setText}
+        onSubmitEditing={Input}
+        returnKeyType="done"
+        />
+        </View>        
         </View>
+
 
         <Text style={styles.ex}>Each family gets one code.</Text>
         <Text style={styles.ex}>Please register as a family.</Text>
         
 
         <View style={styles.btn}>
-        <GreenButton text='Cacle'/>
-        <GreenButton text='OK'/>
+        <GreenButton text='Cacle' on={Cancle}/>
+        <GreenButton text='OK' on={Input}/>
         </View>
         
         
@@ -61,5 +92,16 @@ const styles = StyleSheet.create({
         width : 250,
         flexDirection : 'row',
         justifyContent: 'space-between'
+    },
+    Green : {
+        alignItems : 'center',
+        borderRadius : 10,
+        width : 208,
+        height : 40,
+        backgroundColor : "#EFF3EA",
+    },
+    input : {
+        width : 180,
+        height : 40,
     }
 })
