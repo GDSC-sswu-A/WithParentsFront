@@ -3,20 +3,16 @@ import {StatusBar, Platform, Image} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from "./src/screens/HomeScreen";
+import HomeScreen from "./src/screens/Nav/HomeScreen";
 import SettingScreen from "./src/screens/SettingScreen";
+<<<<<<< HEAD
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
+=======
+import GlobalNav from "./src/screens/GlobalNav";
+>>>>>>> dev
 
 const Stack = createNativeStackNavigator();
-
-function LogoTitle() {
-  return (
-  <Image 
-  source={require('./src/img/withParents.png')} 
-  style={{width:120,resizeMode:'contain'}} /> 
-  ); 
-}
 
 function App() {
   
@@ -32,18 +28,15 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
       screenOptions={{
-
+        
       }}
-      initialRouteName="Home">
+      initialRouteName="Nav">
       <Stack.Screen
-      name="Home"
-      component={HomeScreen}
-      options={({navigation})=>({
-        headerTitle : props => <LogoTitle {...props}/>,
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        }
-      })}
+      name="Nav"
+      component={GlobalNav}
+      options={{
+        headerShown : false
+      }}
       />
       <Stack.Screen
       name="Setting"
@@ -76,6 +69,7 @@ function App() {
         headerStyle : {
           backgroundColor :'#AEC195',
         },
+
       })}
       />
       </Stack.Navigator>

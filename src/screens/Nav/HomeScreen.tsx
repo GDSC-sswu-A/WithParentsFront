@@ -1,4 +1,5 @@
 import React from 'react'
+import { format} from 'date-fns'
 import { NavigationContainer } from '@react-navigation/native'
 import { 
     View, 
@@ -10,14 +11,14 @@ import {
     TouchableOpacity
 } from 'react-native'
 
-import FamilyComponent from '../component/FamilyComponent'
-import HomeMedicineComponent from '../component/HomeMedicineComponent'
-import RecentPhotoComponent from '../component/RecentPhotoComponent'
-
+import FamilyComponent from '../../component/FamilyComponent'
+import HomeMedicineComponent from '../../component/HomeMedicineComponent'
+import RecentPhotoComponent from '../../component/RecentPhotoComponent'
+  
 
 export default function HomeScreen({navigation}) {
-    const today = new Date();
-    const date = `${today.getFullYear()}. ${today.getMonth()+1}. ${today.getDate()}`
+    var today = new Date();
+    var date = format(new Date(), "MMM.dd yyyy")
 
     return (
     <SafeAreaView style={styles.container}>
@@ -28,11 +29,12 @@ export default function HomeScreen({navigation}) {
         onPress={() => navigation.navigate('Setting')}>
         <Image
         style={styles.setting} 
-        source = {require('../img/settingIcon.png')}/>
+        source = {require('../../img/settingIcon.png')}/>
         </TouchableOpacity>
  
         <Text style={styles.date}
         >{date}</Text>
+        {/* <Text>{today}</Text> */}
 
         </View>
         
