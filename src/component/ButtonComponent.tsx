@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
+  View
 } from 'react-native';
 
 
@@ -25,6 +26,16 @@ export function WhiteButton({text}) {
     );
   }
 
+  export function AddButton () {
+    return (
+      
+      <View
+      style={styles.AddButton}>
+        <Text style={styles.add}>+</Text>
+
+      </View>
+    )
+  }
 
 
 const styles = StyleSheet.create({
@@ -53,6 +64,18 @@ const styles = StyleSheet.create({
         color : '#F90C0C',
         fontSize : 20,
         fontWeight : '300'
+    },
+    AddButton : {
+      backgroundColor : '#6A7759',
+      width : 60,
+      height : 60,
+      borderRadius : 100,
+      justifyContent : 'center'
+    },
+    add : {
+      textAlign : 'center',
+      color : 'white',
+      fontSize : 20
     }
 
 });

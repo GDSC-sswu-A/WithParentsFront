@@ -1,13 +1,21 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 
 import CalendarComponent from '../../component/CalendarComponent';
+import { AddButton } from '../../component/ButtonComponent';
 
-export default function Calender() {
+export default function Calender({navigation}) {
+
   return (
     <View style={styles.container}>
-      <CalendarComponent />
-      
+      <CalendarComponent  style={styles.calendar}/>
+      <TouchableOpacity
+      style={styles.bottom}
+      onPress={() => navigation.navigate('AddCalendar')}
+      >
+       <AddButton />
+      </TouchableOpacity>
+
     </View>
   )
 }
@@ -15,7 +23,17 @@ export default function Calender() {
 const styles = StyleSheet.create({
   container : {
     flex : 1,
-    backgroundColor : "white"
+    backgroundColor : "white",
+  },
+  calendar : {
+  },
+  bottom : {
+    flex : 1,
+    height : 60,
+    position : 'absolute',
+    bottom: 0,
+    right : 0,
+    margin : 20
   }
 
 });

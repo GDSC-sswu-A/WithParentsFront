@@ -7,6 +7,7 @@ import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
+import AddCalendar from "./src/screens/Calendar/AddCalendar";
 
 
 const Stack = createNativeStackNavigator();
@@ -57,7 +58,7 @@ function App() {
         },
       })}
       />
-       <Stack.Screen
+      <Stack.Screen
       name="JoinFamily"
       component={JoinFamilyScreen}
       options={({navigation})=>({
@@ -66,7 +67,17 @@ function App() {
         headerStyle : {
           backgroundColor :'#AEC195',
         },
-
+      })}
+      />
+      <Stack.Screen
+      name="AddCalendar"
+      component={AddCalendar}
+      options={({navigation})=>({
+        title : 'New Event',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
       })}
       />
       </Stack.Navigator>
