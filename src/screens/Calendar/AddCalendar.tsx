@@ -7,9 +7,11 @@ import {
   TextInput,
   Keyboard
 } from 'react-native'
+
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { GreenButton } from '../../component/ButtonComponent'
+
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
  
@@ -32,7 +34,6 @@ Date.prototype.format = function(f) {
         }
     });
 };
- 
 String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
@@ -50,7 +51,7 @@ const Cancle = ()=>{
 const Input = ()=>{
   setTitle('');
   Keyboard.dismiss();
-  console.log(title, day, alert)
+  console.log(title, day, alert, time)
 }
 const [data, setData] = useState({
   title : "",
@@ -84,9 +85,25 @@ const handleConfirm = (date) => {
   setDay(date.format("yyyy/MM/dd"))
 };
 
+//Date
+const [time, setTime] = useState("");
+const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+const showTimePicker = () => {
+  setTimePickerVisibility(true);
+};
+const hideTimePicker = () => {
+  setTimePickerVisibility(false);
+};
+const TimeConfirm = (date) => {
+  hideTimePicker();
+  setTime(date.format("HH:MM"))
+};
+
 return (
   <View style={styles.container}>
   <View style={styles.input}>
+
+    {/* Title */}
     <View style={styles.line}>
       <Text style={styles.txt}>TITLE</Text>
       <TextInput
@@ -98,6 +115,7 @@ return (
       ></TextInput>
     </View>
 
+    {/* Day */}
     <View style={styles.line}>
       <Text style={styles.txt}>DATE</Text>
       <TouchableOpacity onPress={showDatePicker}>
@@ -120,13 +138,30 @@ return (
       </TouchableOpacity>	
     </View>
 
+    {/* Time */}
     <View style={styles.line}>
       <Text style={styles.txt}>TIME</Text>
-      <TextInput
-      style = {styles.in}
-      ></TextInput>
+      <TouchableOpacity onPress={showTimePicker}>
+          <TextInput
+            style = {styles.in}
+            pointerEvents="none"
+            placeholder="Select the time"
+            placeholderTextColor="#6A7759"
+            underlineColorAndroid="transparent"
+            editable={false}
+            value={time}
+          />
+          <DateTimePickerModal
+            headerTextIOS="Select the Time"
+            isVisible={isTimePickerVisible}
+            mode="time"
+            onConfirm={TimeConfirm}
+            onCancel={hideTimePicker}
+          />
+      </TouchableOpacity>	
     </View>
 
+    {/* Alert */}
     <View style={styles.line}>
       <Text style={styles.txt}>ALERT</Text>
       <View>
