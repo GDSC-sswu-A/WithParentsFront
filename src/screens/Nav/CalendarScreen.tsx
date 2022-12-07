@@ -8,7 +8,7 @@ export default function Calender({navigation}) {
 
   return (
     <View style={styles.container}>
-      <CalendarComponent  style={styles.calendar}/>
+      <CalendarComponent  />
       <TouchableOpacity
       style={styles.bottom}
       onPress={() => navigation.navigate('AddCalendar')}
@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
   container : {
     flex : 1,
     backgroundColor : "white",
-  },
-  calendar : {
   },
   bottom : {
     flex : 1,

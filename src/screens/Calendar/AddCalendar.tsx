@@ -47,18 +47,11 @@ const Cancle = ()=>{
     }
     return false
 }
-
 const Input = ()=>{
   setTitle('');
   Keyboard.dismiss();
   console.log(title, day, alert, time)
 }
-const [data, setData] = useState({
-  title : "",
-  day : "",
-  time : "",
-  alert : true
-});
 
 // title
 const [title, setTitle] = useState("");

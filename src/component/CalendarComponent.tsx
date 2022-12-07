@@ -10,7 +10,7 @@ export default function CalendarComponent() {
   theme= {{
     selectedDayBackgroundColor: '#6A7759',
     arrowColor : '#6A7759',
-    // todayTextColor : 'blue',
+    todayTextColor : '#6A7759',
     // dotColor : 'green'
   }}
   />
