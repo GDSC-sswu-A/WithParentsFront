@@ -7,7 +7,9 @@ import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
-import GalleryWriteScreen from "./src/screens/GalleryWriteScreen"
+import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
+import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -62,6 +64,18 @@ function App() {
       <Stack.Screen
       name="GalleryWrite"
       component={GalleryWriteScreen}
+      options={({navigation})=>({
+        title : 'Write your memory',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+
+      <Stack.Screen
+      name="WrittenGalleryScreen"
+      component={WrittenGalleryScreen}
       options={({navigation})=>({
         title : 'Write your memory',
         headerTintColor: '#FFFFFF',

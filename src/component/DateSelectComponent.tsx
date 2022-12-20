@@ -34,7 +34,7 @@ Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 
 export default function Home() {
-    const placeholder = "날짜 선택";
+    const placeholder = "Select date";
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [text, onChangeText] = useState("");
@@ -50,7 +50,7 @@ export default function Home() {
     const handleConfirm = (date) => {
         console.warn("dateFormat: ", date.format("yyyy/MM/dd"));
         hideDatePicker();
-        onChangeText(date.format("yyyy년 MM월 dd일"))
+        onChangeText(date.format("yyyy/MM/dd"))
     };
 
     return (
@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     textInput: {
-        fontSize: 17,
+        fontSize: 16,
         color: '#000000',
         height: 50, 
-        width: 160, 
+        width: 155, 
        // borderColor: '#000000', 
        // borderWidth: 3, 
        // borderRadius: 12,
