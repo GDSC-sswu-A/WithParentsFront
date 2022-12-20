@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
 
    },
    ContainerBackground:{
-    width:width-55,
+    width:width-35,
     height:height-150,
     backgroundColor : "#EFF3EA",
     padding:30,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     height : 100,
     width : 280,
     flex:2.5,
-    left:20,
+ 
   },
    
    userText:{
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
    TextBot:{
     flex:0.8,
     backgroundColor: '#EFF3EA',
-    left:20,
    },
    icons:{
    }
