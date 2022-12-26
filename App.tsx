@@ -9,6 +9,8 @@ import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
+import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -48,11 +50,23 @@ function App() {
       })}
       />
      
-      <Stack.Screen
+     <Stack.Screen
       name="CreateFamily"
       component={CreateFamilyScreen}
       options={({navigation})=>({
         title : 'Creating a New Family',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+
+      <Stack.Screen
+      name="Addmedicine"
+      component={AddmedipageScreen}
+      options={({navigation})=>({
+        title : 'Add your medicine',
         headerTintColor: '#FFFFFF',
         headerStyle : {
           backgroundColor :'#AEC195',

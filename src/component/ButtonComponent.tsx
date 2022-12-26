@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  View
+  View,
+  Pressable
 } from 'react-native';
 
+const [isSelect, setSelect] = useState([false]);
+
+const buttonColorChange = () =>{
+ 
+};
 
 export function GreenButton({text, on}) {
   return (
@@ -26,14 +32,42 @@ export function WhiteButton({text}) {
     );
   }
 
-  export function AddButton () {
+  export function YellowButton({text,on}) {
     return (
+      <TouchableOpacity
+      onPress = {on}
+      style={styles.YellowButton}>
+
+      <Text style={styles.black}>{text}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  export function GrayButton({text}){
+    return(
+      <TouchableOpacity
+      onPress = {buttonColorChange}
+       style={styles.GrayButton}
+      >
+      <Text style={styles.black}>{text}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+
+  export function AddButton ({on}) {
+    return (
+        <TouchableOpacity
+        onPress = {on}
+        style={styles.AddButton}>
+        <Text style={styles.add}>+</Text>
+        </TouchableOpacity>
       
-      <View
+     /* <View
       style={styles.AddButton}>
         <Text style={styles.add}>+</Text>
 
-      </View>
+      </View>*/
     )
   }
 
@@ -52,6 +86,12 @@ const styles = StyleSheet.create({
         fontSize : 20,
         fontWeight : '300'
     },
+    black: {
+      textAlign : 'center',
+      color : 'black',
+      fontSize : 15,
+      fontWeight : '300'
+    },
     WhiteButton : {
         backgroundColor : "white",
         borderRadius: 10,
@@ -67,15 +107,33 @@ const styles = StyleSheet.create({
     },
     AddButton : {
       backgroundColor : '#6A7759',
-      width : 60,
-      height : 60,
+      width : 55,
+      height : 55,
       borderRadius : 100,
       justifyContent : 'center'
     },
     add : {
       textAlign : 'center',
       color : 'white',
-      fontSize : 20
+      fontSize : 20,
+    },
+    GrayButton:{
+      backgroundColor : '#EEEDED',
+      width : 30,
+      height : 30,
+      borderRadius : 10,
+      marginRight:17,
+      justifyContent : 'center',
+    },
+
+    YellowButton:{
+      backgroundColor : '#FFFBE9',
+      width : 30,
+      height : 30,
+      borderRadius : 10,
+      marginRight:17,
+      justifyContent : 'center',
     }
+
 
 });

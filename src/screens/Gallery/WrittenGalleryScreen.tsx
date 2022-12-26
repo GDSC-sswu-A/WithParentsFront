@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Dimensions } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import App from '../../component/deleteModal'
+import GalleryDeleteModal from '../../component/GalleryDeleteModal'
 
 import { 
   View, 
@@ -21,8 +21,6 @@ const {width, height} = Dimensions.get('screen');
 
 
 export default function WrittenGalleryScreen ({navigation}) {
-
-
   const [name, setName] = useState('')
 
 
@@ -42,32 +40,24 @@ export default function WrittenGalleryScreen ({navigation}) {
     <View style={styles.TextBot}>
       <Text> ___________________________________________</Text>
       <View style ={styles.icons}>
-      <App></App> 
+      <GalleryDeleteModal></GalleryDeleteModal> 
       </View>
       </View>
     </View>
   </SafeAreaView>
   );
-  
-
 }
 
 const styles = StyleSheet.create({
   container : {
     flex : 1,
-  /*  justifyContent: "center",
-    alignItems: "center",
-    width:width-30,
-    height:height-1000,
-    backgroundColor : "#EFF3EA",*/
-
+    padding:20,
    },
    ContainerBackground:{
-    width:width-35,
-    height:height-150,
-    backgroundColor : "#EFF3EA",
-    padding:30,
-    marginLeft:15,
+    flex:1,
+    backgroundColor : "#E5E7E1",
+    borderRadius: 10,
+    padding:20,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -94,7 +84,6 @@ const styles = StyleSheet.create({
 
    TextBot:{
     flex:0.8,
-    backgroundColor: '#EFF3EA',
    },
    icons:{
    }
