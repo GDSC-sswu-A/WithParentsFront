@@ -20,9 +20,8 @@ Dimensions.get('window').height
 Dimensions.get('window').width
 import { GreenButton } from '../../component/ButtonComponent'
 import { GrayButton } from '../../component/ButtonComponent'
-import DateTimePickerModal from '../../component/DateTimePickerModal';
 import SelectMediTimesModal from '../../component/SelectMediTimesModal'
-import App from '../../component/DateTimePicker2';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 
 export default function AddmedipageScreen({navigation}) {
@@ -31,11 +30,6 @@ export default function AddmedipageScreen({navigation}) {
         navigation.navigate('GalleryWrite')
        }
 
-    const SelectTimes = () =>{
-      <DateTimePickerModal></DateTimePickerModal>
-    }
-    const [time, setTime] = useState("");
-    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const showTimePicker = () => {
       setTimePickerVisibility(true);
     };
@@ -46,7 +40,8 @@ export default function AddmedipageScreen({navigation}) {
       hideTimePicker();
       setTime(date.format("HH:MM"))
     };
-
+    const [time, setTime] = useState("");
+    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const [mediName, setMediName] = React.useState("");
     const [userValue, setUserValue] = React.useState("");
     const [userTimes, setUserTimes] = React.useState("");
@@ -103,27 +98,28 @@ export default function AddmedipageScreen({navigation}) {
             <View style={styles.selectTime}>
             <Text>Time 1</Text>
             {/* Time */}
-            {/*
+            
     <View style={styles.line}>
       <TouchableOpacity onPress={showTimePicker}>
           <TextInput
             style = {styles.in}
             pointerEvents="none"
-            placeholder="Select the time"
             placeholderTextColor="#6A7759"
             underlineColorAndroid="transparent"
             editable={false}
             value={time}
           />
-          <DateTimePickerModal
+         { isTimePickerVisible && (
+         <DateTimePickerModal
             headerTextIOS="Select the Time"
             isVisible={isTimePickerVisible}
             mode="time"
             onConfirm={TimeConfirm}
             onCancel={hideTimePicker}
-          />
+          />)}
       </TouchableOpacity>	
-        </View>*/}
+      
+        </View>
       
             </View>
           </View>
@@ -195,6 +191,22 @@ const styles = StyleSheet.create({
     alignItems : 'center',
     justifyContent:'center',
 
-  }
+  },
+   in : {
+    width : 160,
+    height : 30,
+    borderRadius : 10,
+    backgroundColor : '#FFFBE9',
+    padding : 5,
+    marginLeft : 40,
+    color : '#6A7759',
+
+},
+line : {
+    flexDirection : 'row',
+    justifyContent: 'space-between',
+    marginTop : 20,
+    marginBottom : 20
+},
   
 });

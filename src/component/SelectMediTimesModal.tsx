@@ -9,14 +9,19 @@ const App = () => {
 
   const selectBtn1 = () =>{
     setSelectTimes('1')
+    setModalVisible(false)
   }
   
   const selectBtn2 = () =>{
     setSelectTimes('2')
+    setModalVisible(false)
+
   }
   
   const selectBtn3 = () =>{
     setSelectTimes('3')
+    setModalVisible(false)
+
   }
 
 
