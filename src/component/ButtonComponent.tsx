@@ -7,11 +7,7 @@ import {
   Pressable
 } from 'react-native';
 
-const [isSelect, setSelect] = useState([false]);
 
-const buttonColorChange = () =>{
- 
-};
 
 export function GreenButton({text, on}) {
   return (
@@ -37,7 +33,17 @@ export function WhiteButton({text}) {
       <TouchableOpacity
       onPress = {on}
       style={styles.YellowButton}>
+      <Text style={styles.black}>{text}</Text>
+      </TouchableOpacity>
+    );
+  }
 
+
+  export function YellowGreenButton({text,on}) {
+    return (
+      <TouchableOpacity
+      onPress = {on}
+      style={styles.YellowGreenButton}>
       <Text style={styles.black}>{text}</Text>
       </TouchableOpacity>
     );
@@ -46,7 +52,7 @@ export function WhiteButton({text}) {
   export function GrayButton({text}){
     return(
       <TouchableOpacity
-      onPress = {buttonColorChange}
+      //onPress = {buttonColorChange}
        style={styles.GrayButton}
       >
       <Text style={styles.black}>{text}</Text>
@@ -79,6 +85,14 @@ const styles = StyleSheet.create({
         width : 110,
         height : 40,
         justifyContent: 'center',
+    },
+
+    YellowButton:{
+      backgroundColor : '#FFFBE9',
+      width : 80,
+      height : 30,
+      borderRadius : 10,
+
     },
     white : {
         textAlign : 'center',
@@ -126,14 +140,13 @@ const styles = StyleSheet.create({
       justifyContent : 'center',
     },
 
-    YellowButton:{
-      backgroundColor : '#FFFBE9',
+    YellowGreenButton:{
+      backgroundColor : '#E5E7E1',
       width : 30,
       height : 30,
       borderRadius : 10,
-      marginRight:17,
-      justifyContent : 'center',
-    }
+    },
+
 
 
 });

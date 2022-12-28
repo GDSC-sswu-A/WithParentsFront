@@ -1,11 +1,30 @@
 import React, { useState } from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import { YellowGreenButton } from './ButtonComponent';
 
 const App = () => { 
   const [modalVisible, setModalVisible] =useState(false);
+  const [selectTimes,setSelectTimes] =useState('');
+  const [setWeek,setSelectWeek] =useState('');
+
+  const selectBtn1 = () =>{
+    setSelectTimes('1')
+  }
   
+  const selectBtn2 = () =>{
+    setSelectTimes('2')
+  }
+  
+  const selectBtn3 = () =>{
+    setSelectTimes('3')
+  }
+
+
+
+
   return (
     <View style={styles.centeredView}>
+        
       <Modal
         animationType='slide'
         transparent={true}
@@ -13,16 +32,31 @@ const App = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>Select Times</Text>
+
+            <View style ={styles.selectBtn}>
+              <View style={styles.btn}>
+              <YellowGreenButton text='1' on={selectBtn1}></YellowGreenButton>
+              </View>
+              <View style={styles.btn}>
+              <YellowGreenButton text='2' on={selectBtn2}></YellowGreenButton>
+              </View>
+              <View style={styles.btn}>
+              <YellowGreenButton text='3' on={selectBtn3}></YellowGreenButton>
+              </View>
+
+            </View>
+
             <TouchableHighlight
               //styles.openButton을 복사한뒤 새로운 값 backgroundColor 추가
-              style={{ ...styles.openButton, backgroundColor: '#2196F3'}}
+              style={{ ...styles.hideButton, backgroundColor: '#FFFBE9'}}
               onPress={()=>{
                 setModalVisible(!modalVisible)
               }}
             >
               <Text style={styles.textStyle}>Hide Modal</Text>
             </TouchableHighlight>
+
           </View>
         </View>
       </Modal>
@@ -33,8 +67,9 @@ const App = () => {
           setModalVisible(true)
         }}
       >
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text style={styles.textStyle}>{selectTimes}</Text>
       </TouchableHighlight>
+      <Text style={styles.text}>Times</Text>
     </View>
   )
 }
@@ -44,11 +79,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:22,
+    flexDirection:'row',
   },
+
+  btn:{
+    padding:7,
+
+  },
+  selectBtn:{
+    flexDirection:'row',
+    marginLeft:10,
+    marginBottom:20,
+    },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#789395',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -63,14 +108,29 @@ const styles = StyleSheet.create({
     //반경 지정
     shadowRadius: 3.84,
   },
+  text:{
+    marginLeft:20,
+    color: 'black',
+
+},
   openButton: {
-    backgroundColor: '#f194ff',
-    borderRadius: 20,
-    padding: 10,
+    backgroundColor: '#FFFBE9',
+    borderRadius: 5,
+    width:30,
+    height:30,
+    padding:5,
   },
+
+  hideButton:{
+    backgroundColor: '#FFFBE9',
+    borderRadius: 5,
+    width:90,
+    height:30,
+    padding:5,
+  },
+  
   textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: 'black',
     textAlign: 'center',
   },
   modalText: {

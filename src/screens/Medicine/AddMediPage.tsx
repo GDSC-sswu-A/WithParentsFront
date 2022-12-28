@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Dimensions } from "react-native";
-
+import { YellowButton } from '../../component/ButtonComponent';
 
 import { 
   View, 
@@ -20,9 +20,10 @@ Dimensions.get('window').height
 Dimensions.get('window').width
 import { GreenButton } from '../../component/ButtonComponent'
 import { GrayButton } from '../../component/ButtonComponent'
-import { YellowButton } from '../../component/ButtonComponent';
 import DateTimePickerModal from '../../component/DateTimePickerModal';
-import App from '../../component/meditimesmodal'
+import SelectMediTimesModal from '../../component/SelectMediTimesModal'
+import App from '../../component/DateTimePicker2';
+
 
 export default function AddmedipageScreen({navigation}) {
 
@@ -31,15 +32,26 @@ export default function AddmedipageScreen({navigation}) {
        }
 
     const SelectTimes = () =>{
-     <App></App>
-      
+      <DateTimePickerModal></DateTimePickerModal>
     }
+    const [time, setTime] = useState("");
+    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+    const showTimePicker = () => {
+      setTimePickerVisibility(true);
+    };
+    const hideTimePicker = () => {
+      setTimePickerVisibility(false);
+    };
+    const TimeConfirm = (date) => {
+      hideTimePicker();
+      setTime(date.format("HH:MM"))
+    };
 
-    const [mediValue, setMediValue] = React.useState("");
+    const [mediName, setMediName] = React.useState("");
     const [userValue, setUserValue] = React.useState("");
-    const [mediTimes, setMediTimes] = React.useState("");
+    const [userTimes, setUserTimes] = React.useState("");
 
-//버튼을 누르면 노랑색 누르지 않는다면 회색
+    //버튼을 누르면 노랑색 누르지 않는다면 회색
   return (
   <SafeAreaView style={styles.container}>
     <View style = {styles.greenContainer}>
@@ -59,11 +71,11 @@ export default function AddmedipageScreen({navigation}) {
           <Text style ={styles.fontStyle}>The name of the medicine</Text>
           <TextInput
           style={styles.input}
-          value={mediValue}
+          value={mediName}
           onChange={(event) => {
             const {eventCount, target, text} = event.nativeEvent;
             //onChange={(event) => console.log(event.nativeEvent.text)}
-            setMediValue(text);
+            setMediName(text);
           }}
 
       />
@@ -84,13 +96,35 @@ export default function AddmedipageScreen({navigation}) {
         <View style ={styles.footer}>
         <Text style ={styles.fontStyle}>Take it several times a day?</Text>
           <View style ={styles.selectTimes}>
-            <YellowButton  text={mediTimes} on={SelectTimes}>
-            </YellowButton>
-            <Text>Times</Text>
+       
+            <SelectMediTimesModal></SelectMediTimesModal>
           </View>
           <View style = {styles.dosingTime}>
             <View style={styles.selectTime}>
             <Text>Time 1</Text>
+            {/* Time */}
+            {/*
+    <View style={styles.line}>
+      <TouchableOpacity onPress={showTimePicker}>
+          <TextInput
+            style = {styles.in}
+            pointerEvents="none"
+            placeholder="Select the time"
+            placeholderTextColor="#6A7759"
+            underlineColorAndroid="transparent"
+            editable={false}
+            value={time}
+          />
+          <DateTimePickerModal
+            headerTextIOS="Select the Time"
+            isVisible={isTimePickerVisible}
+            mode="time"
+            onConfirm={TimeConfirm}
+            onCancel={hideTimePicker}
+          />
+      </TouchableOpacity>	
+        </View>*/}
+      
             </View>
           </View>
         </View>
@@ -110,14 +144,14 @@ const styles = StyleSheet.create({
    },
 
    selectUser:{
-    flex:1.3,
+    flex:1,
    },
 
    medicineName:{
-    flex:1.3,
+    flex:1.1,
    },
    medicineWeek:{
-    flex:1.4,
+    flex:1.2,
    },
    weekBtn:{
     flexDirection: 'row',
@@ -155,7 +189,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding:10,
     
-  }
+  },
+  selectTime:{
+    flexDirection: 'row',
+    alignItems : 'center',
+    justifyContent:'center',
 
+  }
   
 });
