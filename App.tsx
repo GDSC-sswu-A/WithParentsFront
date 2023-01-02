@@ -10,8 +10,7 @@ import GlobalNav from "./src/screens/GlobalNav";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import LoginHomeScreen from "./src/screens/login/LoginHomeScreen";
-
-
+import SignUpScreen from "./src/screens/login/SignUpScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -31,6 +30,9 @@ function App() {
       }}
       initialRouteName="Login"
     >
+
+    
+
         
       <Stack.Screen
       name="Nav"
@@ -40,14 +42,21 @@ function App() {
       }}
       />
 
-      <Stack.Screen
+          
+    <Stack.Screen
       name="Login"
       component={LoginHomeScreen}
-      options={({navigation})=>({
-        title : '',
+      options={{
         headerShown : false
-      
-      })}
+      }}
+      />
+
+    <Stack.Screen
+      name="Signup"
+      component={SignUpScreen}
+      options={{
+        headerShown : false
+      }}
       />
 
       <Stack.Screen
