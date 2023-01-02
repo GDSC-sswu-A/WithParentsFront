@@ -9,6 +9,8 @@ import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
+import LoginHomeScreen from "./src/screens/login/LoginHomeScreen";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -26,9 +28,10 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator
       screenOptions={{
-        
       }}
-      initialRouteName="Nav">
+      initialRouteName="Login"
+    >
+        
       <Stack.Screen
       name="Nav"
       component={GlobalNav}
@@ -36,6 +39,17 @@ function App() {
         headerShown : false
       }}
       />
+
+      <Stack.Screen
+      name="Login"
+      component={LoginHomeScreen}
+      options={({navigation})=>({
+        title : '',
+        headerShown : false
+      
+      })}
+      />
+
       <Stack.Screen
       name="Setting"
       component={SettingScreen}
@@ -47,7 +61,7 @@ function App() {
         },
       })}
       />
-     
+           
       <Stack.Screen
       name="CreateFamily"
       component={CreateFamilyScreen}
@@ -97,9 +111,10 @@ function App() {
 
       })}
       />
-
       </Stack.Navigator>
+
    
+
     </NavigationContainer>
   </>
   )
