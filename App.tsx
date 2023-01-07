@@ -7,6 +7,7 @@ import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
+import AddCalendar from "./src/screens/Calendar/AddCalendar"
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
@@ -38,6 +39,8 @@ function App() {
         headerShown : false
       }}
       />
+
+      {/* setting */}
       <Stack.Screen
       name="Setting"
       component={SettingScreen}
@@ -49,7 +52,6 @@ function App() {
         },
       })}
       />
-     
      <Stack.Screen
       name="CreateFamily"
       component={CreateFamilyScreen}
@@ -61,7 +63,19 @@ function App() {
         },
       })}
       />
+       <Stack.Screen
+      name="JoinFamily"
+      component={JoinFamilyScreen}
+      options={({navigation})=>({
+        title : 'Family registration',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
 
+      {/* medicine */}
       <Stack.Screen
       name="Addmedicine"
       component={AddmedipageScreen}
@@ -74,7 +88,7 @@ function App() {
       })}
       />
 
-      
+      {/* galllery */}
       <Stack.Screen
       name="GalleryWrite"
       component={GalleryWriteScreen}
@@ -86,7 +100,6 @@ function App() {
         },
       })}
       />
-
       <Stack.Screen
       name="WrittenGalleryScreen"
       component={WrittenGalleryScreen}
@@ -99,16 +112,16 @@ function App() {
       })}
       />
 
+      {/* calendar */}
        <Stack.Screen
-      name="JoinFamily"
-      component={JoinFamilyScreen}
+      name="AddCalendar"
+      component={AddCalendar}
       options={({navigation})=>({
-        title : 'Family registration',
+        title : 'New Event',
         headerTintColor: '#FFFFFF',
         headerStyle : {
           backgroundColor :'#AEC195',
         },
-
       })}
       />
 
