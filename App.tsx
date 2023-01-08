@@ -31,9 +31,6 @@ function App() {
       initialRouteName="Login"
     >
 
-    
-
-        
       <Stack.Screen
       name="Nav"
       component={GlobalNav}
@@ -70,7 +67,7 @@ function App() {
         },
       })}
       />
-           
+     
       <Stack.Screen
       name="CreateFamily"
       component={CreateFamilyScreen}
@@ -120,10 +117,9 @@ function App() {
 
       })}
       />
+
       </Stack.Navigator>
-
    
-
     </NavigationContainer>
   </>
   )

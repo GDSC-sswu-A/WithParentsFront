@@ -18,6 +18,7 @@ import { LoginButton } from '../../component/ButtonComponent'
 
 export default function LoginHomeScreen({navigation}) {
 
+
 const toGoSignUPBtn =()=>{
   navigation.navigate('Signup')
 

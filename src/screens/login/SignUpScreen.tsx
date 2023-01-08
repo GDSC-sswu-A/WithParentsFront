@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { GreenButton } from '../../component/ButtonComponent'
+
 import { 
   StyleSheet, 
   Text, 
@@ -14,14 +17,19 @@ import {
 
 
 export default function SignUpScreen({navigation}) {
-  const [genderIndex, setGenderIndex] = useState(0);   
-  const genderList = ["Male", "Female", "Other"];
-  const genderChangeHandler = (index) => {
-  // console.log("index \t", index);
-  setGenderIndex((preIndex) => index);
-}
-  
+  let bouncyCheckboxRef: BouncyCheckbox | null = null;
+  const [parentCheckbox, parentSetCheckbox] = React.useState(false);
+  const [childCheckbox,childSetcheckbox] =React.useState(false);
   const [name,setName] = useState('');
+
+  const ClickCancleBtn =()=>{
+    navigation.navigate('Login')
+
+  }
+  const ClickNextBtn =()=>{
+    navigation.navigate('Nav')
+
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoImage}>
@@ -37,38 +45,41 @@ export default function SignUpScreen({navigation}) {
           />
 
       </View>
-      {/*
+      
       <View style ={styles.checkUserType}>
-      <View style={{ flexDirection: "row" }}>
-                    {genderList.map((data, index) => (
-                      <TouchableOpacity
-                        key={data}
-                        style={{
-                          flexDirection: "row",
-                          margin: 10,
-                          flex: 3,
-                          justifyContent: "space-evenly",
-                        }}
-                        onPress={genderChangeHandler.bind(this, index)}
-                      >
-                        <MaterialIcons
-                          name={
-                            index === genderIndex
-                              ? "radio-button-checked"
-                              : "radio-button-unchecked"
-                          }
-                          size={18}
-                          color='#ccc'
-                        />
-                        <Text style={styles.termsText}>{data}</Text>
-                      </TouchableOpacity>
-                    ))}
-</View> 
-                        
+      <BouncyCheckbox
+        style={{ marginTop: 16,marginRight:20 }}
+        textStyle={{
+          textDecorationLine: "none",
+        }}
+       ref={(ref: any) => (bouncyCheckboxRef = ref)}
+        isChecked={parentCheckbox}
+        text="parents"
+        disableBuiltInState
+        onPress={() => parentSetCheckbox(!parentCheckbox)}
+      />
+
+      <BouncyCheckbox
+        style={{ marginTop: 16,marginLeft:50 }}
+        textStyle={{
+          textDecorationLine: "none",
+        }}
+       ref={(ref: any) => (bouncyCheckboxRef = ref)}
+        isChecked={childCheckbox}
+        text="child"
+        disableBuiltInState
+        onPress={() => childSetcheckbox(!childCheckbox)}
+      />
 
       </View>
-                        */}
+              
       <View style ={styles.btnContainer}>
+        <View style ={styles.cancleBtn}>
+          <GreenButton text='Cancle' on={ClickCancleBtn}></GreenButton>
+        </View>
+        <View style ={styles.nextBtn}>
+          <GreenButton text='Next' on={ClickNextBtn}></GreenButton>
+        </View>
 
       </View>
     </SafeAreaView>
@@ -79,11 +90,13 @@ const styles = StyleSheet.create({
 
   container:{
     flex:1,
+    
   },
 
   logoImage:{
     flex:3,
-    backgroundColor : "pink",
+    backgroundColor:"white",
+
   },
 
   input:{
@@ -96,7 +109,7 @@ const styles = StyleSheet.create({
  
   },
   inputName:{
-    flex:1.5,
+    flex:1.3,
     backgroundColor:"white",
     justifyContent: "center",
     alignItems: "center",
@@ -104,17 +117,32 @@ const styles = StyleSheet.create({
     },
 
   checkUserType:{
-    flex:1.5,
-    backgroundColor:"yellow",
+    flex:1,
+    backgroundColor:"white",
+    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight:20
   },
   btnContainer:{
     flex:4,
-    backgroundColor:"green",
+    backgroundColor:"white",
+    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   black:{
     color : 'black',
     fontSize : 17,
-    fontWeight : '300'  }
+    fontWeight : '300'  },
+
+  cancleBtn:{
+      marginRight:40,
+    },
+  
+  nextBtn:{
+    marginLeft:20,
+  }
 
 })
