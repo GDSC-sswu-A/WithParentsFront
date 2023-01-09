@@ -141,7 +141,15 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
-  }
+  },
+  blackText: {
+    textAlign : 'center',
+    color : 'black',
+    fontSize : 15,
+    fontWeight : '300'
+  },
+    
+  
 })
 
 export default App;

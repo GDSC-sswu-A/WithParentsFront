@@ -49,17 +49,6 @@ export function WhiteButton({text}) {
     );
   }
 
-  export function GrayButton({text}){
-    return(
-      <TouchableOpacity
-      //onPress = {buttonColorChange}
-       style={styles.GrayButton}
-      >
-      <Text style={styles.black}>{text}</Text>
-      </TouchableOpacity>
-    )
-  }
-
 
   export function AddButton ({on}) {
     return (
@@ -130,14 +119,6 @@ const styles = StyleSheet.create({
       textAlign : 'center',
       color : 'white',
       fontSize : 20,
-    },
-    GrayButton:{
-      backgroundColor : '#EEEDED',
-      width : 30,
-      height : 30,
-      borderRadius : 10,
-      marginRight:17,
-      justifyContent : 'center',
     },
 
     YellowGreenButton:{

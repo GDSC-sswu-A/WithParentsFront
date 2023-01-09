@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { Dimensions } from "react-native";
-import { YellowButton } from '../../component/ButtonComponent';
 
 import { 
   View, 
@@ -10,6 +9,7 @@ import {
   SafeAreaView,
   StyleSheet,
   TextInput,
+  Pressable,
   Image,
   TouchableOpacity
 } from 'react-native'
@@ -26,6 +26,37 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function AddmedipageScreen({navigation}) {
 
+    
+  const [time, setTime] = useState("");
+  const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [mediName, setMediName] = React.useState("");
+  const [userValue, setUserValue] = React.useState("");
+  //const [btnActive,setBtnActive] =useState('');
+
+  //버튼 색 변경 
+    const [isSelect, setSelect] = useState([false, false, false,false,false,false,false]);
+  
+    const getButton = (id: number,weekData) => {
+      return (
+        <Pressable
+          style={[
+            styles.buttonContainer,
+            {backgroundColor: isSelect[id] ? '#789395' : '#EEEDED'},
+          ]}
+          onPress={() => {
+            setSelect([
+              ...isSelect.slice(0, id),
+              !isSelect[id],
+              ...isSelect.slice(id + 1),
+            ]);
+          }}>
+          <Text style={styles.blackText}>{weekData}</Text>
+        </Pressable>
+      );
+    };
+  
+
+
     const toGoWritePage = () =>{
         navigation.navigate('GalleryWrite')
        }
@@ -40,13 +71,10 @@ export default function AddmedipageScreen({navigation}) {
       hideTimePicker();
       setTime(date.format("HH:MM"))
     };
-    const [time, setTime] = useState("");
-    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
-    const [mediName, setMediName] = React.useState("");
-    const [userValue, setUserValue] = React.useState("");
-    const [userTimes, setUserTimes] = React.useState("");
 
-    //버튼을 누르면 노랑색 누르지 않는다면 회색
+
+    
+
   return (
   <SafeAreaView style={styles.container}>
     <View style = {styles.greenContainer}>
@@ -78,6 +106,31 @@ export default function AddmedipageScreen({navigation}) {
         <View style ={styles.medicineWeek}>
           <Text style ={styles.fontStyle}>What day do you take it?</Text>
            <View style ={styles.weekBtn}>
+
+           {getButton(0,'월')}
+           {getButton(1,'화')}
+           {getButton(2,'수')}
+           {getButton(3,'목')}
+           {getButton(4,'금')}
+           {getButton(5,'토')}
+           {getButton(6,'일')}
+
+             {/*
+        {weekData.map((item,idx)=>{
+          return(
+            <>
+            <TouchableOpacity
+              onPress={toggleActive}
+              style={styles.btn}
+              >
+
+            <Text>{item}</Text>
+            </TouchableOpacity>
+            
+            </>
+          )
+        })}
+           
           <GrayButton text='월'></GrayButton>
           <GrayButton text='화'></GrayButton>
           <GrayButton text='수'></GrayButton>
@@ -85,7 +138,7 @@ export default function AddmedipageScreen({navigation}) {
           <GrayButton text='금'></GrayButton>
           <GrayButton text='토'></GrayButton>
           <GrayButton text='일'></GrayButton>
-
+        */}
           </View>
         </View>
         <View style ={styles.footer}>
@@ -201,12 +254,28 @@ const styles = StyleSheet.create({
     marginLeft : 40,
     color : '#6A7759',
 
+
 },
 line : {
     flexDirection : 'row',
     justifyContent: 'space-between',
     marginTop : 20,
     marginBottom : 20
+},
+
+buttonContainer:{
+  backgroundColor : '#EEEDED',
+  width : 30,
+  height : 30,
+  borderRadius : 10,
+  marginRight:17,
+  justifyContent : 'center',
+},
+blackText: {
+  textAlign : 'center',
+  color : 'black',
+  fontSize : 15,
+  fontWeight : '300'
 },
   
 });

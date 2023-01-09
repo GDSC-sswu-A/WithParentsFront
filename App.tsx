@@ -3,14 +3,13 @@ import {StatusBar, Platform, Image} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
-import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
-
 
 const Stack = createNativeStackNavigator();
 
