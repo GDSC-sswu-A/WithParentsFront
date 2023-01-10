@@ -63,17 +63,17 @@ export function WhiteButton({text}) {
 
   export function AddButton ({on}) {
     return (
-        <TouchableOpacity
-        onPress = {on}
-        style={styles.AddButton}>
-        <Text style={styles.add}>+</Text>
-        </TouchableOpacity>
+        // <TouchableOpacity
+        // onPress = {on}
+        // style={styles.AddButton}>
+        // <Text style={styles.add}>+</Text>
+        // </TouchableOpacity>
       
-     /* <View
+      <View
       style={styles.AddButton}>
         <Text style={styles.add}>+</Text>
 
-      </View>*/
+      </View>
     )
   }
 

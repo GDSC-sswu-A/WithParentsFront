@@ -15,9 +15,9 @@ import { AddButton } from '../../component/ButtonComponent'
 
 export default function Medicine({navigation}) {
 
-  const TogoAddMediPage = () =>{
-    navigation.navigate('Addmedicine')
-  }
+  // const TogoAddMediPage = () =>{
+  //   navigation.navigate('Addmedicine')
+  // }
 
 
   return (
@@ -27,7 +27,13 @@ export default function Medicine({navigation}) {
     <View style={styles.medicineTab}>
     </View>
     <View style={styles.mediAddBtn}>
-    <AddButton on={TogoAddMediPage}></AddButton>
+    <TouchableOpacity
+      style={styles.bottom}
+      onPress={() => navigation.navigate('Addmedicine')}
+      >
+       <AddButton />
+      </TouchableOpacity>
+    {/* <AddButton on={TogoAddMediPage}></AddButton> */}
     </View>
 
     </SafeAreaView>
