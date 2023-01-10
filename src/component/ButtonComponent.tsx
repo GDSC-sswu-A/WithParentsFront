@@ -27,6 +27,7 @@ export function WhiteButton({text}) {
       </TouchableOpacity>
     );
   }
+  
 
   export function YellowButton({text,on}) {
     return (

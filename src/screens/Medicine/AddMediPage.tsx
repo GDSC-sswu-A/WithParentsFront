@@ -19,7 +19,6 @@ Dimensions.get('window').height
 //화면의 너비
 Dimensions.get('window').width
 import { GreenButton } from '../../component/ButtonComponent'
-import { GrayButton } from '../../component/ButtonComponent'
 import SelectMediTimesModal from '../../component/SelectMediTimesModal'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -123,7 +122,6 @@ export default function AddmedipageScreen({navigation}) {
               onPress={toggleActive}
               style={styles.btn}
               >
-
             <Text>{item}</Text>
             </TouchableOpacity>
             
