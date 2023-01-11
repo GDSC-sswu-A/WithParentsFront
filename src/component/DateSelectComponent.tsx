@@ -33,7 +33,7 @@ Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 
 
-export default function Home() {
+export default function DateSelectComponent() {
     const placeholder = "Select date";
 
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -60,7 +60,7 @@ export default function Home() {
                     pointerEvents="none"
                     style={styles.textInput}
                     placeholder={placeholder}
-                    placeholderTextColor='#000000'
+                    placeholderTextColor='gray'
                     underlineColorAndroid="transparent"
                     editable={false}
                     value={text}
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     textInput: {
-        fontSize: 16,
+        fontSize: 14,
         color: '#000000',
         height: 50, 
         width: 155, 

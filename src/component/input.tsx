@@ -2,7 +2,7 @@ import React from "react";
 import { SafeAreaView, StyleSheet, TextInput } from "react-native";
 
 const InputText = () => {
-  const [contentText, onChangeInput] = React.useState("think your happy moment :)");
+  const [contentText, onChangeInput] = React.useState('');
 
   return (
     <SafeAreaView>
@@ -10,7 +10,8 @@ const InputText = () => {
         style={styles.input}
         onChangeText={onChangeInput}
         value={contentText}
-        placeholder="placeholder"
+        placeholder="think your happy moment :)"
+        textAlignVertical="top"
         
       />
     </SafeAreaView>
@@ -22,7 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFF3EA',
     height : 200,
     width :280,
-    padding :10,
+    padding :15,
+    margin:0,
   },
 });
 

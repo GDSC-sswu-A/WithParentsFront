@@ -14,7 +14,7 @@ import {
 } from 'react-native'
 
 import { GreenButton } from '../../component/ButtonComponent'
-import Home from '../../component/DateSelectComponent';
+import DateSelectComponent from '../../component/DateSelectComponent';
 import InputText from '../../component/input';
 export default function GalleryWriteScreen({navigation}) {
 
@@ -28,7 +28,7 @@ export default function GalleryWriteScreen({navigation}) {
   return (
   <SafeAreaView style={styles.container}>
     <View style={styles.selectDate}>
-     <Home></Home>
+     <DateSelectComponent></DateSelectComponent>
      <Text>
      _________________________________________________________
      </Text>
