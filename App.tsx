@@ -11,6 +11,7 @@ import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import LoginHomeScreen from "./src/screens/login/LoginHomeScreen";
 import SignUpScreen from "./src/screens/login/SignUpScreen";
+
 const Stack = createNativeStackNavigator();
 
 function App() {

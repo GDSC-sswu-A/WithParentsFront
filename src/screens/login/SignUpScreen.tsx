@@ -32,9 +32,12 @@ export default function SignUpScreen({navigation}) {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.logoImage}>
+  <View style ={styles.Logo}>
+    <Image 
+      style = {styles.LogoImage}
+      source={require("../../img/withParents_Green.png")}/>
 
-      </View>
+    </View>
       <View style ={styles.inputName}>
         <Text style ={styles.black}>name</Text>
         <TextInput
@@ -93,10 +96,11 @@ const styles = StyleSheet.create({
     
   },
 
-  logoImage:{
-    flex:3,
+  Logo:{
+    flex:4,
     backgroundColor:"white",
-
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   input:{

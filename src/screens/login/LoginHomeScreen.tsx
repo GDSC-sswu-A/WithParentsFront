@@ -30,6 +30,13 @@ const toGoLoginBtn =()=>{
 
   return (
     <SafeAreaView style={styles.container}>
+    <View style ={styles.Logo}>
+    <Image 
+      style = {styles.LogoImage}
+      source={require("../../img/withParents.png")}/>
+
+    </View>
+
      <View style={styles.signBtn}>
       <View style ={styles.signUpBtn}>
         <LoginButton text='SIGNUP' on={toGoSignUPBtn}/>
@@ -49,10 +56,25 @@ container:{
     flex:1,
 },
 
+LogoImage:{
+width:270,
+height:35
+},
+
+
+Logo:{
+  flex:3,
+  justifyContent: "center",
+  alignItems: "center",
+  //backgroundColor : 'yellow',
+
+},
+
 signBtn:{
   justifyContent: "center",
   alignItems: "center",
-  flex:3,
+  flex:2,
+  marginBottom:100,
 },
 
 signUpBtn:{
