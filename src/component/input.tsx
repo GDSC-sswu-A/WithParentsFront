@@ -10,7 +10,7 @@ const InputText = () => {
         style={styles.input}
         onChangeText={onChangeInput}
         value={contentText}
-        placeholder="think your happy moment :)"
+        placeholder="Think your happy moment :)"
         textAlignVertical="top"
         
       />
@@ -23,8 +23,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFF3EA',
     height : 200,
     width :280,
-    padding :15,
-    margin:0,
+    padding :18,
+    
+
   },
 });
 

@@ -29,11 +29,8 @@ export default function GalleryWriteScreen({navigation}) {
   <SafeAreaView style={styles.container}>
     <View style={styles.selectDate}>
      <DateSelectComponent></DateSelectComponent>
-     <Text>
-     _________________________________________________________
-     </Text>
     </View>
-    
+    <View style={styles.border}></View>
     <View style={styles.selectPhoto}>
     <View style={styles.Photo}><Text>Select Picture</Text></View>
     </View>
@@ -56,12 +53,21 @@ const styles = StyleSheet.create({
    selectDate:{
     flex : 1.3,
     padding:15,
-    },
+    left:10
+  },
 
+    border:{
+      borderBottomColor: 'darkgray',
+      width:350,
+      left:30,
+      borderBottomWidth: 1,
+      bottom:15,
+    },
     selectPhoto:{
-      flex : 3,
+      flex : 3.3,
       justifyContent: "center",
       alignItems: "center",
+      padding:10
     },
     
     Photo:{
