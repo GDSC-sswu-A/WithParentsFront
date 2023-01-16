@@ -1,16 +1,15 @@
 import React from "react";
-import {StatusBar, Platform, Image} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import LoginHomeScreen from "./src/screens/login/LoginHomeScreen";
+import SignUpScreen from "./src/screens/login/SignUpScreen"
 import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
-import LoginHomeScreen from "./src/screens/login/LoginHomeScreen";
-import SignUpScreen from "./src/screens/login/SignUpScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +28,8 @@ function App() {
       <Stack.Navigator
       screenOptions={{
       }}
-      initialRouteName="Login"
+        initialRouteName="Login"
+     
     >
 
       <Stack.Screen
