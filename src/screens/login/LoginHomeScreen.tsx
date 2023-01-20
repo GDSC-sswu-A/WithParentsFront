@@ -2,6 +2,7 @@ import React, {useEffect,useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { GoogleSignin, GoogleSigninButton,statusCodes } from '@react-native-google-signin/google-signin';
 import { LoginButton } from '../../component/ButtonComponent'
+import axios from 'axios';
 
 import { 
     StyleSheet, 
@@ -33,20 +34,35 @@ const toGoLoginBtn =()=>{
  useEffect(()=>{
   GoogleSignin.configure({
     webClientId: '1052651211735-c39hr3egfh2rkan1s8s87l4321af2h4j.apps.googleusercontent.com', 
-    offlineAccess: true, 
-    forceCodeForRefreshToken: true, 
+    androidClientId:'1052651211735-q77h1m8kftpiablcvmhigjlna00pqqns.apps.googleusercontent.com',
+    offlineAccess: true, //서버에서 사용자 대시나여 google api 액세스할때 
+    forceCodeForRefreshToken: false, // 액세스 요청창 두번 나와서 일단 false해둠 
   });
   isSignedIn()
  ,[]})
 
+ const tokenSubmit = () =>{
+  axios
+    .post('/api/auth/testLogin',
+    {
+      headers: {Authorization: user.idToken,},
+    })
+    .then(response=>{
+      console.log(response);
+    })
+ }
+
 //사용자가 로그인하도록 모달띄움 , 로그인되면 userinfo객체 반환 
 //그렇지않다면 오류 console.log에 출력
+//statusCode는 로그인 프로세스 중에 어떤 종류의 오류가 발생했는지 확인할 때 유용
  const signIn = async () => {
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
     console.log('due____',userInfo)
     setUser(userInfo)
+    tokenSubmit
+
   } catch (error) {
       console.log('Message___',error.message);
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -70,10 +86,11 @@ const isSignedIn = async () => {
   }
 };
 
+//signInSilently()는 현재 사용자 반환 그렇지않다면 오류
   const getCurrentUserInfo = async()=>{
     try{
-    const userInfo = await GoogleSignin.getCurrentUser();
-    console.log('edit__',user)
+    const userInfo = await GoogleSignin.signInSilently();
+    //console.log('edit__',user)
     setUser(userInfo);
     }catch(error){
       if(error.code === statusCodes.SIGN_IN_REQUIRED){
@@ -86,11 +103,12 @@ const isSignedIn = async () => {
     }
   };
 
+  //로그아웃
   const signOut = async () => {
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
-      setUser({}); // Remember to remove the user from your app's state as well
+      setUser({}); 
     } catch (error) {
       console.error(error);
     }
