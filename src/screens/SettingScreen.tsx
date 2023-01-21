@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { 
   View, 
   Text, 
@@ -6,10 +6,20 @@ import {
   TouchableOpacity
 } from 'react-native'
 
+import { getFamilycode } from '../common/FamilyApi';
+
 export default function SettingScreen({navigation}) {
+  const [code, setCode] = "";
+  useEffect (() => {
+    const init = async () => {
+        const result = await getFamilycode();
+        console.log(result,"ZZ")
+    };
+    init();
+})
+
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.top}>Setting</Text> */}
 
       <View style={styles.menus}>
         <Text style={styles.title}>System setting</Text>
@@ -35,9 +45,10 @@ export default function SettingScreen({navigation}) {
       </View>
 
       <View style={styles.menus}>
-        <Text style={styles.title}>System setting</Text>
+        <Text style={styles.title}>Personal/Security</Text>
         <TouchableOpacity>
           <Text style={styles.menu}>Log out</Text>
+          <Text style={styles.menu}>Family code [ password! ]</Text>
 
         </TouchableOpacity>
       </View>
