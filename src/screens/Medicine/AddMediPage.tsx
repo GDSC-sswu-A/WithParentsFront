@@ -71,6 +71,9 @@ export default function AddmedipageScreen({navigation}) {
       setTime(date.format("HH:MM"))
     };
 
+    const parentfunction = (data)=>{
+      console.log(data);
+    };
 
     
 
@@ -143,7 +146,7 @@ export default function AddmedipageScreen({navigation}) {
         <Text style ={styles.fontStyle}>Take it several times a day?</Text>
           <View style ={styles.selectTimes}>
        
-            <SelectMediTimesModal></SelectMediTimesModal>
+            <SelectMediTimesModal parentfunction={parentfunction}></SelectMediTimesModal>
           </View>
           <View style = {styles.dosingTime}>
             <View style={styles.selectTime}>

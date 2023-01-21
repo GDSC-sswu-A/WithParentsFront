@@ -2,26 +2,27 @@ import React, { useState } from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { YellowGreenButton } from './ButtonComponent';
 
-const App = () => { 
+const App = ({parentfunction}) => { 
   const [modalVisible, setModalVisible] =useState(false);
   const [selectTimes,setSelectTimes] =useState('');
-  const [setWeek,setSelectWeek] =useState('');
 
   const selectBtn1 = () =>{
-    setSelectTimes('1')
+    setSelectTimes(1)
+    parentfunction(selectTimes)
     setModalVisible(false)
   }
   
   const selectBtn2 = () =>{
     setSelectTimes('2')
+    parentfunction(selectTimes)
     setModalVisible(false)
 
   }
   
   const selectBtn3 = () =>{
     setSelectTimes('3')
+    parentfunction(selectTimes)
     setModalVisible(false)
-
   }
 
 
