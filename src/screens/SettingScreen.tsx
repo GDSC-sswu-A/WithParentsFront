@@ -9,15 +9,15 @@ import {
 import { getFamilycode } from '../common/FamilyApi';
 
 export default function SettingScreen({navigation}) {
-  const [code, setCode] = "";
+  const [code, setCode] = useState("");
   useEffect (() => {
     const init = async () => {
         const result = await getFamilycode();
-        console.log(result,"ZZ")
+        setCode(result)
     };
     init();
 })
-
+console.log("@@", code)
   return (
     <View style={styles.container}>
 
@@ -48,7 +48,7 @@ export default function SettingScreen({navigation}) {
         <Text style={styles.title}>Personal/Security</Text>
         <TouchableOpacity>
           <Text style={styles.menu}>Log out</Text>
-          <Text style={styles.menu}>Family code [ password! ]</Text>
+          <Text style={styles.menu}>Family code [ {code} ]</Text>
 
         </TouchableOpacity>
       </View>
