@@ -37,10 +37,9 @@ export const getFamilycode = async(
           }
         },
       );
-      code = response.data.familyId;
+      const code = response.data.familyId;
       return code;
     } catch (e: any) {
-        console.log("가족코드 api", e)
         return e.response;
     }
 }
