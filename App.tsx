@@ -2,7 +2,7 @@ import React from "react";
 import {StatusBar, Platform, Image} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { RecoilRoot, useRecoilState } from "recoil";
 import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
@@ -22,7 +22,7 @@ function App() {
   // }
 
   return (
-    <>
+    <RecoilRoot>
       {/* <StatusBar barStyle="dark-content" /> */}
     <NavigationContainer>
       <Stack.Navigator
@@ -114,7 +114,7 @@ function App() {
       </Stack.Navigator>
    
     </NavigationContainer>
-  </>
+  </RecoilRoot>
   )
 }
 
