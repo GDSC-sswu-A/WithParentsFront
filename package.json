@@ -1,5 +1,5 @@
 {
-  "name": "withParents",
+  "name": "withparents",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -18,8 +18,9 @@
     "@react-navigation/native-stack": "^6.9.5",
     "axios": "^1.2.3",
     "date-fns": "^2.29.3",
+    "global": "^4.4.0",
     "react": "18.1.0",
-    "react-native": "0.70.5",
+    "react-native": "^0.71.1",
     "react-native-bouncy-checkbox": "^3.0.6",
     "react-native-calendars": "^1.1292.0",
     "react-native-dropdown-picker": "^5.4.3",
@@ -44,5 +45,17 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GDSC-sswu-A/WithParentsFront.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GDSC-sswu-A/WithParentsFront/issues"
+  },
+  "homepage": "https://github.com/GDSC-sswu-A/WithParentsFront#readme",
+  "description": ""
 }
