@@ -1,16 +1,30 @@
-import React, {useState} from 'react'
-import { StyleSheet, Text, View, Keyboard, TextInput } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  TextInput 
+} from 'react-native'
 
 import { GreenButton } from '../component/ButtonComponent'
+import { getModifyUser } from '../common/FamilyApi'
 
 const JoinFamilyScreen = ({navigation}) => {
-
-  const [text, setText] = useState('');
-
+  const [code, setCode] = useState('');
+  const [isOk, setIsOk] = useState(false);
+  useEffect (() => {
+    const clickOk = async () => {
+        const result = await getModifyUser(code);
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@",result,"ZZ")
+    };
+    if (isOk) {
+        clickOk();
+        navigation.navigate('Setting')
+    }
+    setIsOk(false)
+})
   const Input = ()=>{
-    setText('');
-    Keyboard.dismiss();
-    console.log(text)
+    setIsOk(true)
 }
 
 const Cancle = ()=>{
@@ -23,14 +37,12 @@ const Cancle = ()=>{
 
   return (
     <View style={styles.container}>
-
       <Text style={styles.txt}>Enter the code</Text>
 
-      
         <TextInput 
         style={styles.input}
-        value={text}
-        onChangeText={setText}
+        value={code}
+        onChangeText={setCode}
         onSubmitEditing={Input}
         returnKeyType="done"
         />
@@ -40,8 +52,6 @@ const Cancle = ()=>{
         <GreenButton text='OK' on={Input}/>
         </View>
     </View>
-    
-
   )
 }
 
