@@ -6,14 +6,14 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-import { getFamilycode } from '../common/FamilyApi';
+import { getUserInfo } from '../common/FamilyApi';
 
 export default function SettingScreen({navigation}) {
   const [code, setCode] = useState("");
   useEffect (() => {
     const init = async () => {
-        const result = await getFamilycode();
-        setCode(result)
+        const result = await getUserInfo();
+        setCode(result.familyId)
     };
     init();
 })

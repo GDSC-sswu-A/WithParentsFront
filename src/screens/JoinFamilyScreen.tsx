@@ -7,15 +7,25 @@ import {
 } from 'react-native'
 
 import { GreenButton, GreenLineButton } from '../component/ButtonComponent'
-import { postModifyUser } from '../common/FamilyApi'
+import { postModifyUser, getUserInfo } from '../common/FamilyApi'
 
 
 const JoinFamilyScreen = ({navigation}) => {
   const [code, setCode] = useState('');
+  const [user, setUser] = useState(null);
   const [isOk, setIsOk] = useState(false);
+  useEffect (()=> {
+    const init = async () => {
+      const res = await getUserInfo();
+      console.log("INIT", res)
+      setUser(res)
+    };
+    init();
+    console.log("###", user)
+  }, [])
   useEffect (() => {
     const clickOk = async () => {
-        const result = await postModifyUser(code);
+        const result = await postModifyUser(code, user);
         console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@",result,"ZZ")
     };
     if (isOk) {
@@ -23,7 +33,8 @@ const JoinFamilyScreen = ({navigation}) => {
         navigation.navigate('Setting')
     }
     setIsOk(false)
-})
+    
+});
 const Input = ()=>{
   setIsOk(true)
 }

@@ -27,7 +27,7 @@ export const createFamily = async(
     }
 }
 
-export const getFamilycode = async(
+export const getUserInfo = async(
 ) => {
     try {
       const response = await axios.get(
@@ -38,20 +38,22 @@ export const getFamilycode = async(
           }
         },
       );
-      const code = response.data.familyId;
-      return code;
+      const data = response.data;
+      return data;
     } catch (e: any) {
         return e.response;
     }
 }
 
 export const postModifyUser = async(
-  code : string
+  code : string,
+  user : any
   ) => {
+    console.log("HI",user)
     var params = {
-      "nickname": "nickname?",
-      "familyId" : 1000,
-      "isParent" : false
+      "nickname": user.nickname,
+      "familyId" : user.familyId,
+      "isParent" : user.isParent
     }
 
       try {
