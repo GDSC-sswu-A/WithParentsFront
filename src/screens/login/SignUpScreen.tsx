@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {GreenButton} from '../../component/ButtonComponent';
-
+import LoginModal from '../../component/LoginModal';
+import {LoginAtom} from '../../atom/atom';
 import {
   StyleSheet,
   Text,
@@ -13,19 +14,28 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {useRecoilState} from 'recoil';
 
 export default function SignUpScreen({navigation}) {
   let bouncyCheckboxRef: BouncyCheckbox | null = null;
-  const [parentCheckbox, parentSetCheckbox] = React.useState(false);
-  const [childCheckbox, childSetcheckbox] = React.useState(false);
-  const [name, setName] = useState('');
-
+  const [parentCheckbox, parentSetCheckbox] = useState(false);
+  const [childCheckbox, childSetcheckbox] = useState(false);
+  const [username, setuserName] = useState('');
+  const [LoginmodalVisible, setLoginModalVisible] = useRecoilState(LoginAtom);
   const ClickCancleBtn = () => {
     navigation.navigate('Login');
   };
+
   const ClickNextBtn = () => {
-    navigation.navigate('Nav');
+    if (username === '') {
+      setLoginModalVisible(true);
+    } else if (childCheckbox === false && parentCheckbox === false) {
+      setLoginModalVisible(true);
+    } else {
+      navigation.navigate('Nav');
+    }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.Logo}>
@@ -34,16 +44,18 @@ export default function SignUpScreen({navigation}) {
           source={require('../../img/withParents_Green.png')}
         />
       </View>
+      <View style={styles.modal}>
+        {LoginmodalVisible && <LoginModal></LoginModal>}
+      </View>
       <View style={styles.inputName}>
         <Text style={styles.black}>name</Text>
         <TextInput
           style={styles.input}
-          value={name}
-          onChangeText={text => setName(text)}
+          value={username}
+          onChangeText={text => setuserName(text)}
           returnKeyType="next"
         />
       </View>
-
       <View style={styles.checkUserType}>
         <BouncyCheckbox
           style={{marginTop: 16, marginRight: 20}}
