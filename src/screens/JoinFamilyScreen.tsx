@@ -6,7 +6,7 @@ import {
   TextInput 
 } from 'react-native'
 
-import { GreenButton } from '../component/ButtonComponent'
+import { GreenButton, GreenLineButton } from '../component/ButtonComponent'
 import { getModifyUser } from '../common/FamilyApi'
 
 const JoinFamilyScreen = ({navigation}) => {
@@ -23,9 +23,14 @@ const JoinFamilyScreen = ({navigation}) => {
     }
     setIsOk(false)
 })
-  const Input = ()=>{
-    setIsOk(true)
+const Input = ()=>{
+  setIsOk(true)
 }
+
+const Navi = ()=>{
+  navigation.navigate('CreateFamily')
+}
+
 
 const Cancle = ()=>{
     if (navigation?.canGoBack()){
@@ -49,8 +54,10 @@ const Cancle = ()=>{
 
     <View style={styles.btn}>
       <GreenButton text='Cacle' on={Cancle}/>
-        <GreenButton text='OK' on={Input}/>
-        </View>
+      <GreenButton text='OK' on={Input}/>
+    </View>
+    <Text style={styles.ex}>If you do not have a family code</Text> 
+    <GreenLineButton text='Create →' on={Navi}/>
     </View>
   )
 }
@@ -71,7 +78,7 @@ const styles = StyleSheet.create({
         marginBottom: 60
     },
     btn :{
-        marginTop : 180,
+        marginTop : 80,
         width : 250,
         flexDirection : 'row',
         justifyContent: 'space-between'
@@ -84,5 +91,11 @@ const styles = StyleSheet.create({
       width : 208,
       height : 40,
       backgroundColor : "#EFF3EA",
-  }
+  },
+  ex : {
+    fontSize : 15,
+    fontWeight : '400',
+    marginTop : 100,
+    color : 'gray'
+},
 })
