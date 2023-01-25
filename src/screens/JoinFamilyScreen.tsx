@@ -7,14 +7,15 @@ import {
 } from 'react-native'
 
 import { GreenButton, GreenLineButton } from '../component/ButtonComponent'
-import { getModifyUser } from '../common/FamilyApi'
+import { postModifyUser } from '../common/FamilyApi'
+
 
 const JoinFamilyScreen = ({navigation}) => {
   const [code, setCode] = useState('');
   const [isOk, setIsOk] = useState(false);
   useEffect (() => {
     const clickOk = async () => {
-        const result = await getModifyUser(code);
+        const result = await postModifyUser(code);
         console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@",result,"ZZ")
     };
     if (isOk) {
