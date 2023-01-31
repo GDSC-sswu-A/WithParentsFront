@@ -46,18 +46,17 @@ export const getUserInfo = async(
 }
 
 export const postModifyUser = async(
-  code : string,
+  id : string,
+  password : string,
   user : any
   ) => {
-    console.log("HI",user)
     var params = {
       "nickname": user.nickname,
-      "familyId" : user.familyId,
+      "family_password" : password,
+      "familyId" : id,
       "isParent" : user.isParent
     }
-
       try {
-        console.log("유저정보 수정", code)
         const response = await axios.post(
           `http://3.37.21.121:8080/api/user/modifyUserInfo`,params,
           {

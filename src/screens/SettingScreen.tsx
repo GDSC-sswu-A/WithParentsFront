@@ -47,9 +47,9 @@ console.log("@@", code)
       <View style={styles.menus}>
         <Text style={styles.title}>Personal/Security</Text>
         <TouchableOpacity>
+          <Text style={styles.menu}>Family ID : {code} </Text>
+          <Text style={styles.menu}>Family Password : {code} </Text>
           <Text style={styles.menu}>Log out</Text>
-          <Text style={styles.menu}>Family code [ {code} ]</Text>
-
         </TouchableOpacity>
       </View>
     </View>

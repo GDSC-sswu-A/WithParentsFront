@@ -11,7 +11,8 @@ import { postModifyUser, getUserInfo } from '../common/FamilyApi'
 
 
 const JoinFamilyScreen = ({navigation}) => {
-  const [code, setCode] = useState('');
+  const [id, setId] = useState('');
+  const [passwd, setPasswd] = useState('')
   const [user, setUser] = useState(null);
   const [isOk, setIsOk] = useState(false);
   useEffect (()=> {
@@ -25,8 +26,7 @@ const JoinFamilyScreen = ({navigation}) => {
   }, [])
   useEffect (() => {
     const clickOk = async () => {
-        const result = await postModifyUser(code, user);
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@",result,"ZZ")
+        const result = await postModifyUser(id, passwd, user);
     };
     if (isOk) {
         clickOk();
@@ -54,14 +54,25 @@ const Cancle = ()=>{
 
   return (
     <View style={styles.container}>
-      <Text style={styles.txt}>Enter the code</Text>
+      {/* <Text style={styles.txt}></Text> */}
+      <Text style={styles.ex}>If you do not remember your ID and password,</Text> 
+      <Text style={styles.ex}>please see the bottom of the settings</Text> 
+        <TextInput 
+        style={styles.input}
+        value={id}
+        onChangeText={setId}
+        onSubmitEditing={Input}
+        returnKeyType="done"
+        placeholder = "ID"
+        />
 
         <TextInput 
         style={styles.input}
-        value={code}
-        onChangeText={setCode}
+        value={passwd}
+        onChangeText={setPasswd}
         onSubmitEditing={Input}
         returnKeyType="done"
+        placeholder = "Password"
         />
 
     <View style={styles.btn}>
@@ -93,7 +104,8 @@ const styles = StyleSheet.create({
         marginTop : 80,
         width : 250,
         flexDirection : 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom : 20
     },
 
   input : {
@@ -103,11 +115,12 @@ const styles = StyleSheet.create({
       width : 208,
       height : 40,
       backgroundColor : "#EFF3EA",
+      marginTop : 50
   },
   ex : {
     fontSize : 15,
     fontWeight : '400',
-    marginTop : 100,
+    marginTop : 10,
     color : 'gray'
 },
 })
