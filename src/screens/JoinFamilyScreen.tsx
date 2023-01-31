@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef, useCallback} from 'react'
+import Toast from 'react-native-easy-toast'
 import { 
   StyleSheet, 
   Text, 
@@ -12,9 +13,15 @@ import { postModifyUser, getUserInfo } from '../common/FamilyApi'
 
 const JoinFamilyScreen = ({navigation}) => {
   const [id, setId] = useState('');
-  const [passwd, setPasswd] = useState('')
+  const [passwd, setPasswd] = useState('');
   const [user, setUser] = useState(null);
   const [isOk, setIsOk] = useState(false);
+  const toastRef = useRef(); 
+
+  const showToast = useCallback((m) => {
+    toastRef.current.show(m);
+  }, []);
+  
   useEffect (()=> {
     const init = async () => {
       const res = await getUserInfo();
@@ -31,7 +38,8 @@ const JoinFamilyScreen = ({navigation}) => {
           navigation.navigate('Setting')
           setIsOk(false)
         } else {
-          console.log(result.data.message)
+          const meesage = result.data.message
+          showToast(meesage);
         }
     };
     if (isOk) {
@@ -47,8 +55,6 @@ const Input = ()=>{
 const Navi = ()=>{
   navigation.navigate('CreateFamily')
 }
-
-
 const Cancle = ()=>{
     if (navigation?.canGoBack()){
         navigation.goBack()
@@ -86,7 +92,14 @@ const Cancle = ()=>{
     </View>
     <Text style={styles.ex}>If you do not have a family code</Text> 
     <GreenLineButton text='Create →' on={Navi}/>
+    <Toast 
+          positionValue={250}
+          ref={toastRef}
+          fadeOutDuration={5000}
+          style={{backgroundColor:'#789395'}}
+      />
     </View>
+    
   )
 }
 

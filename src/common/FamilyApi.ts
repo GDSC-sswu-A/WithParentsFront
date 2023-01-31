@@ -57,6 +57,7 @@ export const postModifyUser = async(
       "isParent" : user.isParent
     }
       try {
+        console.log("HI",id, password)
         const response = await axios.post(
           `http://3.37.21.121:8080/api/user/modifyUserInfo`,params,
           {
