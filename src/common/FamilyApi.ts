@@ -46,14 +46,14 @@ export const getUserInfo = async(
 }
 
 export const postModifyUser = async(
-  id : string,
+  id : number,
   password : string,
   user : any
   ) => {
     var params = {
       "nickname": user.nickname,
-      "family_password" : password,
       "familyId" : id,
+      "familyPassword" : password,
       "isParent" : user.isParent
     }
       try {
@@ -66,10 +66,10 @@ export const postModifyUser = async(
             
           },
         );
-        console.log("유저정보 수정 OK")
+        console.log("가족 등록 OK")
         return response;
       } catch (e: any) {
-        console.log("유저정보 수정 API error")
+        console.log("가족등록 API error", e.response)
           return e.response;
       }
   }
