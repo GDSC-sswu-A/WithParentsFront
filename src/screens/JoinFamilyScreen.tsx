@@ -27,10 +27,15 @@ const JoinFamilyScreen = ({navigation}) => {
   useEffect (() => {
     const clickOk = async () => {
         const result = await postModifyUser(id, passwd, user);
+        if (result.status===200) {
+          navigation.navigate('Setting')
+          setIsOk(false)
+        } else {
+          console.log(result.data.message)
+        }
     };
     if (isOk) {
         clickOk();
-        navigation.navigate('Setting')
     }
     setIsOk(false)
     
