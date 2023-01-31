@@ -9,15 +9,17 @@ import {
 import { getUserInfo } from '../common/FamilyApi';
 
 export default function SettingScreen({navigation}) {
-  const [code, setCode] = useState("");
+  const [id, setId] = useState("");
+  const [passwd, setPasswd] = useState("");
   useEffect (() => {
     const init = async () => {
         const result = await getUserInfo();
-        setCode(result.familyId)
+        setId(result.familyId)
+        setPasswd(result.familyPassword)
     };
     init();
 })
-console.log("@@", code)
+console.log("@@", id, passwd)
   return (
     <View style={styles.container}>
 
@@ -33,22 +35,21 @@ console.log("@@", code)
 
       <View style={styles.menus}>
         <Text style={styles.title}>Family setting</Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
         onPress={() => navigation.navigate('CreateFamily')}> 
           <Text style={styles.menu}>Creating a New Family</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
         onPress={() => navigation.navigate('JoinFamily')}>
           <Text style={styles.menu}>Family registration</Text>
-
         </TouchableOpacity>
       </View>
 
       <View style={styles.menus}>
         <Text style={styles.title}>Personal/Security</Text>
         <TouchableOpacity>
-          <Text style={styles.menu}>Family ID : {code} </Text>
-          <Text style={styles.menu}>Family Password : {code} </Text>
+          <Text style={styles.menu}>Family ID : {id} </Text>
+          <Text style={styles.menu}>Family Password : {passwd} </Text>
           <Text style={styles.menu}>Log out</Text>
         </TouchableOpacity>
       </View>
