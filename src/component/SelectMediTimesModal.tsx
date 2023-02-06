@@ -2,29 +2,43 @@ import React, {useState, useEffect} from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {YellowGreenButton} from './ButtonComponent';
 import {RecoilRoot, useRecoilState} from 'recoil';
-import {buttonValueState} from '../atom/atom';
+import {
+  buttonValueAtom,
+  mediTimeAtom1,
+  mediTimeAtom2,
+  mediTimeAtom3,
+} from '../atom/atom';
 
-const App = ({timesData}) => {
+const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectTimes, setSelectTimes] = useState();
-  const [buttonValue, setButtonValue] = useRecoilState(buttonValueState);
+  const [buttonValue, setButtonValue] = useRecoilState(buttonValueAtom);
+  const [mediTime1, setMediTime1] = useRecoilState(mediTimeAtom1);
+  const [mediTime2, setMediTime2] = useRecoilState(mediTimeAtom2);
+  const [mediTime3, setMediTime3] = useRecoilState(mediTimeAtom3);
 
   const selectBtn1 = () => {
     setSelectTimes(1);
     setButtonValue(1);
     setModalVisible(false);
+    setMediTime1([]);
   };
 
   const selectBtn2 = () => {
     setSelectTimes(2);
     setButtonValue(2);
     setModalVisible(false);
+    setMediTime1([]);
+    setMediTime2([]);
   };
 
   const selectBtn3 = () => {
     setSelectTimes(3);
     setButtonValue(3);
     setModalVisible(false);
+    setMediTime1([]);
+    setMediTime2([]);
+    setMediTime3([]);
   };
 
   return (

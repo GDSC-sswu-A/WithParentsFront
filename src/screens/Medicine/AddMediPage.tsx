@@ -1,16 +1,28 @@
 import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {Dimensions} from 'react-native';
-
+import CheckModal from '../../component/CheckModal';
+import {GreenButton} from '../../component/ButtonComponent';
+import SelectMediTimesModal from '../../component/SelectMediTimesModal';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {
+  buttonValueAtom,
+  CheckModalAtom,
+  mediWeekBtnAtom,
+  mediTimeAtom1,
+  mediTimeAtom2,
+  mediTimeAtom3,
+  mediNameAtom,
+  mediListAtom,
+  mediType,
+} from '../../atom/atom';
 import {
   View,
   Text,
-  Button,
-  SafeAreaView,
   StyleSheet,
   TextInput,
+  Alert,
   Pressable,
-  Image,
   TouchableOpacity,
 } from 'react-native';
 
@@ -18,15 +30,28 @@ import {
 Dimensions.get('window').height;
 //화면의 너비
 Dimensions.get('window').width;
-import {GreenButton} from '../../component/ButtonComponent';
-import SelectMediTimesModal from '../../component/SelectMediTimesModal';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {useRecoilState} from 'recoil';
-import {buttonValueState} from '../../atom/atom';
 
+//요일 버튼 색 변경 컴포넌트 (회색=>초록)
+const mediWeekBtn = (id: number, weekData) => {
+  const [isSelect, setSelect] = useRecoilState(mediWeekBtnAtom);
+  return (
+    <Pressable
+      style={[
+        styles.buttonContainer,
+        {backgroundColor: isSelect[id] ? '#789395' : '#EEEDED'},
+      ]}
+      onPress={() => {
+        setSelect({
+          ...isSelect,
+          [id]: !isSelect[id],
+        });
+      }}>
+      <Text style={styles.blackText}>{weekData}</Text>
+    </Pressable>
+  );
+};
 //시간 선택 컴포넌트
-const SelectDosingTime = () => {
-  const [time, setTime] = useState('');
+const SelectDosingTime = ({mediTime, setMediTime}) => {
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
 
   const showTimePicker = () => {
@@ -37,14 +62,14 @@ const SelectDosingTime = () => {
   };
   const TimeConfirm = date => {
     hideTimePicker();
-    setTime(date.format('HH:MM'));
+    setMediTime(date.format('HH:MM'));
   };
   return (
     <>
-      <View style={styles.SelectDosingTime}>
-        <Text>Time 1</Text>
+      <View style={styles.selectDosingTime}>
+        <View style={styles.mediTimeContainer}>
+          <Text>Time</Text>
 
-        <View style={styles.line}>
           <TouchableOpacity onPress={showTimePicker}>
             <TextInput
               style={styles.in}
@@ -52,7 +77,7 @@ const SelectDosingTime = () => {
               placeholderTextColor="#6A7759"
               underlineColorAndroid="transparent"
               editable={false}
-              value={time}
+              value={mediTime}
             />
             {isTimePickerVisible && (
               <DateTimePickerModal
@@ -71,53 +96,76 @@ const SelectDosingTime = () => {
 };
 
 //메인페이지
-
 export default function AddmedipageScreen({navigation}) {
-  const [buttonValue, setButtonValue] = useRecoilState(buttonValueState);
-  const [mediName, setMediName] = React.useState('');
-  const [userValue, setUserValue] = React.useState('');
+  const [buttonValue, setButtonValue] = useRecoilState(buttonValueAtom);
+  const [mediName, setMediName] = useRecoilState(mediNameAtom);
+  // const [userName, setUserValue] = React.useState('');
+  const [checkModalVisible, setCheckModalVisible] =
+    useRecoilState(CheckModalAtom);
+  const [isSelect, setSelect] = useRecoilState(mediWeekBtnAtom);
+  const [mediTime1, setMediTime1] = useRecoilState(mediTimeAtom1);
+  const [mediTime2, setMediTime2] = useRecoilState(mediTimeAtom2);
+  const [mediTime3, setMediTime3] = useRecoilState(mediTimeAtom3);
+  const medicines = useRecoilValue<mediType[]>(mediListAtom);
+  const setmedicines = useSetRecoilState<mediType[]>(mediListAtom);
 
-  //요일 버튼 색 변경 (회색=>초록)
-  const [isSelect, setSelect] = useState([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
-
-  const getButton = (id: number, weekData) => {
-    return (
-      <Pressable
-        style={[
-          styles.buttonContainer,
-          {backgroundColor: isSelect[id] ? '#789395' : '#EEEDED'},
-        ]}
-        onPress={() => {
-          setSelect([
-            ...isSelect.slice(0, id),
-            !isSelect[id],
-            ...isSelect.slice(id + 1),
-          ]);
-        }}>
-        <Text style={styles.blackText}>{weekData}</Text>
-      </Pressable>
+  //medicine 추가하기
+  const addMedicine = () => {
+    const nextId = Math.floor(
+      medicines.length > 0 ? medicines[medicines.length - 1].id + 1 : 0,
     );
+    const mediType = {
+      id: nextId,
+      task: mediName,
+      completed: true,
+    };
+    setmedicines([...medicines, mediType]);
+    navigation.navigate('Medicine');
+    setMediName('');
+    setSelect(false);
+
+    /* const medicine: mediType = {
+      id: nextId,
+      task: mediName,
+      completed: false,
+    };
+    setmedicines([...medicines, medicine]);*/
   };
 
-  const toGoWritePage = () => {
-    navigation.navigate('GalleryWrite');
-  };
+  //CheckModal 뜨는 조건
+  const ToGoMediHome = () => {
+    if (mediName === '') {
+      Alert.alert('Error', 'please input medicine name');
+    } /*else if (isSelect.every(day => day === false)) {
+      Alert.alert('Error', 'please input day of the week');
 
-  const timesData = data => {
-    console.log(data);
+      //      setCheckModalVisible(!checkModalVisible);
+    }*/ else if (buttonValue === 1 && mediTime1.length !== 0) {
+      navigation.navigate('Medicine');
+      addMedicine();
+    } else if (
+      buttonValue === 2 &&
+      mediTime1.length !== 0 &&
+      mediTime2.length !== 0
+    ) {
+      addMedicine();
+      navigation.navigate('Medicine');
+    } else if (
+      buttonValue === 3 &&
+      mediTime1.length !== 0 &&
+      mediTime2.length !== 0 &&
+      mediTime3.length !== 0
+    ) {
+      addMedicine();
+    } else {
+      Alert.alert('Error', 'please input intake time');
+    }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.greenContainer}>
+        {/*
         <View style={styles.selectUser}>
           <Text style={styles.fontStyle}>
             Whose medicine is it in the family?
@@ -131,82 +179,85 @@ export default function AddmedipageScreen({navigation}) {
               setUserValue(text);
             }}
           />
+          </View>*/}
+        <View style={styles.modal}>
+          {checkModalVisible && (
+            <CheckModal children="Did you miss anything while writing?"></CheckModal>
+          )}
         </View>
+        {/*medicine 이름 입력하기*/}
         <View style={styles.medicineName}>
           <Text style={styles.fontStyle}>The name of the medicine</Text>
           <TextInput
+            placeholder="Add medicine name"
             style={styles.input}
             value={mediName}
-            onChange={event => {
-              const {eventCount, target, text} = event.nativeEvent;
-              //onChange={(event) => console.log(event.nativeEvent.text)}
-              setMediName(text);
-            }}
+            onChangeText={text => setMediName(text)}
           />
         </View>
+        {/*요일 선택하기*/}
         <View style={styles.medicineWeek}>
           <Text style={styles.fontStyle}>What day do you take it?</Text>
           <View style={styles.weekBtn}>
-            {getButton(0, '월')}
-            {getButton(1, '화')}
-            {getButton(2, '수')}
-            {getButton(3, '목')}
-            {getButton(4, '금')}
-            {getButton(5, '토')}
-            {getButton(6, '일')}
+            {mediWeekBtn(0, '월')}
+            {mediWeekBtn(1, '화')}
+            {mediWeekBtn(2, '수')}
+            {mediWeekBtn(3, '목')}
+            {mediWeekBtn(4, '금')}
+            {mediWeekBtn(5, '토')}
+            {mediWeekBtn(6, '일')}
           </View>
         </View>
+        {/*시간알람 선택하기(1~3)*/}
         <View style={styles.footer}>
           <Text style={styles.fontStyle}>Take it several times a day?</Text>
           <View style={styles.selectTimes}>
-            <SelectMediTimesModal timesData={timesData}></SelectMediTimesModal>
+            <SelectMediTimesModal></SelectMediTimesModal>
           </View>
 
           <View style={styles.dosingTime}>
-            {buttonValue == 1 && <SelectDosingTime />}
+            {buttonValue == 1 && (
+              <SelectDosingTime
+                mediTime={mediTime1}
+                setMediTime={setMediTime1}
+              />
+            )}
             {buttonValue == 2 && (
               <>
-                <SelectDosingTime />
-                <SelectDosingTime />
+                <SelectDosingTime
+                  mediTime={mediTime1}
+                  setMediTime={setMediTime1}
+                />
+                <SelectDosingTime
+                  mediTime={mediTime2}
+                  setMediTime={setMediTime2}
+                />
               </>
             )}
             {buttonValue == 3 && (
               <>
-                <SelectDosingTime />
-                <SelectDosingTime />
-                <SelectDosingTime />
+                <SelectDosingTime
+                  mediTime={mediTime1}
+                  setMediTime={setMediTime1}
+                />
+                <SelectDosingTime
+                  mediTime={mediTime2}
+                  setMediTime={setMediTime2}
+                />
+                <SelectDosingTime
+                  mediTime={mediTime3}
+                  setMediTime={setMediTime3}
+                />
               </>
             )}
-
-            {/*<Text>Time 1</Text>
-                
-         <View style={styles.line}>
-           <TouchableOpacity onPress={showTimePicker}>
-              <TextInput
-                style = {styles.in}
-                pointerEvents="none"
-                placeholderTextColor="#6A7759"
-                underlineColorAndroid="transparent"
-                editable={false}
-                value={time}
-              />
-            { isTimePickerVisible && (
-            <DateTimePickerModal
-                headerTextIOS="Select the Time"
-                isVisible={isTimePickerVisible}
-                mode="time"
-                onConfirm={TimeConfirm}
-                onCancel={hideTimePicker}
-              />)}
-          </TouchableOpacity>	 
-            </View>  */}
           </View>
         </View>
       </View>
+      {/*저장버튼*/}
       <View style={styles.AddmediBtn}>
-        <GreenButton text="continue" on={toGoWritePage} />
+        <GreenButton text="continue" on={ToGoMediHome} />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -215,9 +266,9 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
-  selectUser: {
+  /*selectUser: {
     flex: 1,
-  },
+  },*/
 
   medicineName: {
     flex: 1.1,
@@ -249,8 +300,8 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    height: 30,
-    padding: 8,
+    height: 36,
+    padding: 10,
     borderRadius: 10,
     backgroundColor: '#FFFBE9',
   },
@@ -266,9 +317,10 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   in: {
-    width: 160,
+    width: 100,
     height: 30,
     borderRadius: 10,
     backgroundColor: '#FFFBE9',
@@ -276,13 +328,13 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     color: '#6A7759',
   },
-  line: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-    marginBottom: 20,
-  },
 
+  mediTimeContainer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    flexDirection: 'row',
+  },
   buttonContainer: {
     backgroundColor: '#EEEDED',
     width: 30,
@@ -296,5 +348,10 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 15,
     fontWeight: '300',
+  },
+  selectDosingTime: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

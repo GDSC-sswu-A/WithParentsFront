@@ -4,131 +4,114 @@ import {
   Text,
   StyleSheet,
   View,
-  Pressable
+  Pressable,
 } from 'react-native';
-
-
 
 export function GreenButton({text, on}) {
   return (
-    <TouchableOpacity
-    onPress = {on}
-    style={styles.GreenButton}>
-    <Text style={styles.white}>{text}</Text>
+    <TouchableOpacity onPress={on} style={styles.GreenButton}>
+      <Text style={styles.white}>{text}</Text>
     </TouchableOpacity>
   );
 }
 
 export function WhiteButton({text}) {
-    return (
-      <TouchableOpacity
-      style={styles.WhiteButton}>
+  return (
+    <TouchableOpacity style={styles.WhiteButton}>
       <Text style={styles.red}>{text}</Text>
-      </TouchableOpacity>
-    );
-  }
-  
+    </TouchableOpacity>
+  );
+}
 
-  export function YellowButton({text,on}) {
-    return (
-      <TouchableOpacity
-      onPress = {on}
-      style={styles.YellowButton}>
+export function YellowButton({text, on}) {
+  return (
+    <TouchableOpacity onPress={on} style={styles.YellowButton}>
       <Text style={styles.black}>{text}</Text>
-      </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
+}
 
-
-  export function YellowGreenButton({text,on}) {
-    return (
-      <TouchableOpacity
-      onPress = {on}
-      style={styles.YellowGreenButton}>
+export function YellowGreenButton({text, on}) {
+  return (
+    <TouchableOpacity onPress={on} style={styles.YellowGreenButton}>
       <Text style={styles.black}>{text}</Text>
-      </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
+}
 
+export function AddButton({on}) {
+  return (
+    <TouchableOpacity onPress={on} style={styles.AddButton}>
+      <Text style={styles.add}>+</Text>
+    </TouchableOpacity>
 
-  export function AddButton ({on}) {
-    return (
-        <TouchableOpacity
-        onPress = {on}
-        style={styles.AddButton}>
-        <Text style={styles.add}>+</Text>
-        </TouchableOpacity>
-      
-     /* <View
+    /* <View
       style={styles.AddButton}>
         <Text style={styles.add}>+</Text>
 
       </View>*/
-    )
-  }
-
+  );
+}
 
 const styles = StyleSheet.create({
-    GreenButton : {
-        backgroundColor : "#6A7759",
-        borderRadius: 20,
-        width : 110,
-        height : 40,
-        justifyContent: 'center',
-    },
+  GreenButton: {
+    backgroundColor: '#6A7759',
+    borderRadius: 20,
+    width: 110,
+    height: 40,
+    justifyContent: 'center',
+  },
 
-    YellowButton:{
-      backgroundColor : '#FFFBE9',
-      width : 80,
-      height : 30,
-      borderRadius : 10,
+  YellowButton: {
+    backgroundColor: '#FFFBE9',
+    width: 80,
+    height: 30,
+    borderRadius: 10,
+  },
+  white: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 20,
+    fontWeight: '300',
+  },
+  black: {
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 15,
+    fontWeight: '300',
+  },
+  WhiteButton: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    width: 75,
+    height: 40,
+    justifyContent: 'center',
+  },
+  red: {
+    textAlign: 'center',
+    color: '#F90C0C',
+    fontSize: 20,
+    fontWeight: '300',
+  },
+  AddButton: {
+    backgroundColor: '#6A7759',
+    width: 55,
+    height: 55,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  add: {
+    textAlign: 'center',
+    color: 'white',
+    bottom: 1,
+    fontSize: 30,
+  },
 
-    },
-    white : {
-        textAlign : 'center',
-        color : 'white',
-        fontSize : 20,
-        fontWeight : '300'
-    },
-    black: {
-      textAlign : 'center',
-      color : 'black',
-      fontSize : 15,
-      fontWeight : '300'
-    },
-    WhiteButton : {
-        backgroundColor : "white",
-        borderRadius: 10,
-        width : 75,
-        height : 40,
-        justifyContent: 'center',
-    },
-    red : {
-        textAlign : 'center',
-        color : '#F90C0C',
-        fontSize : 20,
-        fontWeight : '300'
-    },
-    AddButton : {
-      backgroundColor : '#6A7759',
-      width : 55,
-      height : 55,
-      borderRadius : 100,
-      justifyContent : 'center'
-    },
-    add : {
-      textAlign : 'center',
-      color : 'white',
-      fontSize : 20,
-    },
-
-    YellowGreenButton:{
-      backgroundColor : '#E5E7E1',
-      width : 30,
-      height : 30,
-      borderRadius : 10,
-    },
-
-
-
+  YellowGreenButton: {
+    backgroundColor: '#E5E7E1',
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+  },
 });
