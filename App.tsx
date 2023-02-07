@@ -7,7 +7,10 @@ import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
-import AddCalendar from "./src/screens/Calendar/AddCalendar";
+import AddCalendar from "./src/screens/Calendar/AddCalendar"
+import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
+import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
+import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +39,8 @@ function App() {
         headerShown : false
       }}
       />
+
+      {/* setting */}
       <Stack.Screen
       name="Setting"
       component={SettingScreen}
@@ -47,7 +52,7 @@ function App() {
         },
       })}
       />
-      <Stack.Screen
+     <Stack.Screen
       name="CreateFamily"
       component={CreateFamilyScreen}
       options={({navigation})=>({
@@ -58,7 +63,7 @@ function App() {
         },
       })}
       />
-      <Stack.Screen
+       <Stack.Screen
       name="JoinFamily"
       component={JoinFamilyScreen}
       options={({navigation})=>({
@@ -69,7 +74,46 @@ function App() {
         },
       })}
       />
+
+      {/* medicine */}
       <Stack.Screen
+      name="Addmedicine"
+      component={AddmedipageScreen}
+      options={({navigation})=>({
+        title : 'Add your medicine',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+
+      {/* galllery */}
+      <Stack.Screen
+      name="GalleryWrite"
+      component={GalleryWriteScreen}
+      options={({navigation})=>({
+        title : 'Write your memory',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+      <Stack.Screen
+      name="WrittenGalleryScreen"
+      component={WrittenGalleryScreen}
+      options={({navigation})=>({
+        title : 'Write your memory',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+
+      {/* calendar */}
+       <Stack.Screen
       name="AddCalendar"
       component={AddCalendar}
       options={({navigation})=>({
@@ -80,11 +124,13 @@ function App() {
         },
       })}
       />
+
       </Stack.Navigator>
    
     </NavigationContainer>
   </>
   )
 }
+
 
 export default App;
