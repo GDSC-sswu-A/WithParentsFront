@@ -6,6 +6,8 @@ install! 'cocoapods', :deterministic_uuids => false
 
 target 'withParents' do
   config = use_native_modules!
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
 
   # React Native Maps dependencies
   rn_maps_path = '../node_modules/react-native-maps'

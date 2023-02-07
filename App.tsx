@@ -12,10 +12,21 @@ import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 
-
+import messaging from '@react-native-firebase/messaging';
 const Stack = createNativeStackNavigator();
 
 function App() {
+  async function requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  }
+  requestUserPermission();
   
   // if (Platform.OS === 'android') {
   //   StatusBar.setBackgroundColor('white');
