@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {Dimensions} from 'react-native';
+import axios from 'axios';
+
 import CheckModal from '../../component/CheckModal';
 import {GreenButton} from '../../component/ButtonComponent';
 import SelectMediTimesModal from '../../component/SelectMediTimesModal';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+
 import {
   buttonValueAtom,
   CheckModalAtom,
@@ -15,6 +18,7 @@ import {
   mediNameAtom,
   mediListAtom,
   mediType,
+  mediTimeListAtom,
 } from '../../atom/atom';
 import {
   View,
@@ -26,13 +30,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-//화면의 높이
+//화면의 높이,너비
 Dimensions.get('window').height;
-//화면의 너비
 Dimensions.get('window').width;
 
 //요일 버튼 색 변경 컴포넌트 (회색=>초록)
 const mediWeekBtn = (id: number, weekData) => {
+  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
+
   const [isSelect, setSelect] = useRecoilState(mediWeekBtnAtom);
   return (
     <Pressable
@@ -53,6 +58,7 @@ const mediWeekBtn = (id: number, weekData) => {
 //시간 선택 컴포넌트
 const SelectDosingTime = ({mediTime, setMediTime}) => {
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
 
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -62,7 +68,9 @@ const SelectDosingTime = ({mediTime, setMediTime}) => {
   };
   const TimeConfirm = date => {
     hideTimePicker();
-    setMediTime(date.format('HH:MM'));
+    setMediTime(date.format('HH:mm'));
+
+    setMediTimeList([...mediTimeList, mediTime]);
   };
   return (
     <>
@@ -107,22 +115,55 @@ export default function AddmedipageScreen({navigation}) {
   const [mediTime2, setMediTime2] = useRecoilState(mediTimeAtom2);
   const [mediTime3, setMediTime3] = useRecoilState(mediTimeAtom3);
   const medicines = useRecoilValue<mediType[]>(mediListAtom);
+  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
+
   const setmedicines = useSetRecoilState<mediType[]>(mediListAtom);
 
   //medicine 추가하기
+
   const addMedicine = () => {
     const nextId = Math.floor(
       medicines.length > 0 ? medicines[medicines.length - 1].id + 1 : 0,
     );
-    const mediType = {
-      id: nextId,
-      task: mediName,
+
+    //요일 => true,false에서 0,1 상태로 전환
+    const setWeekdata = [...Object.values(isSelect)];
+    const setWeekForm = setWeekdata.map(weekItem => {
+      weekItem === true ? (weekItem = '1') : (weekItem = '0');
+      return weekItem;
+    });
+    const selectWeek = setWeekForm.join('');
+    console.log(mediTime1);
+
+    //setMediTimeList([...mediTimeList, mediTime1]);
+    console.log(mediTimeList);
+
+    /*
+    axios
+      .post('http://3.37.21.121:8080/api/medication/createMedication', {
+        userId: nextId,
+        description: mediName,
+        //completed: true,
+        dayOfTheWeekList: selectWeek,
+        dosingTime: mediTime1,
+      })
+      .then(function (response) {
+        console.log('medicine 추가');
+      })
+      .catch(function (error) {
+        console.log('medicine 추가오류');
+      });
+    /*const mediType = {
+      userId: nextId,
+      description: mediName,
       completed: true,
-    };
-    setmedicines([...medicines, mediType]);
+      dayOfTheWeekList: isSelect.join(''),
+      dosingTime: [mediTime1, mediTime2, mediTime3],
+    };*/
+    // setmedicines([...medicines, mediType]);
     navigation.navigate('Medicine');
     setMediName('');
-    setSelect(false);
+    setSelect([false, false, false, false, false, false]);
 
     /* const medicine: mediType = {
       id: nextId,

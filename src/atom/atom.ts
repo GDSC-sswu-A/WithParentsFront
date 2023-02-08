@@ -10,7 +10,7 @@ export const CheckModalAtom = atom<any>({
   default: false,
 });
 export const mediNameAtom = atom<any>({
-  key: 'mediNameAtom/${v1()}',
+  key: 'mediNameAtom',
   default: '',
 });
 export const mediWeekBtnAtom = atom<any>({
@@ -19,15 +19,20 @@ export const mediWeekBtnAtom = atom<any>({
 });
 
 export const mediTimeAtom1 = atom<any>({
-  key: 'mediTimeAtom/${v1()}',
-  default: [],
+  key: 'mediTimeAtom',
+  default: '',
 });
 export const mediTimeAtom2 = atom<any>({
-  key: 'mediTimeAtom2/${v1()}',
-  default: [],
+  key: 'mediTimeAtom2',
+  default: '',
 });
 export const mediTimeAtom3 = atom<any>({
-  key: 'mediTimeAtom3/${v1()}',
+  key: 'mediTimeAtom3',
+  default: '',
+});
+
+export const medTimeListAtom = atom<any>({
+  key: 'mediTimeListAtom',
   default: [],
 });
 
