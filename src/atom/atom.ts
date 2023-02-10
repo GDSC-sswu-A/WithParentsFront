@@ -19,7 +19,7 @@ export const mediWeekBtnAtom = atom<any>({
 });
 
 export const mediTimeAtom1 = atom<any>({
-  key: 'mediTimeAtom',
+  key: 'mediTimeAtom1',
   default: '',
 });
 export const mediTimeAtom2 = atom<any>({
@@ -31,7 +31,7 @@ export const mediTimeAtom3 = atom<any>({
   default: '',
 });
 
-export const medTimeListAtom = atom<any>({
+export const mediTimeListAtom = atom<any>({
   key: 'mediTimeListAtom',
   default: [],
 });

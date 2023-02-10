@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
-
 import CheckModal from '../../component/CheckModal';
 import {GreenButton} from '../../component/ButtonComponent';
 import SelectMediTimesModal from '../../component/SelectMediTimesModal';
@@ -36,8 +35,6 @@ Dimensions.get('window').width;
 
 //요일 버튼 색 변경 컴포넌트 (회색=>초록)
 const mediWeekBtn = (id: number, weekData) => {
-  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
-
   const [isSelect, setSelect] = useRecoilState(mediWeekBtnAtom);
   return (
     <Pressable
@@ -58,7 +55,8 @@ const mediWeekBtn = (id: number, weekData) => {
 //시간 선택 컴포넌트
 const SelectDosingTime = ({mediTime, setMediTime}) => {
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
-  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
+  //const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
+  // const [mediTimeList, setMediTimeList] = React.useState([]);
 
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -69,8 +67,8 @@ const SelectDosingTime = ({mediTime, setMediTime}) => {
   const TimeConfirm = date => {
     hideTimePicker();
     setMediTime(date.format('HH:mm'));
-
-    setMediTimeList([...mediTimeList, mediTime]);
+    /*setMediTimeList([...mediTimeList, mediTime]);
+    console.log(mediTimeList);*/
   };
   return (
     <>
@@ -107,20 +105,18 @@ const SelectDosingTime = ({mediTime, setMediTime}) => {
 export default function AddmedipageScreen({navigation}) {
   const [buttonValue, setButtonValue] = useRecoilState(buttonValueAtom);
   const [mediName, setMediName] = useRecoilState(mediNameAtom);
-  // const [userName, setUserValue] = React.useState('');
-  const [checkModalVisible, setCheckModalVisible] =
-    useRecoilState(CheckModalAtom);
+  /* const [checkModalVisible, setCheckModalVisible] =
+    useRecoilState(CheckModalAtom);*/
   const [isSelect, setSelect] = useRecoilState(mediWeekBtnAtom);
   const [mediTime1, setMediTime1] = useRecoilState(mediTimeAtom1);
   const [mediTime2, setMediTime2] = useRecoilState(mediTimeAtom2);
   const [mediTime3, setMediTime3] = useRecoilState(mediTimeAtom3);
   const medicines = useRecoilValue<mediType[]>(mediListAtom);
   const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
-
-  const setmedicines = useSetRecoilState<mediType[]>(mediListAtom);
+  //const [mediTimeList, setMediTimeList] = React.useState(['1']);
+  // const setmedicines = useSetRecoilState<mediType[]>(mediListAtom);
 
   //medicine 추가하기
-
   const addMedicine = () => {
     const nextId = Math.floor(
       medicines.length > 0 ? medicines[medicines.length - 1].id + 1 : 0,
@@ -133,9 +129,13 @@ export default function AddmedipageScreen({navigation}) {
       return weekItem;
     });
     const selectWeek = setWeekForm.join('');
-    console.log(mediTime1);
 
-    //setMediTimeList([...mediTimeList, mediTime1]);
+    //약 시간 배열로 전환
+    console.log(mediTime1);
+    console.log(mediTime2);
+    console.log(mediTime3);
+    setMediTimeList(...mediTimeList, mediTime1);
+    setMediTimeList(mediTimeList.concat(mediTime1));
     console.log(mediTimeList);
 
     /*
@@ -161,16 +161,9 @@ export default function AddmedipageScreen({navigation}) {
       dosingTime: [mediTime1, mediTime2, mediTime3],
     };*/
     // setmedicines([...medicines, mediType]);
-    navigation.navigate('Medicine');
+    //navigation.navigate('Medicine');
     setMediName('');
-    setSelect([false, false, false, false, false, false]);
-
-    /* const medicine: mediType = {
-      id: nextId,
-      task: mediName,
-      completed: false,
-    };
-    setmedicines([...medicines, medicine]);*/
+    setSelect([false, false, false, false, false, false, false]);
   };
 
   //CheckModal 뜨는 조건
@@ -182,8 +175,8 @@ export default function AddmedipageScreen({navigation}) {
 
       //      setCheckModalVisible(!checkModalVisible);
     }*/ else if (buttonValue === 1 && mediTime1.length !== 0) {
-      navigation.navigate('Medicine');
       addMedicine();
+      navigation.navigate('Medicine');
     } else if (
       buttonValue === 2 &&
       mediTime1.length !== 0 &&
@@ -198,6 +191,7 @@ export default function AddmedipageScreen({navigation}) {
       mediTime3.length !== 0
     ) {
       addMedicine();
+      navigation.navigate('Medicine');
     } else {
       Alert.alert('Error', 'please input intake time');
     }
@@ -207,25 +201,11 @@ export default function AddmedipageScreen({navigation}) {
     <View style={styles.container}>
       <View style={styles.greenContainer}>
         {/*
-        <View style={styles.selectUser}>
-          <Text style={styles.fontStyle}>
-            Whose medicine is it in the family?
-          </Text>
-          <TextInput
-            style={styles.input}
-            value={userValue}
-            onChange={event => {
-              const {eventCount, target, text} = event.nativeEvent;
-              //onChange={(event) => console.log(event.nativeEvent.text)}
-              setUserValue(text);
-            }}
-          />
-          </View>*/}
         <View style={styles.modal}>
           {checkModalVisible && (
             <CheckModal children="Did you miss anything while writing?"></CheckModal>
           )}
-        </View>
+          </View>*/}
         {/*medicine 이름 입력하기*/}
         <View style={styles.medicineName}>
           <Text style={styles.fontStyle}>The name of the medicine</Text>
