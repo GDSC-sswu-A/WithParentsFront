@@ -1,29 +1,25 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { 
     StyleSheet, 
     Text, 
     View, 
     TextInput,
+    Keyboard,
+    BackHandler,
 } from 'react-native'
 
 import { GreenButton } from '../component/ButtonComponent';
-import { createFamily } from '../common/FamilyApi';
+
+const code = { code : 'dsawr'};
 
 export default function CreateFamilyScreen({navigation}) {
-    const [password, setPassword] = useState('');
-    const [isOk, setIsOk] = useState(false);
+    const [text, setText] = useState('');
 
-    useEffect (() => {
-        const clickOk = async () => {
-            const result = await createFamily(password);
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@",result,"ZZ")
-        };
-        if (isOk) {
-            clickOk();
-            navigation.navigate('Setting')
-        }
-        setIsOk(false)
-    })
+    const Input = ()=>{
+        setText('');
+        Keyboard.dismiss();
+    }
 
     const Cancle = ()=>{
         if (navigation?.canGoBack()){
@@ -32,30 +28,29 @@ export default function CreateFamilyScreen({navigation}) {
         }
         return false
     }
-    const Input = ()=>{
-        setPassword
-        setIsOk(true);
-    }
   return (
     <View style={styles.container}>
-        <Text style={styles.ex}>Each family gets one code.</Text>
-        <Text style={styles.ex}>Please register as a family.</Text>
+
+        <Text style={styles.txt}>Family Code</Text>
+        <Text style={styles.txt}>[  {code.code} ]</Text>
 
         <View style={styles.passwd}>
         <Text style={styles.txt}>Enter the Password</Text>
 
         <TextInput 
         style={styles.input}
-        value={password}
-        onChangeText={setPassword}
+        value={text}
+        onChangeText={setText}
         onSubmitEditing={Input}
         returnKeyType="done"
         />   
         </View>
 
-        <Text style={styles.ex}>The Family code can be found</Text>
-        <Text style={styles.ex}>at the very bottom of the Settings page.</Text>
+
+        <Text style={styles.ex}>Each family gets one code.</Text>
+        <Text style={styles.ex}>Please register as a family.</Text>
         
+
         <View style={styles.btn}>
         <GreenButton text='Cacle' on={Cancle}/>
         <GreenButton text='OK' on={Input}/>
