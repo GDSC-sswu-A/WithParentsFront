@@ -12,6 +12,7 @@ import {
   Keyboard,
   SafeAreaView,
   Image,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 import {useRecoilState} from 'recoil';
@@ -21,16 +22,19 @@ export default function SignUpScreen({navigation}) {
   const [parentCheckbox, parentSetCheckbox] = useState(false);
   const [childCheckbox, childSetcheckbox] = useState(false);
   const [username, setuserName] = useState('');
-  const [LoginmodalVisible, setLoginModalVisible] = useRecoilState(LoginAtom);
+  //const [LoginmodalVisible, setLoginModalVisible] = useRecoilState(LoginAtom);
+
   const ClickCancleBtn = () => {
     navigation.navigate('Login');
   };
 
   const ClickNextBtn = () => {
     if (username === '') {
-      setLoginModalVisible(true);
+      Alert.alert('Error', 'please input your name');
+      //setLoginModalVisible(true);
     } else if (childCheckbox === false && parentCheckbox === false) {
-      setLoginModalVisible(true);
+      // setLoginModalVisible(true);
+      Alert.alert('Error', 'please check parents or child');
     } else {
       navigation.navigate('Nav');
     }
@@ -45,7 +49,7 @@ export default function SignUpScreen({navigation}) {
         />
       </View>
       <View style={styles.modal}>
-        {LoginmodalVisible && <LoginModal></LoginModal>}
+        {/*{LoginmodalVisible && <LoginModal></LoginModal>}*/}
       </View>
       <View style={styles.inputName}>
         <Text style={styles.black}>name</Text>

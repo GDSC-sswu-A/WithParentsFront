@@ -6,7 +6,6 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {LoginButton} from '../../component/ButtonComponent';
-import {GoogleLoginApi} from '../../api/GoogleLoginApi';
 import axios from 'axios';
 
 import {
@@ -44,17 +43,10 @@ export default function LoginHomeScreen({navigation}) {
     isSignedIn(), [];
   });
 
-  /*
-  const tokenSubmit = () => {
-    axios
-      .post('http://localhost:8080/api/auth/googleLogin', {
-        headers: {Authorization: user.idToken},
-      })
-      .then(response => {
-        console.log(response);
-      });
-  };
-*/
+  function tokenSubmit(idTokenData) {
+    const url = 'http://3.37.21.121:8080/api/auth/googleLogin';
+    return axios.post(url, idTokenData);
+  }
 
   //사용자가 로그인하도록 모달띄움 , 로그인되면 userinfo객체 반환
   //그렇지않다면 오류 console.log에 출력
@@ -65,12 +57,10 @@ export default function LoginHomeScreen({navigation}) {
       const userInfo = await GoogleSignin.signIn();
       console.log('due____', userInfo);
       setUser(userInfo);
-      const token = {
-        headers: userInfo.idToken,
-      };
-      //console.log(token.headers);
-      const {data} = await GoogleLoginApi(token.headers);
-      console.log(data);
+      //  console.log(userInfo.idToken);
+      const idTokenData = {idToken: userInfo.idToken};
+      const {data} = await tokenSubmit(idTokenData);
+      console.log(data, '전송완료');
     } catch (error) {
       console.log('Message___', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
