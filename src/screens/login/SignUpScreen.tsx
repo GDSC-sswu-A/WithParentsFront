@@ -36,7 +36,7 @@ export default function SignUpScreen({navigation}) {
       // setLoginModalVisible(true);
       Alert.alert('Error', 'please check parents or child');
     } else {
-      navigation.navigate('Nav');
+      navigation.navigate('JoinFamily');
     }
   };
 
