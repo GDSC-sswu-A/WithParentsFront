@@ -4,6 +4,7 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'
 import MapViewComponent from '../../component/MapViewComponent'
 import Geolocation, { PositionError } from 'react-native-geolocation-service'
 import DropDownPicker from 'react-native-dropdown-picker';
+import { postLocationInfo, getLocationInfo } from '../../common/MapApi';
 
 interface ILocation {
   latitude : number;
@@ -19,6 +20,12 @@ export default function Map(navigation) {
   ]);
 
   useEffect(() => {
+    const getlocation = async () => {
+      console.log("HI")
+      const result = await getLocationInfo();
+      console.log(result, "$$$$$$")
+  };
+  getlocation();
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization('always');
     }
@@ -36,6 +43,11 @@ export default function Map(navigation) {
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     )
+    const postlocation = async () => {
+      console.log("HI")
+      const result = await postLocationInfo(location);
+  };
+  postlocation();
     
   }, []);
   
