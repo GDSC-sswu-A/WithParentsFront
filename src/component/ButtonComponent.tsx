@@ -18,6 +18,15 @@ export function GreenButton({text, on}) {
     </TouchableOpacity>
   );
 }
+export function GreenLineButton({text, on}) {
+  return (
+    <TouchableOpacity
+    onPress = {on}
+    style={styles.GreenLineButton}>
+    <Text style={styles.green}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
 
 export function WhiteButton({text}) {
     return (
@@ -86,7 +95,13 @@ const styles = StyleSheet.create({
         height : 40,
         justifyContent: 'center',
     },
-
+    GreenLineButton : {
+      borderColor : "#6A7759",
+      borderRadius: 20,
+      width : 110,
+      height : 40,
+      justifyContent: 'center',
+    },
     YellowButton:{
       backgroundColor : '#FFFBE9',
       width : 80,
@@ -119,6 +134,12 @@ const styles = StyleSheet.create({
         fontSize : 20,
         fontWeight : '300'
     },
+    green : {
+      textAlign : 'center',
+      color : '#6A7759',
+      fontSize : 20,
+      fontWeight : '300'
+  },
     AddButton : {
       backgroundColor : '#6A7759',
       width : 55,

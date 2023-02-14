@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { 
   View, 
   Text, 
@@ -6,10 +6,22 @@ import {
   TouchableOpacity
 } from 'react-native'
 
+import { getUserInfo } from '../common/FamilyApi';
+
 export default function SettingScreen({navigation}) {
+  const [id, setId] = useState("");
+  const [passwd, setPasswd] = useState("");
+  useEffect (() => {
+    const init = async () => {
+        const result = await getUserInfo();
+        setId(result.familyId)
+        setPasswd(result.familyPassword)
+    };
+    init();
+})
+console.log("@@", id, passwd)
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.top}>Setting</Text> */}
 
       <View style={styles.menus}>
         <Text style={styles.title}>System setting</Text>
@@ -23,22 +35,22 @@ export default function SettingScreen({navigation}) {
 
       <View style={styles.menus}>
         <Text style={styles.title}>Family setting</Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
         onPress={() => navigation.navigate('CreateFamily')}> 
           <Text style={styles.menu}>Creating a New Family</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
         onPress={() => navigation.navigate('JoinFamily')}>
           <Text style={styles.menu}>Family registration</Text>
-
         </TouchableOpacity>
       </View>
 
       <View style={styles.menus}>
-        <Text style={styles.title}>System setting</Text>
+        <Text style={styles.title}>Personal/Security</Text>
         <TouchableOpacity>
+          <Text style={styles.menu}>Family ID : {id} </Text>
+          <Text style={styles.menu}>Family Password : {passwd} </Text>
           <Text style={styles.menu}>Log out</Text>
-
         </TouchableOpacity>
       </View>
     </View>
