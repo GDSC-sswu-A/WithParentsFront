@@ -11,7 +11,7 @@ export const postLocationInfo = async(
     "longitude" : location.longitude
   }
     try {
-      console.log("api 호출 전", location.latitude, location.longitude)
+      // console.log("api 호출 전", location.latitude, location.longitude)
       const response = await axios.post(
         `http://3.37.21.121:8080/api/user/setLocationInfo`,params,
         {

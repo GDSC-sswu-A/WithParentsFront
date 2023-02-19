@@ -1,31 +1,39 @@
 import { View, Text, StyleSheet, Label, TouchableOpacity, Platform } from 'react-native'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'
 import MapViewComponent from '../../component/MapViewComponent'
 import Geolocation, { PositionError } from 'react-native-geolocation-service'
-import DropDownPicker from 'react-native-dropdown-picker';
+
 import { postLocationInfo, getLocationInfo } from '../../common/MapApi';
 
 interface ILocation {
   latitude : number;
   longitude : number;
 }
+interface ParentData {
+  latitude: string;
+  longitude: string;
+  nickname: string;
+  userId: number;
+}
 export default function Map(navigation) {
   const [location, setLocation] = useState<ILocation | undefined>(37.78825,-122.4324);
-  const [open, setOpen] = useState(false);
-  const [parent, setParent] = useState(null);
-  const [parents, setParents] = useState([
-      {label: '아부지', value: '0'},
-      {label: '어무니', value: '1'},
-  ]);
+  const [parents, setParents] = useState<ParentData | undefined>(
+    
+  );
 
   useEffect(() => {
+    
     const getlocation = async () => {
-      console.log("HI")
       const result = await getLocationInfo();
-      console.log(result, "$$$$$$")
+      console.log(result)
+      // setParents(result);
+      // result.map((i, k)=>{
+      //     setParents({label: i.nickname,value: k})
+      // })
   };
-  getlocation();
+  
+  // getlocation();
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization('always');
     }
@@ -36,7 +44,6 @@ export default function Map(navigation) {
           latitude,
           longitude,
         });
-        
       },
       (e) => {
         console.log("error!!!!!!!!!!",e.code, e.message);
@@ -44,47 +51,25 @@ export default function Map(navigation) {
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     )
     const postlocation = async () => {
-      console.log("HI")
       const result = await postLocationInfo(location);
   };
   postlocation();
     
   }, []);
   
-  console.log("location", location)
+  // console.log("location", location)
   
   return (
     <View style={styles.container}>
       
       <Text style={styles.title}>Parent's location</Text>
       <View style={styles.map}>
-        <MapViewComponent location={location} who={parents[0]}/>
+        <MapViewComponent location={location}/>
     </View>
       
       <Text style={styles.title}>The last connection time</Text>
       <Text style={styles.date}>2022-10-11 18:32</Text>
-      <View>
-      <DropDownPicker
-        // style = {{backgroundColor : '#FCF4D6'}}
-        containerStyle={{
-          width : 100
-        }}
-        textStyle={{
-          fontSize: 13,
-          color : '#6A7759'
-        }}
-        labelStyle={{
-          color : '#6A7759'
-        }}   
-        open={open}
-        value={parent}
-        items={parents}
-        setOpen={setOpen}
-        setValue={setParent}
-        setItems={setParents}
-        placeholder="parents"
-      />
-      </View>
+
     </View>
   )
 }
@@ -96,7 +81,7 @@ const styles = StyleSheet.create({
   },
   map : {
     // flex : 1,
-    height : 320,
+    height : 360,
     marginBottom : 40
   },
   title : {
