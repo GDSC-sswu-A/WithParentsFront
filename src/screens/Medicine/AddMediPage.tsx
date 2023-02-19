@@ -6,6 +6,7 @@ import {GreenButton} from '../../component/ButtonComponent';
 import SelectMediTimesModal from '../../component/SelectMediTimesModal';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {createMedicationApi, getMedicineInfo} from '../../common/medicineApi';
 
 import {
   buttonValueAtom,
@@ -17,7 +18,7 @@ import {
   mediNameAtom,
   mediListAtom,
   mediType,
-  mediTimeListAtom,
+  //mediTimeListAtom,
 } from '../../atom/atom';
 import {
   View,
@@ -55,8 +56,6 @@ const mediWeekBtn = (id: number, weekData) => {
 //시간 선택 컴포넌트
 const SelectDosingTime = ({mediTime, setMediTime}) => {
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
-  //const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
-  // const [mediTimeList, setMediTimeList] = React.useState([]);
 
   const showTimePicker = () => {
     setTimePickerVisibility(true);
@@ -66,9 +65,7 @@ const SelectDosingTime = ({mediTime, setMediTime}) => {
   };
   const TimeConfirm = date => {
     hideTimePicker();
-    setMediTime(date.format('HH:mm'));
-    /*setMediTimeList([...mediTimeList, mediTime]);
-    console.log(mediTimeList);*/
+    setMediTime(date.format('HH:mm,'));
   };
   return (
     <>
@@ -105,23 +102,14 @@ const SelectDosingTime = ({mediTime, setMediTime}) => {
 export default function AddmedipageScreen({navigation}) {
   const [buttonValue, setButtonValue] = useRecoilState(buttonValueAtom);
   const [mediName, setMediName] = useRecoilState(mediNameAtom);
-  /* const [checkModalVisible, setCheckModalVisible] =
-    useRecoilState(CheckModalAtom);*/
   const [isSelect, setSelect] = useRecoilState(mediWeekBtnAtom);
   const [mediTime1, setMediTime1] = useRecoilState(mediTimeAtom1);
   const [mediTime2, setMediTime2] = useRecoilState(mediTimeAtom2);
   const [mediTime3, setMediTime3] = useRecoilState(mediTimeAtom3);
   const medicines = useRecoilValue<mediType[]>(mediListAtom);
-  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeListAtom);
-  //const [mediTimeList, setMediTimeList] = React.useState(['1']);
-  // const setmedicines = useSetRecoilState<mediType[]>(mediListAtom);
 
   //medicine 추가하기
-  const addMedicine = () => {
-    const nextId = Math.floor(
-      medicines.length > 0 ? medicines[medicines.length - 1].id + 1 : 0,
-    );
-
+  const addMedicine = async () => {
     //요일 => true,false에서 0,1 상태로 전환
     const setWeekdata = [...Object.values(isSelect)];
     const setWeekForm = setWeekdata.map(weekItem => {
@@ -130,60 +118,64 @@ export default function AddmedipageScreen({navigation}) {
     });
     const selectWeek = setWeekForm.join('');
 
-    //약 시간 배열로 전환
-    console.log(mediTime1);
-    console.log(mediTime2);
-    console.log(mediTime3);
-    setMediTimeList(...mediTimeList, mediTime1);
-    setMediTimeList(mediTimeList.concat(mediTime1));
-    console.log(mediTimeList);
+    //시간 배열형식으로 변환
+    const TimeArray = () => {
+      if (buttonValue === 1) {
+        const mediTimeArray = mediTime1.split(',').slice(0, 1);
+        return mediTimeArray;
+      }
+      if (buttonValue === 2) {
+        const mediTimeData = mediTime1.concat(mediTime2);
+        const mediTimeArray = mediTimeData.split(',').slice(0, 2);
+        return mediTimeArray;
+      }
+      if (buttonValue === 3) {
+        const mediTimeData = mediTime1.concat(mediTime2).concat(mediTime3);
+        const mediTimeArray = mediTimeData.split(',').slice(0, 3);
+        return mediTimeArray;
+      }
+    };
 
-    /*
-    axios
-      .post('http://3.37.21.121:8080/api/medication/createMedication', {
-        userId: nextId,
-        description: mediName,
-        //completed: true,
-        dayOfTheWeekList: selectWeek,
-        dosingTime: mediTime1,
-      })
-      .then(function (response) {
-        console.log('medicine 추가');
-      })
-      .catch(function (error) {
-        console.log('medicine 추가오류');
-      });
-    /*const mediType = {
-      userId: nextId,
-      description: mediName,
-      completed: true,
-      dayOfTheWeekList: isSelect.join(''),
-      dosingTime: [mediTime1, mediTime2, mediTime3],
-    };*/
-    // setmedicines([...medicines, mediType]);
-    //navigation.navigate('Medicine');
+    const result = await createMedicationApi(
+      1,
+      mediName,
+      selectWeek,
+      TimeArray(),
+      true,
+    );
+
+    //console.log(result);
+
     setMediName('');
     setSelect([false, false, false, false, false, false, false]);
+    setMediTime1('');
+    setMediTime2('');
+    setMediTime3('');
+  };
+
+  const medicineInfo = async () => {
+    const result = await getMedicineInfo(1);
+    console.log(result);
+    navigation.navigate('Medicine');
   };
 
   //CheckModal 뜨는 조건
   const ToGoMediHome = () => {
     if (mediName === '') {
-      Alert.alert('Error', 'please input medicine name');
-    } /*else if (isSelect.every(day => day === false)) {
+      Alert.alert('Error', 'Please input medicine name');
+      console.log(isSelect);
+    } else if (Object.values(isSelect).every(day => day === false)) {
       Alert.alert('Error', 'please input day of the week');
-
-      //      setCheckModalVisible(!checkModalVisible);
-    }*/ else if (buttonValue === 1 && mediTime1.length !== 0) {
+    } else if (buttonValue === 1 && mediTime1.length !== 0) {
       addMedicine();
-      navigation.navigate('Medicine');
+      medicineInfo();
     } else if (
       buttonValue === 2 &&
       mediTime1.length !== 0 &&
       mediTime2.length !== 0
     ) {
       addMedicine();
-      navigation.navigate('Medicine');
+      medicineInfo();
     } else if (
       buttonValue === 3 &&
       mediTime1.length !== 0 &&
@@ -191,7 +183,7 @@ export default function AddmedipageScreen({navigation}) {
       mediTime3.length !== 0
     ) {
       addMedicine();
-      navigation.navigate('Medicine');
+      medicineInfo();
     } else {
       Alert.alert('Error', 'please input intake time');
     }
@@ -200,12 +192,6 @@ export default function AddmedipageScreen({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.greenContainer}>
-        {/*
-        <View style={styles.modal}>
-          {checkModalVisible && (
-            <CheckModal children="Did you miss anything while writing?"></CheckModal>
-          )}
-          </View>*/}
         {/*medicine 이름 입력하기*/}
         <View style={styles.medicineName}>
           <Text style={styles.fontStyle}>The name of the medicine</Text>
