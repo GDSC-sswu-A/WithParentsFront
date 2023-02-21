@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NTIzNzIwM30.8bTAxzC1FTYXTpuci5N2KxEclYbcKvLakD9Km5HQ_zw"
+accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NzQ1ODExM30.6wcjJi0d6d0tOwlFr_psOHQ-NH311CF5zF3_l6RRpaM"
 
 
 export const getScheduleList = async(
 ) => {
     try {
       const response = await axios.get(
-        `http://3.37.21.121:8080/api/schedule/getScheduleList`,
+        `http://3.37.21.121:8080/api/schedule/getScheduleList?year=2023&month=2`,
         {
           headers: {
             jwt_token:accessToken,
@@ -16,6 +16,7 @@ export const getScheduleList = async(
         },
       );
       const data = response.data;
+      console.log("get !!")
       return data;
     } catch (e: any) {
         return e.response;
@@ -41,16 +42,16 @@ export const getTodaySchedule = async(
 }
 
 export const postCreatSchedule = async(
-    id: number,
-    date: string,
-    time: string,
     title: string,
+    day: string,
+    time: string,
+    alert: boolean,
   ) => {
     var params = {
-      "memberId": id,
-      "date" : date,
-      "time" : time,
-      "title" : title
+      "title" : title? title: null,
+      "date" : day? day: null,
+      "time" : time? time: null,
+      "notificationStatus": alert? alert:null
     }
       try {
         const response = await axios.post(

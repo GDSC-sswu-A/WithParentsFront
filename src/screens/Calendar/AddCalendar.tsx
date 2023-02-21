@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
   TouchableOpacity,
   View, 
@@ -38,7 +38,20 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 
+import { postCreatSchedule } from '../../common/CalendarApi';
+
 export default function AddCalendar({navigation}) {
+  const [ok, setOk] = useState(false);
+  useEffect (() => {
+    const posting = async () => {
+        const result = await postCreatSchedule(title, day, time, alert);
+        console.log(result)
+    };
+    if (ok) {
+      posting();
+    }
+   
+})
 
 const Cancle = ()=>{
     if (navigation?.canGoBack()){
@@ -49,8 +62,9 @@ const Cancle = ()=>{
 }
 const Input = ()=>{
   setTitle('');
+  setOk(true);
   Keyboard.dismiss();
-  console.log(title, day, alert, time)
+  // console.log(title, day, alert, time)
 }
 
 // title
@@ -60,8 +74,8 @@ const [title, setTitle] = useState("");
 const [open, setOpen] = useState(false);
 const [alert, setAlert] = useState(null);
 const [alerts, setAlerts] = useState([
-    {label: 'O', value: '1'},
-    {label: 'X', value: '2'},
+    {label: 'O', value: true},
+    {label: 'X', value: false},
 ]);
 
 //Date
@@ -75,7 +89,7 @@ const hideDatePicker = () => {
 };
 const handleConfirm = (date) => {
   hideDatePicker();
-  setDay(date.format("yyyy/MM/dd"))
+  setDay(date.format("yyyy-MM-dd"))
 };
 
 //Date
