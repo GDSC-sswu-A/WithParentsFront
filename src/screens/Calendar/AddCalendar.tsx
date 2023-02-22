@@ -45,13 +45,13 @@ export default function AddCalendar({navigation}) {
   useEffect (() => {
     const posting = async () => {
         const result = await postCreatSchedule(title, day, time, alert);
-        console.log(result)
     };
     if (ok) {
       posting();
+      navigation.navigate('Calendar')
     }
    
-})
+}, )
 
 const Cancle = ()=>{
     if (navigation?.canGoBack()){
@@ -61,10 +61,8 @@ const Cancle = ()=>{
     return false
 }
 const Input = ()=>{
-  setTitle('');
   setOk(true);
   Keyboard.dismiss();
-  // console.log(title, day, alert, time)
 }
 
 // title
