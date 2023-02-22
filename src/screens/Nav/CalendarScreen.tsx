@@ -1,19 +1,50 @@
-import React from 'react'
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 
 import CalendarComponent from '../../component/CalendarComponent';
 import { AddButton } from '../../component/ButtonComponent';
 
+import { getScheduleList } from '../../common/CalendarApi';
+
+function ScheduleList(data) {
+  console.log(data)
+  return(
+      <View style = {styles.list}>
+        <View>
+          <Text>{data.data.date}</Text>
+          <Text>{data.data.title}</Text> 
+        </View>
+          <TouchableOpacity><Text>button</Text></TouchableOpacity>
+      </View>
+  )
+}
+
 export default function Calender({navigation}) {
+  const [ schedule, setSchedule] = useState(null)
+  useEffect (() => {
+    const getList = async () => {
+        const result = await getScheduleList();
+        setSchedule(result);
+        // console.log(result, "H");
+    };
+    getList();
+},[]);
 
   return (
     <View style={styles.container}>
       <CalendarComponent  />
+      <ScrollView>
+        {schedule && schedule.map((d,i)=>{
+        return(
+          <ScheduleList key={i} data={d}/>
+        )
+      })}
+      </ScrollView>
       <TouchableOpacity
       style={styles.bottom}
       onPress={() => navigation.navigate('AddCalendar')}
       >
-       <AddButton />
+       <AddButton on={undefined} />
       </TouchableOpacity>
 
     </View>
@@ -32,6 +63,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     right : 0,
     margin : 20
+  },
+  list : {
+    padding: 15,
+    flexDirection : 'row',
+    justifyContent: 'space-between'
   }
 
 });
