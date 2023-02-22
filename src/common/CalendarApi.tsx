@@ -16,6 +16,7 @@ export const getScheduleList = async(
         },
       );
       const data = response.data;
+      console.log("get")
       return data;
     } catch (e: any) {
         return e.response;

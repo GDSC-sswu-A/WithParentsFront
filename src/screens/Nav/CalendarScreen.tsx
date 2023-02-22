@@ -8,7 +8,6 @@ import ModalComponent from '../../component/ModalComponent';
 import { getScheduleList } from '../../common/CalendarApi';
 
 function ScheduleList(data) {
-  // console.log(data)
   return(
       <View style = {styles.list}>
         <View>
@@ -16,16 +15,12 @@ function ScheduleList(data) {
           <Text>{data.data.title}</Text> 
         </View>
         <ModalComponent data={data.data}/>
-          {/* <TouchableOpacity
-          onPress={() => {}}
-          >
-            <Text>button</Text>
-          </TouchableOpacity> */}
       </View>
   )
 }
 
 export default function Calender({navigation}) {
+  const [change, setChange] = useState(false);
   const [ schedule, setSchedule] = useState(null)
   useEffect (() => {
     const getList = async () => {
@@ -33,11 +28,16 @@ export default function Calender({navigation}) {
         setSchedule(result);
     };
     getList();
-},[schedule]);
+}, [change]);
 
   return (
     <View style={styles.container}>
       <CalendarComponent  />
+      <TouchableOpacity
+      style={styles.change}
+      onPress={()=>setChange(!change)}>
+        <Text style={{textAlign : 'center', color: 'white'}}>새로고침</Text>
+      </TouchableOpacity>
       <ScrollView>
         {schedule && schedule.map((d,i)=>{
         return(
@@ -75,6 +75,14 @@ const styles = StyleSheet.create({
     flexDirection : 'row',
     justifyContent: 'space-between',
     backgroundColor: '#EFF3EA',
+  },
+  change: {
+    backgroundColor: '#6A7759',
+    width: 60,
+    height: 30,
+    borderRadius: 20,
+    justifyContent: 'center',
+    margin: 10,
   }
 
 });
