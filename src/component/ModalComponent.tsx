@@ -1,11 +1,27 @@
 import { View, Text, Pressable, Modal, StyleSheet } from 'react-native'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { WhiteButton } from './ButtonComponent'
 
+import { deleteSchedule } from '../common/CalendarApi';
+
 export default function ModalComponent(data) {
-  console.log("s",data);
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
+    const [del, setDel] = useState(false);
+    useEffect (() => {
+      const delSchedule = async () => {
+          const result = await deleteSchedule(data.data.id);
+          console.log(result)
+      };
+      if(del){
+        delSchedule();
+        setOpen(false);
+      }
+     
+  }, [del])
+  const deleteBtn = ()=>{
+    setDel(!del)
+  }
   return (
     <View style={styles.container}>
         <Modal
@@ -29,7 +45,7 @@ export default function ModalComponent(data) {
             </View>
                 <View style={styles.btn}>
                 <WhiteButton text='edit'/>
-                <WhiteButton text='delete' />
+                <WhiteButton text='delete' on={deleteBtn}/>
                 </View>
             </View>
         </View>

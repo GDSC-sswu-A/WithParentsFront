@@ -16,7 +16,6 @@ export const getScheduleList = async(
         },
       );
       const data = response.data;
-      console.log("get !!")
       return data;
     } catch (e: any) {
         return e.response;
@@ -102,10 +101,11 @@ export const postCreatSchedule = async(
       }
 
       export const deleteSchedule = async(
+        id: number
         ) => {
             try {
               const response = await axios.delete(
-                `http://3.37.21.121:8080/api/schedule/deleteSchedule`,
+                `http://3.37.21.121:8080/api/schedule/deleteSchedule?scheduleId=`+id,
                 {
                   headers: {
                     jwt_token:accessToken,
@@ -113,6 +113,7 @@ export const postCreatSchedule = async(
                 },
               );
               const data = response.data;
+              console.log("삭제성공")
               return data;
             } catch (e: any) {
                 return e.response;

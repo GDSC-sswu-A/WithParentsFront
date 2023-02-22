@@ -31,10 +31,9 @@ export default function Calender({navigation}) {
     const getList = async () => {
         const result = await getScheduleList();
         setSchedule(result);
-        // console.log(result, "H");
     };
     getList();
-},[]);
+},[schedule]);
 
   return (
     <View style={styles.container}>
