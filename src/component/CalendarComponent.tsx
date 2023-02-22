@@ -1,17 +1,37 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { format } from "date-fns";
 import { Calendar } from 'react-native-calendars';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-export default function CalendarComponent() {
-
+export default function CalendarComponent(data) {
+  const posts = data.data
+  const markedDates = posts.reduce((acc, current) => {
+    const formattedDate = format(new Date(current.date), 'yyyy-MM-dd');
+    acc[formattedDate] = {marked: true};
+    return acc;
+  }, {});
+  
+  const [selectedDate, setSelectedDate] = useState(
+    format(new Date(), "yyyy-MM-dd"),
+  );
+  const markedSelectedDates = {
+    ...markedDates,
+    [selectedDate]: {
+      selected: true,
+      marked: markedDates[selectedDate]?.marked,
+    }
+  }
+  
+  console.log(markedSelectedDates)
   return (
   <Calendar 
   style={styles.calendar} 
+  markedDates={markedSelectedDates}
   theme= {{
     selectedDayBackgroundColor: '#6A7759',
     arrowColor : '#6A7759',
     todayTextColor : '#6A7759',
-    // dotColor : 'green'
+    dotColor : '#6A7759'
   }}
   />
   )
