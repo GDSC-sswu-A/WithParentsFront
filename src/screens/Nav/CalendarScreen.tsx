@@ -3,18 +3,24 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 
 import CalendarComponent from '../../component/CalendarComponent';
 import { AddButton } from '../../component/ButtonComponent';
+import ModalComponent from '../../component/ModalComponent';
 
 import { getScheduleList } from '../../common/CalendarApi';
 
 function ScheduleList(data) {
-  console.log(data)
+  // console.log(data)
   return(
       <View style = {styles.list}>
         <View>
           <Text>{data.data.date}</Text>
           <Text>{data.data.title}</Text> 
         </View>
-          <TouchableOpacity><Text>button</Text></TouchableOpacity>
+        <ModalComponent data={data.data}/>
+          {/* <TouchableOpacity
+          onPress={() => {}}
+          >
+            <Text>button</Text>
+          </TouchableOpacity> */}
       </View>
   )
 }
@@ -66,8 +72,10 @@ const styles = StyleSheet.create({
   },
   list : {
     padding: 15,
+    margin: 1,
     flexDirection : 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    backgroundColor: '#EFF3EA',
   }
 
 });
