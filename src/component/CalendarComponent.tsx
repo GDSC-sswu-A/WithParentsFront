@@ -16,14 +16,16 @@ export default function CalendarComponent(data) {
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), "yyyy-MM-dd"),
   );
-  const markedSelectedDates = {
+  const markedSelectedDate = {
     ...markedDates,
     [selectedDate]: {
       selected: true,
       marked: markedDates[selectedDate]?.marked,
     }
   }
+  markedSelectedDates = markedSelectedDate
   }
+  console.log(markedSelectedDates)
   
   return (
   <Calendar 
