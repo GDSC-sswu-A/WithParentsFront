@@ -5,7 +5,9 @@ import { StyleSheet, View } from 'react-native'
 
 export default function CalendarComponent(data) {
   const posts = data.data
-  const markedDates = posts.reduce((acc, current) => {
+  let markedSelectedDates
+  if(posts != null){
+    const markedDates = posts.reduce((acc, current) => {
     const formattedDate = format(new Date(current.date), 'yyyy-MM-dd');
     acc[formattedDate] = {marked: true};
     return acc;
@@ -21,12 +23,12 @@ export default function CalendarComponent(data) {
       marked: markedDates[selectedDate]?.marked,
     }
   }
+  }
   
-  console.log(markedSelectedDates)
   return (
   <Calendar 
   style={styles.calendar} 
-  markedDates={markedSelectedDates}
+  markedDates={markedSelectedDates? markedSelectedDates:null}
   theme= {{
     selectedDayBackgroundColor: '#6A7759',
     arrowColor : '#6A7759',
