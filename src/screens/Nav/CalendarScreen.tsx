@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import React from 'react'
+import { View, StyleSheet, TouchableOpacity} from 'react-native'
 
 import CalendarComponent from '../../component/CalendarComponent';
 import { AddButton } from '../../component/ButtonComponent';

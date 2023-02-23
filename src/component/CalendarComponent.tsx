@@ -6,11 +6,13 @@ import { getScheduleList } from '../common/CalendarApi'
 import ModalComponent from './ModalComponent';
 
 function ScheduleList(data) {
+  const listDate = data.data.date.split('-');
+  console.log(listDate)
   return(
       <View style = {styles.list}>
         <View>
-          <Text>{data.data.date}</Text>
-          <Text>{data.data.title}</Text> 
+          <Text style={styles.listDate}>Day {listDate[2]} | nickname</Text>
+          <Text style={styles.title}>{data.data.title}</Text> 
         </View>
         <ModalComponent data={data.data}/>
       </View>
@@ -19,7 +21,7 @@ function ScheduleList(data) {
 
 export default function CalendarComponent() {
   const [change, setChange] = useState(false);
-  const [ schedule, setSchedule] = useState(null)
+  const [schedule, setSchedule] = useState(null)
   const [month, setMonth] = useState(2);
   const [year, setYear] = useState(2023);
 
@@ -30,10 +32,10 @@ export default function CalendarComponent() {
     };
     getList();
 }, [year, month, change]);
-  const posts = [{"creatorId": 1, "date": "2023-02-22", "id": 49, "notificationStatus": null, "time": "18:02:00", "title": "테스트2"}, {"creatorId": 1, "date": "2023-02-22", "id": 51, "notificationStatus": null, "time": "18:02:00", "title": "2월"}, {"creatorId": 1, "date": "2023-02-25", "id": 53, "notificationStatus": null, "time": "18:02:00", "title": "test"}]
+
   let markedSelectedDates
-  if(posts != null){
-    const markedDates = posts.reduce((acc, current) => {
+  if(schedule != null){
+    const markedDates = schedule.reduce((acc, current) => {
     const formattedDate = format(new Date(current.date), 'yyyy-MM-dd');
     acc[formattedDate] = {marked: true};
     return acc;
@@ -57,11 +59,7 @@ export default function CalendarComponent() {
     <>
     <Calendar 
     style={styles.calendar} 
-    onDayPress={day=>{
-      console.log('selected day', day);
-    }}
     onMonthChange={month => {
-      console.log('month changed', month);
       setMonth(month.month)
       setYear(month.year)
     }}
@@ -69,14 +67,18 @@ export default function CalendarComponent() {
     theme= {{
       selectedDayBackgroundColor: '#6A7759',
       arrowColor : '#6A7759',
-      todayTextColor : '#6A7759',
-      dotColor : '#6A7759'
+      todayTextColor : 'red',
+      dotColor : '#6A7759',
+      textMonthFontWeight: 'bold',
+      textDayFontSize: 18,
+      textMonthFontSize: 16,
+      textDayHeaderFontSize: 16
     }}
     />
     <TouchableOpacity
       style={styles.change}
       onPress={()=>setChange(!change)}>
-        <Text style={{textAlign : 'center', color: 'white'}}>새로고침</Text>
+        <Text style={{textAlign : 'center', color: 'white'}}>Refresh</Text>
     </TouchableOpacity>
     <ScrollView>
         {schedule && schedule.map((d,i)=>{
@@ -110,4 +112,11 @@ const styles = StyleSheet.create({
       justifyContent: 'space-between',
       backgroundColor: '#EFF3EA',
     },
+    listDate : {
+      marginBottom: 10,
+    },
+    title : {
+      color : '#6A7759',
+      fontSize: 18
+    }
 })
