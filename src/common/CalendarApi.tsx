@@ -5,10 +5,12 @@ accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0
 
 
 export const getScheduleList = async(
+  year: number,
+  month: number
 ) => {
     try {
       const response = await axios.get(
-        `http://3.37.21.121:8080/api/schedule/getScheduleList?year=2023&month=2`,
+        `http://3.37.21.121:8080/api/schedule/getScheduleList?year=${year}&month=${month}`,
         {
           headers: {
             jwt_token:accessToken,
