@@ -10,30 +10,10 @@ interface ILocation {
   latitude : number;
   longitude : number;
 }
-interface ParentData {
-  latitude: string;
-  longitude: string;
-  nickname: string;
-  userId: number;
-}
 export default function Map(navigation) {
   const [location, setLocation] = useState<ILocation | undefined>(37.78825,-122.4324);
-  const [parents, setParents] = useState<ParentData | undefined>(
-    
-  );
 
   useEffect(() => {
-    
-    const getlocation = async () => {
-      const result = await getLocationInfo();
-      console.log(result)
-      // setParents(result);
-      // result.map((i, k)=>{
-      //     setParents({label: i.nickname,value: k})
-      // })
-  };
-  
-  // getlocation();
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization('always');
     }
@@ -57,7 +37,6 @@ export default function Map(navigation) {
     
   }, []);
   
-  // console.log("location", location)
   
   return (
     <View style={styles.container}>
@@ -66,9 +45,6 @@ export default function Map(navigation) {
       <View style={styles.map}>
         <MapViewComponent location={location}/>
     </View>
-      
-      <Text style={styles.title}>The last connection time</Text>
-      <Text style={styles.date}>2022-10-11 18:32</Text>
 
     </View>
   )
@@ -81,7 +57,7 @@ const styles = StyleSheet.create({
   },
   map : {
     // flex : 1,
-    height : 360,
+    height : 500,
     marginBottom : 40
   },
   title : {

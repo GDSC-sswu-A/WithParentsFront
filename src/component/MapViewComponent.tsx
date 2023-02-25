@@ -1,14 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import MapView, {Marker, PROVIDER_GOOGLE} from "react-native-maps"
-import { getLocationInfo } from '../common/MapApi';
+import { getLocationInfo, getLastTime } from '../common/MapApi';
 
 export default function MapViewComponent(location : any) {
   const [parents, setParents] = useState([
     {latitude: "", longitude: "", nickname: "test", userId: 0}
   ]);
   const [open, setOpen] = useState(false);
-  const [pick, setPick] = useState(null)
+  const [pick, setPick] = useState(null);
+  const [time, setTime] = useState(null);
   useEffect(() => {
     
     const getlocation = async () => {
@@ -17,7 +18,13 @@ export default function MapViewComponent(location : any) {
       setParents(result)
   };
   getlocation();
- }, []);
+    const getTime = async () => {
+      const result = await getLastTime();
+      console.log(result)
+      setTime(result)
+    }
+    getTime();
+ }, [pick]);
 
  console.log(pick,"pick")
   const Pick = (props) => {
@@ -61,6 +68,13 @@ export default function MapViewComponent(location : any) {
             description="recent location"
           />
         </MapView>
+
+        <Text style={styles.title}>The last connection time</Text>
+        <Text style={styles.date}>{time ? null : <>
+        {time.map((item)=>(
+          <Text>{item.lastApiCallTime}</Text>
+        ))}
+        </>}</Text>
         </View>
         </>
       );
@@ -76,6 +90,17 @@ const styles = StyleSheet.create({
     width: 100,
     padding: 10,
     marginBottom: 10,
+  },
+  title : {
+    marginTop: 40,
+    backgroundColor : "#EFF3EA",
+    fontSize : 20,
+    fontWeight: '300',
+    padding : 5,
+    marginBottom : 20
+  },
+  date : {
+    marginBottom : 40
   }
   
 });
