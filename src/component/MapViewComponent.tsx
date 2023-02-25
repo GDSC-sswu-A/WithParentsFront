@@ -71,7 +71,7 @@ export default function MapViewComponent(location : any) {
 
         <Text style={styles.title}>The last connection time</Text>
         <Text style={styles.date}>{time ? null : <>
-        {time.map((item)=>(
+        {time&&time.map((item)=>(
           <Text>{item.lastApiCallTime}</Text>
         ))}
         </>}</Text>
