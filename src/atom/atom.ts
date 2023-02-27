@@ -31,22 +31,7 @@ export const mediTimeAtom3 = atom<any>({
   default: '',
 });
 
-export const mediTimeListAtom = atom<any>({
-  key: 'mediTimeListAtom',
-  default: [],
-});
-
-//medicine 추가 타입
-export interface mediType {
-  id: number;
-  task: string;
-  completed: boolean;
-}
-// 업데이트 시킬 medi atom 배열
-//임의의 데이터
-export const mediListAtom = atom<mediType[]>({
+export const mediListAtom = atom<[]>({
   key: 'mediListAtom',
-
-  // default에는 임의의 데이터를 넣어줍시다.
   default: [],
 });
