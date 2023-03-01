@@ -12,7 +12,7 @@ import {
 //     {id:2, name:"소화제"}
 // ]
 export default function HomeMedicineComponent(props) {
-    console.log(props)
+    // console.log(props)
     let medi = props.medicine
     let count = {medi}.medi.length
     return (

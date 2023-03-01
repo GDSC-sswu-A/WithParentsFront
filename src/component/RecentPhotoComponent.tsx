@@ -7,17 +7,18 @@ import {
     Image,
 } from 'react-native'
 
-const recentPonto = {url : "../img/moon.jpeg"}
-
-export default function RecentPhotoComponent() {
-    let image = recentPonto.url
+export default function RecentPhotoComponent(props) {
+    // console.log(props.photo[0].imageUrl)
+    // let recentPonto = props.photo[0].imageUrl;
+    const recentPhoto = {uri : props.photo[0].imageUrl}
     return (
     <View style={styles.container}>
         <Text style={styles.title}>recently Photo</Text>
         <Image 
         style={styles.image}
         resizeMode= 'contain'
-        source={image}/>
+        source = {recentPhoto}
+        />
     </View>
     
     
