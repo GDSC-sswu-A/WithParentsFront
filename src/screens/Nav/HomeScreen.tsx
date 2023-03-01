@@ -25,7 +25,6 @@ export default function HomeScreen({navigation}) {
         };
         init();
     }, [])
-    // console.log(data.recentPhotoList)
     var today = new Date();
     var date = format(new Date(), "MMM.dd yyyy")
 
@@ -47,7 +46,7 @@ export default function HomeScreen({navigation}) {
 
         </View>
         
-        <FamilyComponent/>
+        {data? <FamilyComponent family={data.userList} />: null}
         {data? <HomeMedicineComponent date = {date} medicine={data.todayMedicationList} /> : null}
         
         <RecentPhotoComponent photo = {data.recentPhotoList}/>
