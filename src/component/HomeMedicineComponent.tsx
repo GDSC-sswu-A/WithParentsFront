@@ -7,11 +7,13 @@ import {
     FlatList
  } from 'react-native'
 
-const medi = [
-    {id:1, name:"타이레놀"},
-    {id:2, name:"소화제"}
-]
-export default function HomeMedicineComponent(date) {
+// const medi = [
+//     {id:1, name:"타이레놀"},
+//     {id:2, name:"소화제"}
+// ]
+export default function HomeMedicineComponent(props) {
+    console.log(props)
+    let medi = props.medicine
     let count = {medi}.medi.length
     return (
     <View style={styles.container}>
@@ -20,14 +22,14 @@ export default function HomeMedicineComponent(date) {
       source={require("../img/medicine.png")}/>
       <View style={styles.text}>
         <Text style={styles.title}>
-            {date.date} medicine ({count})</Text>
+            {props.date} medicine ({count})</Text>
 
         <FlatList
             data = {medi}
             renderItem={(item)=>(
                 <MedicineItem
                 id = {item.item.id}
-                name = {item.item.name}
+                name = {item.item.description}
                 />
             )}
         />
