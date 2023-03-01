@@ -49,7 +49,7 @@ export default function HomeScreen({navigation}) {
         {data? <FamilyComponent family={data.userList} />: null}
         {data? <HomeMedicineComponent date = {date} medicine={data.todayMedicationList} /> : null}
         
-        <RecentPhotoComponent photo = {data.recentPhotoList}/>
+        {data? <RecentPhotoComponent photo = {data.recentPhotoList}/>: null}
     </SafeAreaView>
 
   )
