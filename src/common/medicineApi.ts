@@ -2,12 +2,7 @@ import axios from 'axios';
 
 let accessToken = '';
 accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NzQ1ODExM30.6wcjJi0d6d0tOwlFr_psOHQ-NH311CF5zF3_l6RRpaM';
-let accessToken2 =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdDNAdGVzdC5jb20iLCJleHAiOjE2NzYzNTI3NTV9.5Lh3hY-UsfPkNDPUE9b0ByiXZtW6kuhLv-hW9iydAME';
-let accessToken3 =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdDNAdGVzdC5jb20iLCJleHAiOjE2NzYzNTI3NTV9.5Lh3hY-UsfPkNDPUE9b0ByiXZtW6kuhLv-hW9iydAME';
-
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3ODYyNjEyOX0.NT2PDkdna16hJLw-Q0uvUeYVY2gCzSiD8HYKi_L-rAk';
 //영양제 추가 api
 export const createMedicationApi = async (
   userId: Long,
@@ -30,11 +25,11 @@ export const createMedicationApi = async (
       params,
       {
         headers: {
-          jwt_token: accessToken3,
+          jwt_token: accessToken,
         },
       },
     );
-    console.log('영양제 추가 OK', response);
+    console.log('영양제 추가 OK', response.data);
     return response;
   } catch (e: any) {
     console.log('영양제 추가 API error', e);
@@ -52,7 +47,7 @@ export const getMedicineInfo = async (userId: Long) => {
 
       {
         headers: {
-          jwt_token: accessToken3,
+          jwt_token: accessToken,
         },
       },
     );
@@ -77,10 +72,10 @@ export const deleteMedicineApi = async (medicationId: Long) => {
         },
       },
     );
-    console.log('영양제 삭제 OK', response);
+    //console.log('영양제 삭제 OK', response);
     return response;
   } catch (e: any) {
-    console.log('영양제 조회 Error', e.response);
+    console.log('영양제 삭제 Error', e.response);
     return e.response;
   }
 };

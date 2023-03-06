@@ -1,31 +1,35 @@
 import React, {useState} from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight} from 'react-native';
-import {GreenButton} from './ButtonComponent';
 import {CheckModalAtom} from '../atom/atom';
 import {useRecoilState} from 'recoil';
 
-const CheckModal = ({children}) => {
-  const [checkModalVisible, setCheckModalVisible] =
-    useRecoilState(CheckModalAtom);
+const CheckModal = ({showModal, setShowModal, children}) => {
   return (
     <View style={styles.centeredView}>
       <View style={styles.modal_bg}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={checkModalVisible}>
+        <Modal animationType="fade" transparent={true} visible={showModal}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>{children} </Text>
 
               <View style={styles.ModalButton}>
-                <View style={styles.YesBtn}>
+                <View style={styles.Btn}>
                   <TouchableHighlight //Yes 버튼
                     style={{...styles.openButton}}
                     onPress={() => {
-                      setCheckModalVisible(!checkModalVisible);
+                      setShowModal(!showModal);
                     }}>
                     <Text style={styles.textStyle}>Yes</Text>
+                  </TouchableHighlight>
+                </View>
+
+                <View style={styles.Btn}>
+                  <TouchableHighlight //Yes 버튼
+                    style={{...styles.openButton}}
+                    onPress={() => {
+                      setShowModal(!showModal);
+                    }}>
+                    <Text style={styles.textStyle}>No</Text>
                   </TouchableHighlight>
                 </View>
               </View>
@@ -36,19 +40,7 @@ const CheckModal = ({children}) => {
     </View>
   );
 };
-/*
-      <TouchableHighlight style={styles.openButton}>
-        {/* onPress={() => {
-          setModalVisible(true);
-        }
-        <GreenButton
-          text="Next"
-          on={() => {
-            setModalVisible(true);
-          }}></GreenButton>
-        </TouchableHighlight>*/
 
-//<Text style={styles.textStyle}>Show Modal</Text>
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
@@ -60,7 +52,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: '#789395',
     borderRadius: 20,
-    padding: 35,
+    padding: 25,
     alignItems: 'center',
     shadowColor: '#000',
     //그림자의 영역 지정
@@ -74,11 +66,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
 
-  YesBtn: {
+  Btn: {
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 5,
-    top: 10,
+    top: 5,
   },
 
   textStyle: {
@@ -94,6 +86,7 @@ const styles = StyleSheet.create({
   },
   ModalButton: {
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
 });
 

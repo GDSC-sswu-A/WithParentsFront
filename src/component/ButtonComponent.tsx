@@ -23,6 +23,14 @@ export function WhiteButton({text}) {
   );
 }
 
+export function GrayButton({text, on}) {
+  return (
+    <TouchableOpacity onPress={on} style={styles.grayButton}>
+      <Text style={styles.black}>{text}</Text>
+    </TouchableOpacity>
+  );
+}
+
 export function YellowButton({text, on}) {
   return (
     <TouchableOpacity onPress={on} style={styles.YellowButton}>
@@ -59,7 +67,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 110,
     height: 40,
-    justifyContent: 'center',
   },
 
   YellowButton: {
@@ -67,6 +74,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 30,
     borderRadius: 10,
+    justifyContent: 'center',
   },
   white: {
     textAlign: 'center',
@@ -109,9 +117,18 @@ const styles = StyleSheet.create({
   },
 
   YellowGreenButton: {
-    backgroundColor: '#E5E7E1',
+    backgroundColor: '#EEEDED',
     width: 30,
     height: 30,
     borderRadius: 10,
+    justifyContent: 'center',
+  },
+  grayButton: {
+    backgroundColor: '#f5f5f5',
+    width: 70,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
   },
 });

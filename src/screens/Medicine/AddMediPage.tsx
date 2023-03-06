@@ -16,7 +16,6 @@ import {
   mediTimeAtom2,
   mediTimeAtom3,
   mediNameAtom,
-  mediListAtom,
 } from '../../atom/atom';
 import {
   View,
@@ -104,24 +103,7 @@ export default function AddmedipageScreen({navigation}) {
   const [mediTime1, setMediTime1] = useRecoilState(mediTimeAtom1);
   const [mediTime2, setMediTime2] = useRecoilState(mediTimeAtom2);
   const [mediTime3, setMediTime3] = useRecoilState(mediTimeAtom3);
-  //const [userMedicines, setUserMedicines] = React.useState();
 
-  /*const medicineInfo = () => {
-    /* getMedicineInfo(1).then(res => {
-      setUserMedicines(res.request._response);
-      console.log(userMedicines);
-    });
-
-    const result = getMedicineInfo(1);
-    console.log(result);
-    navigation.navigate('Medicine');
-  };*/
-
-  /*const medicineInfo = async () => {
-    const result = await getMedicineInfo(1);
-    console.log(result.request._response);
-    navigation.navigate('Medicine');
-  };*/
   //medicine 추가하기
   const addMedicine = async () => {
     //요일 => true,false에서 0,1 상태로 전환
@@ -170,7 +152,6 @@ export default function AddmedipageScreen({navigation}) {
   const ToGoMediHome = () => {
     if (mediName === '') {
       Alert.alert('Error', 'Please input medicine name');
-      console.log(isSelect);
     } else if (Object.values(isSelect).every(day => day === false)) {
       Alert.alert('Error', 'please input day of the week');
     } else if (buttonValue === 1 && mediTime1.length !== 0) {

@@ -5,7 +5,7 @@ export const buttonValueAtom = atom<any>({
   default: [],
 });
 
-export const CheckModalAtom = atom<any>({
+export const CheckModalAtom = atom<boolean>({
   key: 'CheckModalAtom',
   default: false,
 });
@@ -29,9 +29,4 @@ export const mediTimeAtom2 = atom<any>({
 export const mediTimeAtom3 = atom<any>({
   key: 'mediTimeAtom3',
   default: '',
-});
-
-export const mediListAtom = atom<[]>({
-  key: 'mediListAtom',
-  default: [],
 });

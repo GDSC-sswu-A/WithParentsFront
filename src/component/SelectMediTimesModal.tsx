@@ -93,11 +93,10 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    padding: 7,
+    padding: 5,
   },
   selectBtn: {
     flexDirection: 'row',
-    marginLeft: 10,
     marginBottom: 20,
   },
   modalView: {
@@ -144,6 +143,8 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: 'center',
+    fontSize: 17,
+    color: 'white',
   },
   blackText: {
     textAlign: 'center',
