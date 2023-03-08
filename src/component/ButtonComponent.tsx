@@ -28,9 +28,10 @@ export function GreenLineButton({text, on}) {
   );
 }
 
-export function WhiteButton({text}) {
+export function WhiteButton({text, on}) {
     return (
       <TouchableOpacity
+      onPress = {on}
       style={styles.WhiteButton}>
       <Text style={styles.red}>{text}</Text>
       </TouchableOpacity>
