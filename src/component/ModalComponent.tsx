@@ -1,17 +1,17 @@
 import { View, Text, Pressable, Modal, StyleSheet } from 'react-native'
-import React, {useState, useEffect} from 'react'
-
-import { WhiteButton } from './ButtonComponent'
+import React, {useState, useEffect} from 'react';
+import { WhiteButton} from './ButtonComponent'
+import { useNavigation } from '@react-navigation/native';
 
 import { deleteSchedule } from '../common/CalendarApi';
 
-export default function ModalComponent(data) {
+export default function ModalComponent({data}) {
+  const navigation = useNavigation();
     const [open, setOpen] = useState(false);
     const [del, setDel] = useState(false);
     useEffect (() => {
       const delSchedule = async () => {
-          const result = await deleteSchedule(data.data.id);
-          console.log(result)
+          const result = await deleteSchedule(data.id);
       };
       if(del){
         delSchedule();
@@ -22,6 +22,10 @@ export default function ModalComponent(data) {
   const deleteBtn = ()=>{
     setDel(!del)
   }
+ const editBtn = ()=>{
+  setOpen(false);
+  navigation.navigate('EditCalendar'); 
+}
   return (
     <View style={styles.container}>
         <Modal
@@ -33,18 +37,18 @@ export default function ModalComponent(data) {
         <View>
             <View style={styles.modal}>
                 <View style={styles.top}>
-                <Text style={{fontSize:24}}>{data.data.date}</Text>
+                <Text style={{fontSize:24}}>{data.date}</Text>
                 <Pressable onPress={()=> setOpen(false)}>
                     <Text style={{fontSize:24}}>X</Text>
                 </Pressable>
                 </View>
-                <Text style={{fontSize:24}}>{data.data.title}</Text>
+                <Text style={{fontSize:24}}>{data.title}</Text>
             <View style={styles.nick}>
                 <Text style={{fontSize:16}}>nick |</Text>
-                <Text style={{fontSize:16}}>{data.data.time}</Text>
+                <Text style={{fontSize:16}}>{data.time}</Text>
             </View>
                 <View style={styles.btn}>
-                <WhiteButton text='edit'/>
+                <WhiteButton text='edit' on={editBtn}/>
                 <WhiteButton text='delete' on={deleteBtn}/>
                 </View>
             </View>
@@ -56,7 +60,6 @@ export default function ModalComponent(data) {
         onPress={() => setOpen(!open)}>
         <Text style={styles.textStyle}>></Text>
       </Pressable>
-
     </View>
   )
 }

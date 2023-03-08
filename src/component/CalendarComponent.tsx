@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { format } from "date-fns";
 import { Calendar } from 'react-native-calendars';
 import { StyleSheet, View, ScrollView, Text, TouchableOpacity } from 'react-native'
-import { getScheduleList } from '../common/CalendarApi'
+import { getScheduleList } from '../common/CalendarApi';
 import ModalComponent from './ModalComponent';
 
 function ScheduleList(data) {
@@ -33,27 +33,18 @@ export default function CalendarComponent() {
     getList();
 }, [year, month, change]);
 
+  console.log('hi', schedule)
   let markedSelectedDates
-  if(schedule != null){
-    const markedDates = schedule.reduce((acc, current) => {
-    const formattedDate = format(new Date(current.date), 'yyyy-MM-dd');
-    acc[formattedDate] = {marked: true};
-    return acc;
-  }, {});
+  // if(schedule != 'undefined'){
+  //   const markedDates = schedule.reduce((acc, current) => {
+  //   const formattedDate = format(new Date(current.date), 'yyyy-MM-dd');
+  //   acc[formattedDate] = {marked: true};
+  //   return acc;
+  // }, {});
   
-  // const [selectedDate, setSelectedDate] = useState(
-  //   format(new Date(), "yyyy-MM-dd"),
-  // );
-  // const markedSelectedDate = {
-  //   ...markedDates,
-  //   [selectedDate]: {
-  //     selected: true,
-  //     marked: markedDates[selectedDate]?.marked,
-  //   }
+  // markedSelectedDates = markedDates
   // }
-  markedSelectedDates = markedDates
-  }
-  console.log(markedSelectedDates)
+  // console.log(markedSelectedDates)
   
   return (
     <>
@@ -75,7 +66,7 @@ export default function CalendarComponent() {
       textDayHeaderFontSize: 16
     }}
     />
-    <TouchableOpacity
+        <TouchableOpacity
       style={styles.change}
       onPress={()=>setChange(!change)}>
         <Text style={{textAlign : 'center', color: 'white'}}>Refresh</Text>
