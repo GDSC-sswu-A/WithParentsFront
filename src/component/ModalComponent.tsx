@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { deleteSchedule } from '../common/CalendarApi';
 
 export default function ModalComponent({data}) {
+  console.log(data)
   const navigation = useNavigation();
     const [open, setOpen] = useState(false);
     const [del, setDel] = useState(false);
@@ -24,7 +25,7 @@ export default function ModalComponent({data}) {
   }
  const editBtn = ()=>{
   setOpen(false);
-  navigation.navigate('EditCalendar'); 
+  navigation.navigate('EditCalendar', {id:data.id}); 
 }
   return (
     <View style={styles.container}>

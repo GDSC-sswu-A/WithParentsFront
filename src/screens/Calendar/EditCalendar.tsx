@@ -7,10 +7,11 @@ import {
   TextInput,
   Keyboard
 } from 'react-native'
-
+import { useNavigation } from '@react-navigation/native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { GreenButton } from '../../component/ButtonComponent'
+import { GreenButton } from '../../component/ButtonComponent';
+import {patchModifySchedule} from '../../common/CalendarApi';
 
 Date.prototype.format = function(f) {
     if (!this.valueOf()) return " ";
@@ -38,13 +39,15 @@ String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s
 String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 
-import { postCreatSchedule } from '../../common/CalendarApi';
 
-export default function EditCalendar({navigation}) {
+export default function EditCalendar(id) {
+    const navigation = useNavigation();
+    
   const [ok, setOk] = useState(false);
   useEffect (() => {
     const posting = async () => {
-        const result = await postCreatSchedule(title, day, time, alert);
+        // console.log("ID", postId)
+        const result = await patchModifySchedule(id.route.params.id, title, day, time, alert);
     };
     if (ok) {
       posting();
@@ -64,6 +67,9 @@ const Input = ()=>{
   setOk(true);
   Keyboard.dismiss();
 }
+
+// const [postId, setPostId] =(id.route.params.id)
+// setPostId(id.route.params.id)
 
 // title
 const [title, setTitle] = useState("");

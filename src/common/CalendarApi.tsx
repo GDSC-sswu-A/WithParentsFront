@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NzQ1ODExM30.6wcjJi0d6d0tOwlFr_psOHQ-NH311CF5zF3_l6RRpaM"
+accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3ODg2MjQyM30.8T6G0OKbqPYITMEMj0UAVaFuhkIdXyuaEjljU0fTm0M"
 
 
 export const getScheduleList = async(
@@ -73,20 +73,22 @@ export const postCreatSchedule = async(
       }
     }
 
-    export const putModifySchedule = async(
-        id: number,
-        date: string,
-        time: string,
-        title: string,
+    export const patchModifySchedule = async(
+      postId:number,
+      title: string,
+      day: string,
+      time: string,
+      alert: boolean,
       ) => {
         var params = {
-          "memberId": id,
-          "date" : date,
-          "time" : time,
-          "title" : title
+          "scheduleId": postId? postId:null,
+          "title" : title? title: null,
+          "date" : day? day: null,
+          "time" : time? time: null,
+          "notificationStatus": alert? alert:null
         }
           try {
-            const response = await axios.put(
+            const response = await axios.patch(
               `http://3.37.21.121:8080/api/schedule/modifySchedule`,params,
               {
                 headers: {
@@ -106,6 +108,7 @@ export const postCreatSchedule = async(
       export const deleteSchedule = async(
         id: number
         ) => {
+          console.log(id)
             try {
               const response = await axios.delete(
                 `http://3.37.21.121:8080/api/schedule/deleteSchedule?scheduleId=`+id,
