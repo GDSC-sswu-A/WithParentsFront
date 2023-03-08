@@ -12,9 +12,14 @@ import {
 //     {id:2, name:"소화제"}
 // ]
 export default function HomeMedicineComponent(props) {
-    // console.log(props)
-    let medi = props.medicine
-    let count = {medi}.medi.length
+    console.log(props.medicine)
+    let medi = []
+    let count = 0
+    if (props.medicine != undefined){
+        medi = props.medicine
+        count = {medi}.medi.length
+    }
+    
     return (
     <View style={styles.container}>
       <Image 
@@ -23,7 +28,6 @@ export default function HomeMedicineComponent(props) {
       <View style={styles.text}>
         <Text style={styles.title}>
             {props.date} medicine ({count})</Text>
-
         <FlatList
             data = {medi}
             renderItem={(item)=>(

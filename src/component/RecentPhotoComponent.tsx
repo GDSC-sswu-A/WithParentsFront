@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 import { 
     View, 
     Text, 
     StyleSheet ,
     Image,
-} from 'react-native'
+} from 'react-native';
 
 export default function RecentPhotoComponent(props) {
     // console.log(props.photo[0].imageUrl)
