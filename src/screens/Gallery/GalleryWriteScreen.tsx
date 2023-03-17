@@ -15,7 +15,8 @@ import {
 import {GreenButton} from '../../component/ButtonComponent';
 import DateSelectComponent from '../../component/DateSelectComponent';
 import InputText from '../../component/input';
-import Community from '../../component/ImageSelectComponent';
+import UploadPhoto from '../../component/uploadPhoto';
+
 export default function GalleryWriteScreen({navigation}) {
   const toGoWrittenPage = () => {
     navigation.navigate('WrittenGalleryScreen');
@@ -30,7 +31,7 @@ export default function GalleryWriteScreen({navigation}) {
       </View>
       <View style={styles.border}></View>
       <View style={styles.selectPhoto}>
-        <Community></Community>
+        <UploadPhoto></UploadPhoto>
       </View>
       <View style={styles.writeMemo}>
         <InputText></InputText>
