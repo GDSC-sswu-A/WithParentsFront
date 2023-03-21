@@ -23,7 +23,7 @@ console.log("@@", id, passwd)
   return (
     <View style={styles.container}>
 
-      <View style={styles.menus}>
+      {/* <View style={styles.menus}>
         <Text style={styles.title}>System setting</Text>
         <TouchableOpacity>
           <Text style={styles.menu}>Notification</Text>
@@ -31,7 +31,7 @@ console.log("@@", id, passwd)
         <TouchableOpacity>
           <Text style={styles.menu}>Share Location</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <View style={styles.menus}>
         <Text style={styles.title}>Family setting</Text>
