@@ -11,6 +11,7 @@ import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
 import AddCalendar from "./src/screens/Calendar/AddCalendar"
+import EditCalendar from "./src/screens/Calendar/EditCalendar";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
@@ -19,6 +20,7 @@ import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 const Stack = createNativeStackNavigator();
 
 function App() {
+  
   // if (Platform.OS === 'android') {
   //   StatusBar.setBackgroundColor('white');
   //   // StatusBar.setTranslucent(true);
@@ -26,7 +28,7 @@ function App() {
   // }
 
   return (
-    <RecoilRoot>
+    <>
       {/* <StatusBar barStyle="dark-content" /> */}
       <NavigationContainer>
         <Stack.Navigator screenOptions={{}} initialRouteName="Login">
@@ -139,11 +141,24 @@ function App() {
         },
       })}
       />
+       <Stack.Screen
+      name="EditCalendar"
+      component={EditCalendar}
+      options={({navigation})=>({
+        title : 'Edit Event',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
 
-        </Stack.Navigator>
-      </NavigationContainer>
-    </RecoilRoot>
-  );
+      </Stack.Navigator>
+   
+    </NavigationContainer>
+  </>
+  )
 }
+
 
 export default App;

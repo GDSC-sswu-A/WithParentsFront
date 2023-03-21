@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { format} from 'date-fns'
 import { NavigationContainer } from '@react-navigation/native'
 import { 
@@ -14,9 +14,17 @@ import {
 import FamilyComponent from '../../component/FamilyComponent'
 import HomeMedicineComponent from '../../component/HomeMedicineComponent'
 import RecentPhotoComponent from '../../component/RecentPhotoComponent'
-  
+import { getHomeInfo } from '../../common/HomeApi'
 
 export default function HomeScreen({navigation}) {
+    const [data, setData] = useState(null);
+    useEffect (() => {
+        const init = async () => {
+            const result = await getHomeInfo();
+            setData(result);
+        };
+        init();
+    }, [])
     var today = new Date();
     var date = format(new Date(), "MMM.dd yyyy")
 
@@ -38,9 +46,10 @@ export default function HomeScreen({navigation}) {
 
         </View>
         
-        <FamilyComponent/>
-        <HomeMedicineComponent date = {date}/>
-        <RecentPhotoComponent/>
+        {data? <FamilyComponent family={data.userList} />: null}
+        {data? <HomeMedicineComponent date = {date} medicine={data.todayMedicationList} /> : null}
+        
+        {/* {data? <RecentPhotoComponent photo = {data.recentPhotoList}/>: null} */}
     </SafeAreaView>
 
   )
