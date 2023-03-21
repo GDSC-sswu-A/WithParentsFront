@@ -13,9 +13,7 @@ const member = [
   {id:2, name: "hyeong", role:"papa"}
 ]
 
-export default function FamilyComponent(props) {
-  const member = props.family
-
+export default function FamilyComponent() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Our family</Text>
@@ -25,8 +23,8 @@ export default function FamilyComponent(props) {
             renderItem={(item)=>(
                 <FamilyItem
                 id = {item.item.id}
-                name = {item.item.nickname}
-                // role = {item.item.role}
+                name = {item.item.name}
+                role = {item.item.role}
                 />
             )}
         />
@@ -38,10 +36,10 @@ export default function FamilyComponent(props) {
 function FamilyItem(family) {
   return(
       <View style = {styles.item} >
-          {/* <Image style={styles.image} /> */}
+          <Image style={styles.image} />
 
-            <Text style={{marginBottom : 10}}>• {family.name}</Text>
-            {/* <Text style={styles.role}>({family.role})</Text> */}
+            <Text>{family.name}</Text>
+            <Text style={styles.role}>({family.role})</Text>
 
       </View>
 
