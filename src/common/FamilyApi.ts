@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let accessToken = '';
 accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NTIzNzIwM30.8bTAxzC1FTYXTpuci5N2KxEclYbcKvLakD9Km5HQ_zw';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDAyMDI0MX0.Iqu9EDjkQouABbSWzfu_heur8QJRLMEPRtJF9gWruKE';
 
 export const createFamily = async (password: string) => {
   const params = {
@@ -70,6 +70,29 @@ export const postModifyUser = async (
     return response;
   } catch (e: any) {
     console.log('가족등록 API error', e.response);
+    return e.response;
+  }
+};
+export const PostUser = async (nickname: String, isParent: Boolean) => {
+  var params = {
+    nickname: nickname,
+    isParent: isParent,
+  };
+  try {
+    console.log('HI', nickname, isParent);
+    const response = await axios.post(
+      `http://3.37.21.121:8080/api/user/modifyUserInfo`,
+      params,
+      {
+        headers: {
+          jwt_token: accessToken,
+        },
+      },
+    );
+    console.log('유저등록(닉넴,부모여부) OK');
+    return response;
+  } catch (e: any) {
+    console.log('유저등록 API error', e.response);
     return e.response;
   }
 };

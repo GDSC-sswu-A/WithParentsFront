@@ -7,6 +7,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {LoginButton} from '../../component/ButtonComponent';
 import axios from 'axios';
+import {useRecoilState} from 'recoil';
 
 import {
   StyleSheet,
@@ -18,6 +19,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {userEmailAtom} from '../../atom/atom';
 
 export default function LoginHomeScreen({navigation}) {
   const toGoSignUPBtn = () => {
@@ -29,7 +31,7 @@ export default function LoginHomeScreen({navigation}) {
   };
 
   //구글 로그인 코드
-  const [user, setUser] = useState({});
+  const [user, setUser] = useRecoilState(userEmailAtom);
 
   useEffect(() => {
     GoogleSignin.configure({
