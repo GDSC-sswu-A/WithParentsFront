@@ -1,18 +1,60 @@
-import React, {useState} from 'react'
-import { StyleSheet, Text, View, Keyboard, TextInput } from 'react-native'
+import React, {useState, useEffect, useRef, useCallback} from 'react'
+import Toast from 'react-native-easy-toast'
+import { 
+  StyleSheet, 
+  Text, 
+  View,
+  TextInput 
+} from 'react-native'
 
-import { GreenButton } from '../component/ButtonComponent'
+import { GreenButton, GreenLineButton } from '../component/ButtonComponent'
+import { postModifyUser, getUserInfo } from '../common/FamilyApi'
+
 
 const JoinFamilyScreen = ({navigation}) => {
+  const [id, setId] = useState('');
+  const [passwd, setPasswd] = useState('');
+  const [user, setUser] = useState(null);
+  const [isOk, setIsOk] = useState(false);
+  const toastRef = useRef(); 
 
-  const [text, setText] = useState('');
-
-  const Input = ()=>{
-    setText('');
-    Keyboard.dismiss();
-    console.log(text)
+  const showToast = useCallback((m) => {
+    toastRef.current.show(m);
+  }, []);
+  
+  useEffect (()=> {
+    const init = async () => {
+      const res = await getUserInfo();
+      console.log("INIT", res)
+      setUser(res)
+    };
+    init();
+    console.log("###", user)
+  }, [])
+  useEffect (() => {
+    const clickOk = async () => {
+        const result = await postModifyUser(id, passwd, user);
+        if (result.status===200) {
+          navigation.navigate('Setting')
+          setIsOk(false)
+        } else {
+          const meesage = result.data.message
+          showToast(meesage);
+        }
+    };
+    if (isOk) {
+        clickOk();
+    }
+    setIsOk(false)
+    
+});
+const Input = ()=>{
+  setIsOk(true)
 }
 
+const Navi = ()=>{
+  navigation.navigate('CreateFamily')
+}
 const Cancle = ()=>{
     if (navigation?.canGoBack()){
         navigation.goBack()
@@ -23,25 +65,41 @@ const Cancle = ()=>{
 
   return (
     <View style={styles.container}>
-
-      <Text style={styles.txt}>Enter the code</Text>
-
-      
+      {/* <Text style={styles.txt}></Text> */}
+      <Text style={styles.ex}>If you do not remember your ID and password,</Text> 
+      <Text style={styles.ex}>please see the bottom of the settings</Text> 
         <TextInput 
         style={styles.input}
-        value={text}
-        onChangeText={setText}
+        value={id}
+        onChangeText={setId}
         onSubmitEditing={Input}
         returnKeyType="done"
+        placeholder = "ID"
+        />
+
+        <TextInput 
+        style={styles.input}
+        value={passwd}
+        onChangeText={setPasswd}
+        onSubmitEditing={Input}
+        returnKeyType="done"
+        placeholder = "Password"
         />
 
     <View style={styles.btn}>
       <GreenButton text='Cacle' on={Cancle}/>
-        <GreenButton text='OK' on={Input}/>
-        </View>
+      <GreenButton text='OK' on={Input}/>
+    </View>
+    <Text style={styles.ex}>If you do not have a family code</Text> 
+    <GreenLineButton text='Create →' on={Navi}/>
+    <Toast 
+          positionValue={250}
+          ref={toastRef}
+          fadeOutDuration={5000}
+          style={{backgroundColor:'#789395'}}
+      />
     </View>
     
-
   )
 }
 
@@ -61,10 +119,11 @@ const styles = StyleSheet.create({
         marginBottom: 60
     },
     btn :{
-        marginTop : 180,
+        marginTop : 80,
         width : 250,
         flexDirection : 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom : 20
     },
 
   input : {
@@ -74,5 +133,12 @@ const styles = StyleSheet.create({
       width : 208,
       height : 40,
       backgroundColor : "#EFF3EA",
-  }
+      marginTop : 50
+  },
+  ex : {
+    fontSize : 15,
+    fontWeight : '400',
+    marginTop : 10,
+    color : 'gray'
+},
 })
