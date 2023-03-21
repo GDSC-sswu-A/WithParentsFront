@@ -45,7 +45,7 @@ export default function ModalComponent({data}) {
                 </View>
                 <Text style={{fontSize:24}}>{data.title}</Text>
             <View style={styles.nick}>
-                <Text style={{fontSize:16}}>nick |</Text>
+                <Text style={{fontSize:16}}>{data.nickname} |</Text>
                 <Text style={{fontSize:16}}>{data.time}</Text>
             </View>
                 <View style={styles.btn}>
