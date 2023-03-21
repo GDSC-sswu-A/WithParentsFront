@@ -1,18 +1,20 @@
-import React from 'react';
-import {StatusBar, Platform, Image} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from "react";
+import {StatusBar, Platform, Image} from 'react-native'
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import SettingScreen from './src/screens/SettingScreen';
-import CreateFamilyScreen from './src/screens/CreateFamilyScreen';
-import JoinFamilyScreen from './src/screens/JoinFamilyScreen';
-import GlobalNav from './src/screens/GlobalNav';
-import AddCalendar from './src/screens/Calendar/AddCalendar';
-import EditCalendar from './src/screens/Calendar/EditCalendar';
-import GalleryWriteScreen from './src/screens/Gallery/GalleryWriteScreen';
-import WrittenGalleryScreen from './src/screens/Gallery/WrittenGalleryScreen';
+import SettingScreen from "./src/screens/SettingScreen";
+import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
+import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
+import GlobalNav from "./src/screens/GlobalNav";
+import AddCalendar from "./src/screens/Calendar/AddCalendar"
+import EditCalendar from "./src/screens/Calendar/EditCalendar";
+import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
+import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
+import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 import LoginHomeScreen from './src/screens/login/LoginHomeScreen';
 import SignUpScreen from './src/screens/login/SignUpScreen';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -22,8 +24,10 @@ function App() {
   //   // StatusBar.setTranslucent(true);
   //   StatusBar.setBarStyle('dark-content');
   // }
+
   return (
-    <>
+    <RecoilRoot>
+      {/* <StatusBar barStyle="dark-content" /> */}
       <NavigationContainer>
         <Stack.Navigator screenOptions={{}} initialRouteName="Login">
           <Stack.Screen
@@ -62,29 +66,29 @@ function App() {
             })}
           />
 
-          {/* calendar */}
-          <Stack.Screen
-            name="AddCalendar"
-            component={AddCalendar}
-            options={({navigation}) => ({
-              title: 'New Event',
-              headerTintColor: '#FFFFFF',
-              headerStyle: {
-                backgroundColor: '#AEC195',
-              },
-            })}
-          />
-          <Stack.Screen
-            name="EditCalendar"
-            component={EditCalendar}
-            options={({navigation}) => ({
-              title: 'Edit Event',
-              headerTintColor: '#FFFFFF',
-              headerStyle: {
-                backgroundColor: '#AEC195',
-              },
-            })}
-          />
+      {/* calendar */}
+       <Stack.Screen
+      name="AddCalendar"
+      component={AddCalendar}
+      options={({navigation})=>({
+        title : 'New Event',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
+       <Stack.Screen
+      name="EditCalendar"
+      component={EditCalendar}
+      options={({navigation})=>({
+        title : 'Edit Event',
+        headerTintColor: '#FFFFFF',
+        headerStyle : {
+          backgroundColor :'#AEC195',
+        },
+      })}
+      />
           <Stack.Screen
             name="CreateFamily"
             component={CreateFamilyScreen}
@@ -134,7 +138,7 @@ function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </>
+    </RecoilRoot>
   );
 }
 
