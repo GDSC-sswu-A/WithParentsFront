@@ -12,12 +12,13 @@ import EditCalendar from "./src/screens/Calendar/EditCalendar";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
+import LoginHomeScreen from './src/screens/login/LoginHomeScreen';
+import SignUpScreen from './src/screens/login/SignUpScreen';
 
 
 const Stack = createNativeStackNavigator();
 
 function App() {
-  
   // if (Platform.OS === 'android') {
   //   StatusBar.setBackgroundColor('white');
   //   // StatusBar.setTranslucent(true);
@@ -25,93 +26,45 @@ function App() {
   // }
 
   return (
-    <>
+    <RecoilRoot>
       {/* <StatusBar barStyle="dark-content" /> */}
-    <NavigationContainer>
-      <Stack.Navigator
-      screenOptions={{
-        
-      }}
-      initialRouteName="Nav">
-      <Stack.Screen
-      name="Nav"
-      component={GlobalNav}
-      options={{
-        headerShown : false
-      }}
-      />
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{}} initialRouteName="Login">
+          <Stack.Screen
+            name="Nav"
+            component={GlobalNav}
+            options={{
+              headerShown: false,
+            }}
+          />
 
-      {/* setting */}
-      <Stack.Screen
-      name="Setting"
-      component={SettingScreen}
-      options={({navigation})=>({
-        title : 'Setting',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
-     <Stack.Screen
-      name="CreateFamily"
-      component={CreateFamilyScreen}
-      options={({navigation})=>({
-        title : 'Creating a New Family',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
-       <Stack.Screen
-      name="JoinFamily"
-      component={JoinFamilyScreen}
-      options={({navigation})=>({
-        title : 'Family registration',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
+          <Stack.Screen
+            name="Login"
+            component={LoginHomeScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
 
-      {/* medicine */}
-      <Stack.Screen
-      name="Addmedicine"
-      component={AddmedipageScreen}
-      options={({navigation})=>({
-        title : 'Add your medicine',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
+          <Stack.Screen
+            name="Signup"
+            component={SignUpScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
 
-      {/* galllery */}
-      <Stack.Screen
-      name="GalleryWrite"
-      component={GalleryWriteScreen}
-      options={({navigation})=>({
-        title : 'Write your memory',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
-      <Stack.Screen
-      name="WrittenGalleryScreen"
-      component={WrittenGalleryScreen}
-      options={({navigation})=>({
-        title : 'Write your memory',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
+          <Stack.Screen
+            name="Setting"
+            component={SettingScreen}
+            options={({navigation}) => ({
+              title: 'Setting',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
 
       {/* calendar */}
        <Stack.Screen
@@ -136,13 +89,57 @@ function App() {
         },
       })}
       />
+          <Stack.Screen
+            name="CreateFamily"
+            component={CreateFamilyScreen}
+            options={({navigation}) => ({
+              title: 'Creating a New Family',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
 
-      </Stack.Navigator>
-   
-    </NavigationContainer>
-  </>
-  )
+          <Stack.Screen
+            name="GalleryWrite"
+            component={GalleryWriteScreen}
+            options={({navigation}) => ({
+              title: 'Write your memory',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
+
+          <Stack.Screen
+            name="WrittenGalleryScreen"
+            component={WrittenGalleryScreen}
+            options={({navigation}) => ({
+              title: 'Write your memory',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
+
+          <Stack.Screen
+            name="JoinFamily"
+            component={JoinFamilyScreen}
+            options={({navigation}) => ({
+              title: 'Family registration',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
+  );
 }
-
 
 export default App;

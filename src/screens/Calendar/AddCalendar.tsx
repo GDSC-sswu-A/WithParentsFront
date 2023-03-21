@@ -176,9 +176,9 @@ return (
           fontSize: 15,
           color : '#6A7759'
         }}
-        containerStyle={{
-          width : 90
-        }}
+        labelStyle={{
+          color : '#6A7759'
+        }}   
         open={open}
         value={alert}
         items={alerts}
@@ -234,6 +234,8 @@ const styles = StyleSheet.create({
       fontWeight : '300'
   },
   alert : {
+    width : 90,
+    marginRight : 70,
     backgroundColor : '#FCF4D6',
   },
   btn :{

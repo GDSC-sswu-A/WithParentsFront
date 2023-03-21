@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const GalleryDeleteModal = () => { 
+const App = () => { 
   const [modalVisible, setModalVisible] =useState(false);
   
   return (
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default GalleryDeleteModal;
+export default App;
