@@ -19,3 +19,8 @@ export const LoginAtom = atom({
   key: 'LoginAtom',
   default: false,
 });
+
+export const userEmailAtom = atom({
+  key: 'userEmailAtom',
+  default: {},
+});

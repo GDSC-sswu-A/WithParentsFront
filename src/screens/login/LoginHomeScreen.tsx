@@ -7,6 +7,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import {LoginButton} from '../../component/ButtonComponent';
 import axios from 'axios';
+import {useRecoilState} from 'recoil';
 
 import {
   StyleSheet,
@@ -18,6 +19,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {userEmailAtom} from '../../atom/atom';
 
 export default function LoginHomeScreen({navigation}) {
   const toGoSignUPBtn = () => {
@@ -29,7 +31,7 @@ export default function LoginHomeScreen({navigation}) {
   };
 
   //구글 로그인 코드
-  const [user, setUser] = useState({});
+  const [user, setUser] = useRecoilState(userEmailAtom);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -37,7 +39,7 @@ export default function LoginHomeScreen({navigation}) {
         '1052651211735-c39hr3egfh2rkan1s8s87l4321af2h4j.apps.googleusercontent.com',
       androidClientId:
         '1052651211735-q77h1m8kftpiablcvmhigjlna00pqqns.apps.googleusercontent.com',
-      offlineAccess: true, //서버에서 사용자 대시나여 google api 액세스할때
+      offlineAccess: true, //서버에서 사용자 대신하여 google api 액세스할때
       forceCodeForRefreshToken: false, // 액세스 요청창 두번 나와서 일단 false해둠
     });
     isSignedIn(), [];

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {GreenButton} from '../../component/ButtonComponent';
@@ -16,13 +16,26 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useRecoilState} from 'recoil';
+import {PostUser} from '../../common/FamilyApi';
 
 export default function SignUpScreen({navigation}) {
   let bouncyCheckboxRef: BouncyCheckbox | null = null;
   const [parentCheckbox, parentSetCheckbox] = useState(false);
   const [childCheckbox, childSetcheckbox] = useState(false);
   const [username, setuserName] = useState('');
-  //const [LoginmodalVisible, setLoginModalVisible] = useRecoilState(LoginAtom);
+  const [isOk, setIsOk] = useState(false);
+
+  useEffect(() => {
+    const clickOk = async () => {
+      const result = await PostUser(username, parentCheckbox);
+      //console.log('', result);
+    };
+    if (isOk) {
+      clickOk();
+      navigation.navigate('JoinFamily');
+    }
+    setIsOk(false);
+  });
 
   const ClickCancleBtn = () => {
     navigation.navigate('Login');
@@ -31,12 +44,12 @@ export default function SignUpScreen({navigation}) {
   const ClickNextBtn = () => {
     if (username === '') {
       Alert.alert('Error', 'please input your name');
-      //setLoginModalVisible(true);
     } else if (childCheckbox === false && parentCheckbox === false) {
-      // setLoginModalVisible(true);
       Alert.alert('Error', 'please check parents or child');
+    } else if (childCheckbox === true && parentCheckbox === true) {
+      Alert.alert('Error', 'Please choose between parents and child');
     } else {
-      navigation.navigate('Nav');
+      setIsOk(true);
     }
   };
 
