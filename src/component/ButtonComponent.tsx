@@ -38,6 +38,17 @@ export function WhiteButton({text, on}) {
     );
   }
 
+  export function LoginButton({text,on}) {
+    return (
+      <TouchableOpacity
+      onPress = {on}
+      style={styles.LoginButton}>
+      <Text style={styles.white}>{text}</Text>
+      </TouchableOpacity>
+    );
+  }
+
+  //export function AddButton () {
   export function YellowButton({text,on}) {
     return (
       <TouchableOpacity
