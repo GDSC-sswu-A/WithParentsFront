@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {GreenButton} from '../../component/ButtonComponent';
-import LoginModal from '../../component/LoginModal';
-import {LoginAtom} from '../../atom/atom';
+
 import {
   StyleSheet,
   Text,
