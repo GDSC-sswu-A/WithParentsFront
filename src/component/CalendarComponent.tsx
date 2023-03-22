@@ -20,10 +20,15 @@ function ScheduleList(data) {
 }
 
 export default function CalendarComponent() {
+  var today = new Date();
+  var initmonth = format(new Date(), "M")
+  var  inityear= format(new Date(), "yyyy")
+  console.log(initmonth, inityear)
+
   const [change, setChange] = useState(false);
   const [schedule, setSchedule] = useState(null)
-  const [month, setMonth] = useState(2);
-  const [year, setYear] = useState(2023);
+  const [month, setMonth] = useState(initmonth);
+  const [year, setYear] = useState(inityear);
 
   useEffect (() => {
     const getList = async () => {

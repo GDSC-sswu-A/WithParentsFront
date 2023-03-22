@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3ODg2MjQyM30.8T6G0OKbqPYITMEMj0UAVaFuhkIdXyuaEjljU0fTm0M"
+accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDA2NTYyOX0.79ZWsEVsA9BV1nnRQO-I8rJTJ9Ss95phZHPFOiS3cjQ"
 
 
 export const getScheduleList = async(
@@ -9,6 +9,7 @@ export const getScheduleList = async(
   month: number
 ) => {
     try {
+      console.log("#####", year, month)
       const response = await axios.get(
         `http://3.37.21.121:8080/api/schedule/getScheduleList?year=${year}&month=${month}`,
         {
@@ -18,7 +19,7 @@ export const getScheduleList = async(
         },
       );
       const data = response.data;
-      console.log("get")
+      // console.log("get")
       return data;
     } catch (e: any) {
         return e.response;
