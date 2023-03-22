@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NzQ1ODExM30.6wcjJi0d6d0tOwlFr_psOHQ-NH311CF5zF3_l6RRpaM"
+accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDExNDk0OX0.4044g8mWxRtpfcJgUF2h0-OY008H3buS_XTOKo7VQO8"
 
 export const createFamily = async(
   password : string
@@ -20,7 +20,7 @@ export const createFamily = async(
         },
       );
       console.log("가족생성 OK", response)
-      return response.data.password;
+      return response.data;
     } catch (e: any) {
         console.log("가족생성 api", e)
         return e.response;
@@ -51,10 +51,10 @@ export const postModifyUser = async(
   user : any
   ) => {
     var params = {
-      "nickname": user.nickname,
+      "nickname": user.nickname? user.nickname: null,
       "familyId" : id,
       "familyPassword" : password,
-      "isParent" : user.isParent
+      "isParent" : user.isParent? user.isParent: null
     }
       try {
         console.log("HI",id, password)
@@ -67,7 +67,7 @@ export const postModifyUser = async(
             
           },
         );
-        console.log("가족 등록 OK")
+        console.log("가족 등록 OK", response)
         return response;
       } catch (e: any) {
         console.log("가족등록 API error", e.response)

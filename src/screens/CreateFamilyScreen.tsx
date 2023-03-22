@@ -7,24 +7,30 @@ import {
 } from 'react-native'
 
 import { GreenButton } from '../component/ButtonComponent';
-import { createFamily } from '../common/FamilyApi';
+import { createFamily, postModifyUser } from '../common/FamilyApi';
 
 export default function CreateFamilyScreen({navigation}) {
     const [password, setPassword] = useState('');
     const [isOk, setIsOk] = useState(false);
-
+    const [id, setId] = useState(null)
+    const [user, setUser] = useState([null])
     useEffect (() => {
         const clickOk = async () => {
             const result = await createFamily(password);
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@",result,"ZZ")
+            setId(result.id)
+            
+            setPassword(result.password)
+            joinFamily(result);
         };
+        const joinFamily = async (result) => {
+            const res = await postModifyUser(result.id, result.password, user);
+        }
         if (isOk) {
             clickOk();
-            navigation.navigate('Setting')
+            navigation.navigate('Home')
         }
         setIsOk(false)
     })
-
     const Cancle = ()=>{
         if (navigation?.canGoBack()){
             navigation.goBack()
