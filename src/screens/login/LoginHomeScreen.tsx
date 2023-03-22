@@ -35,7 +35,6 @@ export default function LoginHomeScreen({navigation}) {
 
   useEffect(() => {
     GoogleSignin.configure({
-      iosClientId: '1052651211735-6dt4lsb3g9bs5n0ok3onct0s4qc51gbo.apps.googleusercontent.com',
       webClientId:
         '1052651211735-c39hr3egfh2rkan1s8s87l4321af2h4j.apps.googleusercontent.com',
       androidClientId:

@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-// #import GoogleSignIn
+
 #import <GoogleMaps/GoogleMaps.h>
 // #import <Firebase.h>
 
@@ -32,9 +32,6 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 
 @implementation AppDelegate
 
-// func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
-// 	return GIDSignIn.sharedInstance.handle(url)
-// }
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [GMSServices provideAPIKey:@"AIzaSyA4DIqit0A34AC-VhkMkeBsh1f_t9P9_CU"];
@@ -65,7 +62,6 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [self.window makeKeyAndVisible];
   return YES;
 }
-
 
 /// This method controls whether the `concurrentRoot`feature of React18 is turned on or off.
 ///
