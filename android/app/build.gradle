@@ -82,15 +82,7 @@ project.ext.react = [
     enableHermes: true,  // clean and rebuild if changing
 ]
 
-//project.ext.vectoricons = [
-//    iconFontNames: [ 'MaterialIcons.ttf' ] // 아까 내가 넣었던 폰트 이름
-//]
-
 apply from: "../../node_modules/react-native/react.gradle"
-
-//apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-//apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
 /**
  * Set this to true to create two separate APKs instead of one:
