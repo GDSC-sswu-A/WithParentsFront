@@ -7,11 +7,11 @@ import ModalComponent from './ModalComponent';
 
 function ScheduleList(data) {
   const listDate = data.data.date.split('-');
-  console.log(listDate)
+  // console.log(listDate)
   return(
       <View style = {styles.list}>
         <View>
-          <Text style={styles.listDate}>Day {listDate[2]} | nickname</Text>
+          <Text style={styles.listDate}>Day {listDate[2]} | {data.data.nickname}</Text>
           <Text style={styles.title}>{data.data.title}</Text> 
         </View>
         <ModalComponent data={data.data}/>
@@ -27,13 +27,14 @@ export default function CalendarComponent() {
 
   useEffect (() => {
     const getList = async () => {
+      console.log("#####222222", year, month)
         const result = await getScheduleList(year, month);
         setSchedule(result);
     };
     getList();
 }, [year, month, change]);
 
-  console.log('hi', schedule)
+  // console.log('hi', schedule)
   let markedSelectedDates
   // if(schedule != 'undefined'){
   //   const markedDates = schedule.reduce((acc, current) => {
