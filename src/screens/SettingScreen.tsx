@@ -24,6 +24,7 @@ export default function SettingScreen({navigation}) {
     console.log('@@', id, passwd);
   }, []);
 
+  //로그아웃
   useEffect(() => {
     const signOut = async () => {
       try {
