@@ -28,15 +28,25 @@ export function GreenLineButton({text, on}) {
   );
 }
 
-export function WhiteButton({text, on}) {
+export function WhiteButton({text}) {
     return (
       <TouchableOpacity
-      onPress = {on}
       style={styles.WhiteButton}>
       <Text style={styles.red}>{text}</Text>
       </TouchableOpacity>
     );
   }
+
+  export function LoginButton({text,on}) {
+    return (
+      <TouchableOpacity
+      onPress = {on}
+      style={styles.LoginButton}>
+      <Text style={styles.white}>{text}</Text>
+      </TouchableOpacity>
+    );
+  }
+
 
   export function YellowButton({text,on}) {
     return (
@@ -115,19 +125,30 @@ const styles = StyleSheet.create({
         color : 'white',
         fontSize : 20,
         fontWeight : '300'
+        
     },
-    black: {
+     black:{
       textAlign : 'center',
       color : 'black',
-      fontSize : 15,
+      fontSize : 20,
       fontWeight : '300'
-    },
+     },
+
     WhiteButton : {
         backgroundColor : "white",
         borderRadius: 10,
         width : 75,
         height : 40,
         justifyContent: 'center',
+    },
+    LoginButton:{
+      borderRadius: 10,
+      width : 90,
+      height : 40,
+      justifyContent: 'center',
+      borderWidth:1,
+      borderColor:'white',
+      
     },
     red : {
         textAlign : 'center',

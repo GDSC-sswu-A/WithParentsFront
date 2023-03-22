@@ -3,12 +3,14 @@ import {StatusBar, Platform, Image} from 'react-native'
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import {RecoilRoot, useRecoilState} from 'recoil';
+import LoginHomeScreen from './src/screens/login/LoginHomeScreen';
+import SignUpScreen from './src/screens/login/SignUpScreen';
 import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
 import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
 import GlobalNav from "./src/screens/GlobalNav";
 import AddCalendar from "./src/screens/Calendar/AddCalendar"
-import EditCalendar from "./src/screens/Calendar/EditCalendar";
 import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
 import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
 import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
@@ -17,7 +19,6 @@ import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
 const Stack = createNativeStackNavigator();
 
 function App() {
-  
   // if (Platform.OS === 'android') {
   //   StatusBar.setBackgroundColor('white');
   //   // StatusBar.setTranslucent(true);
@@ -25,21 +26,34 @@ function App() {
   // }
 
   return (
-    <>
+    <RecoilRoot>
       {/* <StatusBar barStyle="dark-content" /> */}
-    <NavigationContainer>
-      <Stack.Navigator
-      screenOptions={{
-        
-      }}
-      initialRouteName="Nav">
-      <Stack.Screen
-      name="Nav"
-      component={GlobalNav}
-      options={{
-        headerShown : false
-      }}
-      />
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{}} initialRouteName="Login">
+          <Stack.Screen
+            name="Nav"
+            component={GlobalNav}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="Login"
+            component={LoginHomeScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="Signup"
+            component={SignUpScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+
 
       {/* setting */}
       <Stack.Screen
@@ -125,24 +139,11 @@ function App() {
         },
       })}
       />
-       <Stack.Screen
-      name="EditCalendar"
-      component={EditCalendar}
-      options={({navigation})=>({
-        title : 'Edit Event',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
 
-      </Stack.Navigator>
-   
-    </NavigationContainer>
-  </>
-  )
+        </Stack.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
+  );
 }
-
 
 export default App;

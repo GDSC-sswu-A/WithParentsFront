@@ -1,21 +1,19 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 
 import CalendarComponent from '../../component/CalendarComponent';
 import { AddButton } from '../../component/ButtonComponent';
-
 
 export default function Calender({navigation}) {
 
   return (
     <View style={styles.container}>
-      <CalendarComponent />
-
+      <CalendarComponent  />
       <TouchableOpacity
       style={styles.bottom}
       onPress={() => navigation.navigate('AddCalendar')}
       >
-       <AddButton on={undefined} />
+       <AddButton />
       </TouchableOpacity>
 
     </View>
@@ -34,6 +32,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right : 0,
     margin : 20
-  },
-  
+  }
+
 });
