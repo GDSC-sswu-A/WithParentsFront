@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NzkxNDQzM30.-M46T0TACZYmQF0X1O46iyLNlpb8WhNcIwH_NZp8HBw"
+import { API_BASE_URL, JWT_TOKEN } from '../..';
 
 export const postLocationInfo = async(
   location: any
@@ -13,10 +11,10 @@ export const postLocationInfo = async(
     try {
       // console.log("api 호출 전", location.latitude, location.longitude)
       const response = await axios.post(
-        `http://3.37.21.121:8080/api/user/setLocationInfo`,params,
+        `${API_BASE_URL}/user/setLocationInfo`,params,
         {
           headers: {
-            jwt_token: accessToken,
+            jwt_token:JWT_TOKEN,
           }
         },
       );
@@ -32,10 +30,10 @@ export const getLocationInfo = async(
 ) => {
     try {
       const response = await axios.get(
-        `http://3.37.21.121:8080/api/user/getLocationInfo`,
+        `${API_BASE_URL}/user/getLocationInfo`,
         {
           headers: {
-            jwt_token:accessToken,
+            jwt_token:JWT_TOKEN,
           }
         },
       );
@@ -50,10 +48,10 @@ export const getLastTime = async(
   ) => {
       try {
         const response = await axios.get(
-          `http://3.37.21.121:8080/api/user/getParentsLastApiCallTime`,
+          `${API_BASE_URL}/user/getParentsLastApiCallTime`,
           {
             headers: {
-              jwt_token:accessToken,
+              jwt_token:JWT_TOKEN,
             }
           },
         );

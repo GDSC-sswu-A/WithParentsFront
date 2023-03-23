@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDA2NTYyOX0.79ZWsEVsA9BV1nnRQO-I8rJTJ9Ss95phZHPFOiS3cjQ"
-
+import { API_BASE_URL, JWT_TOKEN } from '../..';
 
 export const getScheduleList = async(
   year: number,
@@ -11,10 +8,10 @@ export const getScheduleList = async(
     try {
       console.log("#####", year, month)
       const response = await axios.get(
-        `http://3.37.21.121:8080/api/schedule/getScheduleList?year=${year}&month=${month}`,
+        `${API_BASE_URL}/schedule/getScheduleList?year=${year}&month=${month}`,
         {
           headers: {
-            jwt_token:accessToken,
+            jwt_token:JWT_TOKEN,
           }
         },
       );
@@ -30,10 +27,10 @@ export const getTodaySchedule = async(
     ) => {
         try {
           const response = await axios.get(
-            `http://3.37.21.121:8080/api/schedule/getTodayScheduleList`,
+            `${API_BASE_URL}/schedule/getTodayScheduleList`,
             {
               headers: {
-                jwt_token:accessToken,
+                jwt_token:JWT_TOKEN,
               }
             },
           );
@@ -58,10 +55,10 @@ export const postCreatSchedule = async(
     }
       try {
         const response = await axios.post(
-          `http://3.37.21.121:8080/api/schedule/createSchedule`,params,
+          `${API_BASE_URL}/schedule/createSchedule`,params,
           {
             headers: {
-              jwt_token:accessToken,
+              jwt_token:JWT_TOKEN,
             },
             
           },
@@ -90,10 +87,10 @@ export const postCreatSchedule = async(
         }
           try {
             const response = await axios.patch(
-              `http://3.37.21.121:8080/api/schedule/modifySchedule`,params,
+              `${API_BASE_URL}/schedule/modifySchedule`,params,
               {
                 headers: {
-                  jwt_token:accessToken,
+                  jwt_token:JWT_TOKEN,
                 },
                 
               },
@@ -112,10 +109,10 @@ export const postCreatSchedule = async(
           console.log(id)
             try {
               const response = await axios.delete(
-                `http://3.37.21.121:8080/api/schedule/deleteSchedule?scheduleId=`+id,
+                `${API_BASE_URL}/schedule/deleteSchedule?scheduleId=`+id,
                 {
                   headers: {
-                    jwt_token:accessToken,
+                    jwt_token:JWT_TOKEN,
                   }
                 },
               );

@@ -1,16 +1,17 @@
 import axios from 'axios';
+import { API_BASE_URL, JWT_TOKEN } from '../..';
 
 let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3NzkxNDQzM30.-M46T0TACZYmQF0X1O46iyLNlpb8WhNcIwH_NZp8HBw"
+accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDE0NjAwMX0.YZp0AUy5guQEj6l_J2vFetFyHZx1kk1yw6omtQZnEQc"
 
 export const getHomeInfo = async(
 ) => {
     try {
       const response = await axios.get(
-        `http://3.37.21.121:8080/api/user/getHomeInfo`,
+        `${API_BASE_URL}/user/getHomeInfo`,
         {
           headers: {
-            jwt_token:accessToken,
+            jwt_token:JWT_TOKEN,
           }
         },
       );

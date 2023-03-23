@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDExNDk0OX0.4044g8mWxRtpfcJgUF2h0-OY008H3buS_XTOKo7VQO8"
+import { API_BASE_URL, JWT_TOKEN } from '../..';
 
 export const createFamily = async (password: string) => {
   const params = {
@@ -10,11 +8,11 @@ export const createFamily = async (password: string) => {
   try {
     console.log('api 호출 전', password);
     const response = await axios.post(
-      `http://3.37.21.121:8080/api/user/createFamily`,
+      `${API_BASE_URL}/user/createFamily`,
       params,
       {
         headers: {
-          jwt_token: accessToken,
+          jwt_token: JWT_TOKEN,
         },
       },
     );
@@ -29,10 +27,10 @@ export const createFamily = async (password: string) => {
 export const getUserInfo = async () => {
   try {
     const response = await axios.get(
-      `http://3.37.21.121:8080/api/user/getUserInfo`,
+      `${API_BASE_URL}/user/getUserInfo`,
       {
         headers: {
-          jwt_token: accessToken,
+          jwt_token: JWT_TOKEN,
         },
       },
     );
@@ -57,10 +55,10 @@ export const postModifyUser = async(
       try {
         console.log("HI",id, password)
         const response = await axios.post(
-          `http://3.37.21.121:8080/api/user/modifyUserInfo`,params,
+          `${API_BASE_URL}/user/modifyUserInfo`,params,
           {
             headers: {
-              jwt_token:accessToken,
+              jwt_token:JWT_TOKEN,
             },
             
           },
@@ -81,15 +79,15 @@ export const PostUser = async (nickname: String, isParent: Boolean) => {
   try {
     console.log('HI', nickname, isParent);
     const response = await axios.post(
-      `http://3.37.21.121:8080/api/user/modifyUserInfo`,
+      `${API_BASE_URL}/user/modifyUserInfo`,
       params,
       {
         headers: {
-          jwt_token: accessToken,
+          jwt_token: JWT_TOKEN,
         },
       },
     );
-    console.log('유저등록(닉넴,부모여부) OK');
+    console.log('유저등록(닉넴,부모여부) OK', response.request._headers.jwt_token);
     return response;
   } catch (e: any) {
     console.log('유저등록 API error', e.response);
