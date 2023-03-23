@@ -35,7 +35,7 @@ const JoinFamilyScreen = ({navigation}) => {
     const clickOk = async () => {
         const result = await postModifyUser(id, passwd, user);
         if (result.status===200) {
-          navigation.navigate('Setting')
+          navigation.navigate('Nav')
           setIsOk(false)
         } else {
           const meesage = result.data.message
