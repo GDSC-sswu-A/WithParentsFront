@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   GoogleSignin,
   GoogleSigninButton,
@@ -49,6 +50,7 @@ export default function LoginHomeScreen({navigation}) {
   function tokenSubmit(idTokenData) {
     const url = 'http://3.37.21.121:8080/api/auth/googleLogin';
     return axios.post(url, idTokenData);
+    
   }
 
   //사용자가 로그인하도록 모달띄움 , 로그인되면 userinfo객체 반환
@@ -63,7 +65,19 @@ export default function LoginHomeScreen({navigation}) {
       //  console.log(userInfo.idToken);
       const idTokenData = {idToken: userInfo.idToken};
       const {data} = await tokenSubmit(idTokenData);
+      const jwt = data.jwtToken
+      const storeData = async ()=>{
+        try{
+           await AsyncStorage.setItem("token", jwt)
+           console.log("token 등록 완료")
+        }catch(error){
+            console.log(error)
+        }
+    }
+    storeData();
+    
       console.log(data, '전송완료');
+      
     } catch (error) {
       console.log('Message___', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

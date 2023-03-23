@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { API_BASE_URL, JWT_TOKEN } from '../..';
+import { API_BASE_URL } from '../..';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export const createFamily = async (password: string) => {
   const params = {
     password: password,
   };
+  console.log("!!!",AsyncStorage.getItem('token'))
   try {
     console.log('api 호출 전', password);
     const response = await axios.post(
@@ -12,7 +15,7 @@ export const createFamily = async (password: string) => {
       params,
       {
         headers: {
-          jwt_token: JWT_TOKEN,
+          jwt_token: await AsyncStorage.getItem('token'),
         },
       },
     );
@@ -30,7 +33,7 @@ export const getUserInfo = async () => {
       `${API_BASE_URL}/user/getUserInfo`,
       {
         headers: {
-          jwt_token: JWT_TOKEN,
+          jwt_token:await AsyncStorage.getItem('token'),
         },
       },
     );
@@ -58,7 +61,7 @@ export const postModifyUser = async(
           `${API_BASE_URL}/user/modifyUserInfo`,params,
           {
             headers: {
-              jwt_token:JWT_TOKEN,
+              jwt_token:await AsyncStorage.getItem('token'),
             },
             
           },
@@ -77,13 +80,12 @@ export const PostUser = async (nickname: String, isParent: Boolean) => {
     isParent: isParent,
   };
   try {
-    console.log('HI', nickname, isParent);
     const response = await axios.post(
       `${API_BASE_URL}/user/modifyUserInfo`,
       params,
       {
         headers: {
-          jwt_token: JWT_TOKEN,
+          jwt_token: await AsyncStorage.getItem('token'),
         },
       },
     );

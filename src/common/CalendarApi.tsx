@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { API_BASE_URL, JWT_TOKEN } from '../..';
+import { API_BASE_URL } from '../..';
 
 export const getScheduleList = async(
   year: number,
@@ -11,7 +12,7 @@ export const getScheduleList = async(
         `${API_BASE_URL}/schedule/getScheduleList?year=${year}&month=${month}`,
         {
           headers: {
-            jwt_token:JWT_TOKEN,
+            jwt_token:await AsyncStorage.getItem('token'),
           }
         },
       );
@@ -30,7 +31,7 @@ export const getTodaySchedule = async(
             `${API_BASE_URL}/schedule/getTodayScheduleList`,
             {
               headers: {
-                jwt_token:JWT_TOKEN,
+                jwt_token:await AsyncStorage.getItem('token'),
               }
             },
           );
@@ -58,7 +59,7 @@ export const postCreatSchedule = async(
           `${API_BASE_URL}/schedule/createSchedule`,params,
           {
             headers: {
-              jwt_token:JWT_TOKEN,
+              jwt_token:await AsyncStorage.getItem('token'),
             },
             
           },
@@ -90,7 +91,7 @@ export const postCreatSchedule = async(
               `${API_BASE_URL}/schedule/modifySchedule`,params,
               {
                 headers: {
-                  jwt_token:JWT_TOKEN,
+                  jwt_token:await AsyncStorage.getItem('token'),
                 },
                 
               },
@@ -112,7 +113,7 @@ export const postCreatSchedule = async(
                 `${API_BASE_URL}/schedule/deleteSchedule?scheduleId=`+id,
                 {
                   headers: {
-                    jwt_token:JWT_TOKEN,
+                    jwt_token:await AsyncStorage.getItem('token'),
                   }
                 },
               );

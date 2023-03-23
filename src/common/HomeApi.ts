@@ -1,8 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { API_BASE_URL, JWT_TOKEN } from '../..';
-
-let accessToken = ""
-accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDE0NjAwMX0.YZp0AUy5guQEj6l_J2vFetFyHZx1kk1yw6omtQZnEQc"
+import { API_BASE_URL } from '../..';
 
 export const getHomeInfo = async(
 ) => {
@@ -11,7 +9,7 @@ export const getHomeInfo = async(
         `${API_BASE_URL}/user/getHomeInfo`,
         {
           headers: {
-            jwt_token:JWT_TOKEN,
+            jwt_token:await AsyncStorage.getItem('token'),
           }
         },
       );

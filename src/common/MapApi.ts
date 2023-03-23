@@ -1,5 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { API_BASE_URL, JWT_TOKEN } from '../..';
+import { API_BASE_URL } from '../..';
 
 export const postLocationInfo = async(
   location: any
@@ -14,7 +15,7 @@ export const postLocationInfo = async(
         `${API_BASE_URL}/user/setLocationInfo`,params,
         {
           headers: {
-            jwt_token:JWT_TOKEN,
+            jwt_token:await AsyncStorage.getItem('token'),
           }
         },
       );
@@ -33,7 +34,7 @@ export const getLocationInfo = async(
         `${API_BASE_URL}/user/getLocationInfo`,
         {
           headers: {
-            jwt_token:JWT_TOKEN,
+            jwt_token:await AsyncStorage.getItem('token'),
           }
         },
       );
@@ -51,7 +52,7 @@ export const getLastTime = async(
           `${API_BASE_URL}/user/getParentsLastApiCallTime`,
           {
             headers: {
-              jwt_token:JWT_TOKEN,
+              jwt_token:await AsyncStorage.getItem('token'),
             }
           },
         );
