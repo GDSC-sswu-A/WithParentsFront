@@ -9,7 +9,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {AddButton, GrayButton} from '../../component/ButtonComponent';
+import {
+  AddButton,
+  GrayButton,
+  GreenButton,
+  YellowGreenButton,
+} from '../../component/ButtonComponent';
 import CheckModal from '../../component/CheckModal';
 import ICON from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -35,6 +40,17 @@ export default function Medicine({navigation}) {
       const result = await getMedicineInfo(1);
       const medicineData = result.request._response;
       setUserMedicines(JSON.parse(medicineData));
+      //timedata 이중배열돌기..?
+      for (let i = 0; i < JSON.parse(medicineData).length; i++) {
+        setMediTimeList(prev => [
+          ...prev,
+          JSON.parse(medicineData)[i].dosingTimes,
+        ]);
+      }
+      /*setMediTimeList(
+        mediTimeList.filter((v, i) => mediTimeList.indexOf(v) === i),
+      );*/
+      console.log(mediTimeList);
     } catch (e) {
       console.log(e);
     }
@@ -123,22 +139,24 @@ export default function Medicine({navigation}) {
           <View style={styles.mediTime}>
             {userMedicines?.dosingTimes.map((content, i) => {
               return (
-                <Pressable
-                  style={[
-                    styles.buttonContainer,
-                    {
-                      backgroundColor: userMedicines?.dosingTimes[i]
-                        ? '#FFFBE9'
-                        : 'gray',
-                    },
-                  ]}
-                  key={i}
-                  onPress={() => {
-                    openModal(content);
-                    console.log(content);
-                  }}>
-                  <Text>{content.substr(0, 5)}</Text>
-                </Pressable>
+                <>
+                  <Pressable
+                    style={[
+                      styles.buttonContainer,
+                      {
+                        backgroundColor: userMedicines?.dosingTimes[i]
+                          ? '#FFFBE9'
+                          : 'gray',
+                      },
+                    ]}
+                    key={i}
+                    onPress={() => {
+                      openModal(content);
+                      console.log(content);
+                    }}>
+                    <Text>{content.substr(0, 5)}</Text>
+                  </Pressable>
+                </>
               );
             })}
           </View>
@@ -191,9 +209,13 @@ export default function Medicine({navigation}) {
           renderItem={({item}) => <ListItem userMedicines={item} />}
         />
       </View>
-
-      <View style={styles.mediAddBtn}>
-        <AddButton on={TogoAddMediPage}></AddButton>
+      <View style={styles.btnTab}>
+        <View style={styles.mediAddBtn}>
+          <GreenButton text={'Render'} on={medicineInfo}></GreenButton>
+        </View>
+        <View style={styles.mediAddBtn}>
+          <AddButton on={TogoAddMediPage}></AddButton>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -203,6 +225,11 @@ const styles = StyleSheet.create({
   black: {
     color: '#424242',
     fontSize: 13,
+  },
+  btnTab: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    left: 200,
   },
   actionIcon: {
     height: 25,
@@ -221,6 +248,10 @@ const styles = StyleSheet.create({
   mediWeek: {
     flexDirection: 'row',
   },
+  mediAddBtn: {
+    marginLeft: 20,
+    marginBottom: 10,
+  },
   userTab: {
     flex: 0.2,
     paddingLeft: 360,
@@ -229,7 +260,7 @@ const styles = StyleSheet.create({
   medicineTab: {
     flex: 6,
   },
-  mediAddBtn: {
+  btntab: {
     flex: 1,
     left: 330,
   },

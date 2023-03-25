@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: 110,
     height: 40,
+    justifyContent: 'center',
   },
 
   YellowButton: {
