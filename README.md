@@ -12,12 +12,10 @@
 5. Return to project location.
 - cd ..
 6. Execute the project.
-
-(1) if Xcode and CocoaPods are installed
-- yarn ios
-
-(2) if the above cammand does not run.
-- Open Xcode to build the .xcworkspace file
+  - if Xcode and CocoaPods are installed
+    - yarn ios
+  - if the above cammand does not run.
+    - Open Xcode to build the .xcworkspace file
 
 ---
 ### ANDROID
@@ -31,6 +29,5 @@
 5. Connect to the project location from the terminal.
 6. Excute the project
 - yarn android
-
-(1) If an error occurs, run powershell in administrator mode, enter the following command, and 'yarn android',
-- Set-ExcutionPolicy Unrestricted
+- If an error occurs, run powershell in administrator mode, enter the following command, and 'yarn android',
+  - Set-ExcutionPolicy Unrestricted
