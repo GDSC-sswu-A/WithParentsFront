@@ -44,13 +44,13 @@ export default function MapViewComponent(location : any) {
             <TouchableOpacity style={styles.pick} onPress={()=>setOpen(!open)}>
               <Text style={{textAlign : 'center'}}>부모님 선택</Text>
             </TouchableOpacity>
-            {open? null: <>
-            {parents&&parents.map((item)=>(
+            {open? <>
+            {parents&&parents.map((item, k)=>(
               <TouchableOpacity onPress={()=>setPick({item})}>
               <Text>{item.nickname}</Text>
               </TouchableOpacity>
             ))}
-            </>}
+            </>: null}
           
           <MapView
           style={styles.container}
