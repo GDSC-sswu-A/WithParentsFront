@@ -5,6 +5,7 @@ import {
   FlatList,
   StyleSheet,
   Alert,
+  Pressable,
   TouchableOpacity,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
@@ -13,12 +14,16 @@ import CheckModal from '../../component/CheckModal';
 import ICON from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {deleteMedicineApi, getMedicineInfo} from '../../common/medicineApi';
+import {useRecoilState} from 'recoil';
+import {mediTimeBtnAtom} from '../../atom/atom';
 
 export default function Medicine({navigation}) {
   const [userMedicines, setUserMedicines] = React.useState([]);
   const [showModal, setShowModal] = useState(false);
-  const weekData = ['월', ' 화', ' 수', ' 목', ' 금', ' 토', ' 일'];
+  const weekData = ['Mon', ' Tue', ' Wed', ' Thu', ' Fri', ' Sat', ' Sun'];
   const [selectbtnValue, setBtnValue] = useState();
+  const [mediTimeBtn, setMediTimeBtn] = useState(false);
+  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeBtnAtom);
   const date = new Date();
 
   const openModal = btnValue => {
@@ -40,7 +45,7 @@ export default function Medicine({navigation}) {
 
   const TogoAddMediPage = () => {
     navigation.navigate('Addmedicine');
-    console.log(showModal);
+    console.log(mediTimeList);
   };
 
   const deleteMediBtn = async mediId => {
@@ -51,6 +56,27 @@ export default function Medicine({navigation}) {
       console.log(e);
     }
   };
+
+  /*const createTimeArray = () => {
+    /* for (let i = 0; i < userMedicines.length; i++) {
+      let copy = [...newTimeArray];
+      setNewTimeArray(copy[i]);
+    }
+    console.log('timedata', newTimeArray);*/
+  /*for (let i = 0; i < userMedicines.length; i++) {
+      let array = userMedicines[i].dosingTime;
+      for (let k = 0; k < array.length; k++) {
+        setNewTimeArray(...newTimeArray, array[k]);
+
+            for (let i = 0; i < userMedicines.length; i++) {
+      newTimeArray.push(userMedicines[i].dosingTimes);
+    }
+    console.log(userMedicines[1].dosingTimes);
+    console.log(newTimeArray);
+      }
+    }
+  };
+  };*/
 
   const ListItem = ({userMedicines}) => {
     return (
@@ -85,25 +111,34 @@ export default function Medicine({navigation}) {
               })}
             </View>
             <Text style={styles.black}>
-              하루&nbsp;
+              &nbsp;
               {
                 Array.from(userMedicines?.dayOfTheWeekList).filter(
                   n => n === '1',
                 ).length
               }
-              번 복용
+              &nbsp; in a week
             </Text>
           </View>
           <View style={styles.mediTime}>
             {userMedicines?.dosingTimes.map((content, i) => {
               return (
-                <View style={styles.mediTimeData} key={i}>
-                  <GrayButton
-                    on={() => {
-                      openModal(content);
-                    }}
-                    text={content}></GrayButton>
-                </View>
+                <Pressable
+                  style={[
+                    styles.buttonContainer,
+                    {
+                      backgroundColor: userMedicines?.dosingTimes[i]
+                        ? '#FFFBE9'
+                        : 'gray',
+                    },
+                  ]}
+                  key={i}
+                  onPress={() => {
+                    openModal(content);
+                    console.log(content);
+                  }}>
+                  <Text>{content.substr(0, 5)}</Text>
+                </Pressable>
               );
             })}
           </View>
@@ -111,16 +146,15 @@ export default function Medicine({navigation}) {
         <View>
           {showModal && (
             <CheckModal
-              children={`Did you take your medicine?\n If you ate at ${selectbtnValue},\n  please click Yes\n Current time:${
-                date.getHours() + 9
-              }:${date.getMinutes()}
-              `}
+              children={selectbtnValue.substr(0, 5)}
               showModal={showModal}
-              setShowModal={setShowModal}></CheckModal>
+              setShowModal={setShowModal}
+              setMediTimeBtn={setMediTimeBtn}
+              mediTimeBtn={mediTimeBtn}></CheckModal>
           )}
         </View>
         <View style={styles.mediIcons}>
-          {!userMedicines?.notificationStatus ? (
+          {/*} {!userMedicines?.notificationStatus ? (
             <TouchableOpacity
               style={[styles.actionIcon]}
               onPress={TogoAddMediPage}>
@@ -132,7 +166,7 @@ export default function Medicine({navigation}) {
               onPress={TogoAddMediPage}>
               <ICON name="notifications" size={18} color={'white'}></ICON>
             </TouchableOpacity>
-          )}
+          )}*/}
 
           <TouchableOpacity
             style={[styles.actionIcon, {backgroundColor: 'red'}]}
@@ -191,28 +225,28 @@ const styles = StyleSheet.create({
     flex: 0.2,
     paddingLeft: 360,
     paddingTop: 10,
-    //backgroundColor: 'black',
   },
   medicineTab: {
     flex: 6,
-    //backgroundColor:'yellow',
   },
   mediAddBtn: {
     flex: 1,
     left: 330,
-    //position: 'absolute',
-    //bottom: 20,
   },
   listItem: {
     padding: 15,
-    //backgroundColor: '#E5E7E1',
-    backgroundColor: '#dcedc8',
+    backgroundColor: '#E5E7E1',
     flexDirection: 'row',
-    //  elevation: 12,
     borderRadius: 7,
     marginVertical: 10,
-
-    //   alignItems: 'center',
+  },
+  buttonContainer: {
+    marginLeft: 10,
+    width: 70,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
   },
   mediIcons: {
     flexDirection: 'row',
@@ -227,7 +261,6 @@ const styles = StyleSheet.create({
 
   mediWeekContainer: {
     flexDirection: 'column',
-    // justifyContent: 'flex-start',
   },
 });
 function useCallback() {

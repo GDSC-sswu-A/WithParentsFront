@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let accessToken = '';
 accessToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY3ODYyNjEyOX0.NT2PDkdna16hJLw-Q0uvUeYVY2gCzSiD8HYKi_L-rAk';
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6MTY4MDI2MDA3OX0.a6bOllH6JyxfHTCM7S-I_Eo39c29RZlrPmQwBr9cO3I';
 //영양제 추가 api
 export const createMedicationApi = async (
   userId: Long,

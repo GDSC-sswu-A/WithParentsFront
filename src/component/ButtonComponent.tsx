@@ -124,7 +124,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   grayButton: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#FFFBE9',
+    //backgroundColor: '#f5f5f5',
     width: 70,
     height: 30,
     justifyContent: 'center',

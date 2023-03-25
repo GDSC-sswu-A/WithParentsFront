@@ -12,18 +12,9 @@ import WrittenGalleryScreen from './src/screens/Gallery/WrittenGalleryScreen';
 
 import React, {useEffect} from 'react';
 
-import {
-  requestUserPermission,
-  NotificationListner,
-} from './src/utills/pushnotification_helper';
-
 const Stack = createNativeStackNavigator();
 
 function App() {
-  useEffect(() => {
-    requestUserPermission();
-    NotificationListner();
-  }, []);
   // if (Platform.OS === 'android') {
   //   StatusBar.setBackgroundColor('white');
   //   // StatusBar.setTranslucent(true);

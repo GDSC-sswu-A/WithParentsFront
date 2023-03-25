@@ -16,6 +16,7 @@ import {
   mediTimeAtom2,
   mediTimeAtom3,
   mediNameAtom,
+  mediTimeBtnAtom,
 } from '../../atom/atom';
 import {
   View,
@@ -171,7 +172,6 @@ export default function AddmedipageScreen({navigation}) {
       mediTime3.length !== 0
     ) {
       addMedicine();
-      //  medicineInfo();
     } else {
       Alert.alert('Error', 'please input intake time');
     }

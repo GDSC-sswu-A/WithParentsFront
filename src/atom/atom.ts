@@ -30,3 +30,8 @@ export const mediTimeAtom3 = atom<any>({
   key: 'mediTimeAtom3',
   default: '',
 });
+
+export const mediTimeBtnAtom = atom<any>({
+  key: 'mediTimeBtnAtom',
+  default: [],
+});

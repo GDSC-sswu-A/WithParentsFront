@@ -1,29 +1,43 @@
 import React, {useState} from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight} from 'react-native';
-import {CheckModalAtom} from '../atom/atom';
 import {useRecoilState} from 'recoil';
+import {mediTimeBtnAtom} from '../atom/atom';
+const date = new Date();
+//const [mediTimeBtn, setMediTimeBtn] = useRecoilState(mediTimeBtnAtom);
 
-const CheckModal = ({showModal, setShowModal, children}) => {
+const CheckModal = ({
+  showModal,
+  setShowModal,
+  children,
+  setMediTimeBtn,
+  mediTimeBtn,
+}) => {
   return (
     <View style={styles.centeredView}>
       <View style={styles.modal_bg}>
         <Modal animationType="fade" transparent={true} visible={showModal}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>{children} </Text>
-
+              <Text style={styles.modalText}>
+                Did you take your medicine?{'\n'}If you ate at {children} {'\n'}{' '}
+                please click<Text style={styles.redText}> Yes</Text> {'\n'}
+              </Text>
+              <Text style={styles.blueText}>
+                Current time {date.getHours() + 9}:{date.getMinutes()}
+              </Text>
               <View style={styles.ModalButton}>
-                <View style={styles.Btn}>
+                <View style={styles.YesBtn}>
                   <TouchableHighlight //Yes 버튼
                     style={{...styles.openButton}}
                     onPress={() => {
                       setShowModal(!showModal);
+                      setMediTimeBtn(!mediTimeBtn);
                     }}>
                     <Text style={styles.textStyle}>Yes</Text>
                   </TouchableHighlight>
                 </View>
 
-                <View style={styles.Btn}>
+                <View style={styles.NoBtn}>
                   <TouchableHighlight //Yes 버튼
                     style={{...styles.openButton}}
                     onPress={() => {
@@ -47,9 +61,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-
+  blueText: {color: 'blue', fontSize: 17},
+  redText: {color: 'red'},
   modalView: {
-    margin: 20,
     backgroundColor: '#789395',
     borderRadius: 20,
     padding: 25,
@@ -65,12 +79,20 @@ const styles = StyleSheet.create({
     //반경 지정
     shadowRadius: 3.84,
   },
-
-  Btn: {
+  YesBtn: {
+    right: 20,
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 5,
-    top: 5,
+    top: 10,
+  },
+
+  NoBtn: {
+    left: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 5,
+    top: 10,
   },
 
   textStyle: {
@@ -79,7 +101,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
-    marginBottom: 20,
     textAlign: 'center',
     color: 'white',
     fontSize: 17,
