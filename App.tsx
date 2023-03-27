@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useEffect} from 'react';
 
 import SettingScreen from "./src/screens/SettingScreen";
 import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
@@ -15,17 +15,28 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RecoilRoot, useRecoilState} from 'recoil';
 import LoginHomeScreen from './src/screens/login/LoginHomeScreen';
 import SignUpScreen from './src/screens/login/SignUpScreen';
-
+import {StatusBar, Platform, Image} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
-  
   // if (Platform.OS === 'android') {
   //   StatusBar.setBackgroundColor('white');
   //   // StatusBar.setTranslucent(true);
   //   StatusBar.setBarStyle('dark-content');
   // }
+
+  //푸시알림(푸쉬 알림이 수신되었을 때 React Native 의 Alert api 를 사용해 알림을 띄우는 테스트 코드)
+  {
+    /*useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
+}*/
+  }
 
   return (
     <RecoilRoot>
@@ -79,11 +90,12 @@ function App() {
               },
             })}
           />
+
           <Stack.Screen
-            name="JoinFamily"
-            component={JoinFamilyScreen}
+            name="Addmedicine"
+            component={AddmedipageScreen}
             options={({navigation}) => ({
-              title: 'Family registration',
+              title: 'Add your medicine',
               headerTintColor: '#FFFFFF',
               headerStyle: {
                 backgroundColor: '#AEC195',
@@ -138,11 +150,22 @@ function App() {
       })}
       />
 
+
+          <Stack.Screen
+            name="JoinFamily"
+            component={JoinFamilyScreen}
+            options={({navigation}) => ({
+              title: 'Family registration',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </RecoilRoot>
   );
 }
-
 
 export default App;

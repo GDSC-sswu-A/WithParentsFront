@@ -4,17 +4,13 @@ import {
   Text,
   StyleSheet,
   View,
-  Pressable
+  Pressable,
 } from 'react-native';
-
-
 
 export function GreenButton({text, on}) {
   return (
-    <TouchableOpacity
-    onPress = {on}
-    style={styles.GreenButton}>
-    <Text style={styles.white}>{text}</Text>
+    <TouchableOpacity onPress={on} style={styles.GreenButton}>
+      <Text style={styles.white}>{text}</Text>
     </TouchableOpacity>
   );
 }
@@ -34,9 +30,9 @@ export function WhiteButton({text, on}) {
       onPress = {on}
       style={styles.WhiteButton}>
       <Text style={styles.red}>{text}</Text>
-      </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
+}
 
   export function LoginButton({text,on}) {
     return (
@@ -55,48 +51,25 @@ export function WhiteButton({text, on}) {
       onPress = {on}
       style={styles.YellowButton}>
       <Text style={styles.black}>{text}</Text>
-      </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
+}
 
-
-  export function YellowGreenButton({text,on}) {
-    return (
-      <TouchableOpacity
-      onPress = {on}
-      style={styles.YellowGreenButton}>
+export function YellowGreenButton({text, on}) {
+  return (
+    <TouchableOpacity onPress={on} style={styles.YellowGreenButton}>
       <Text style={styles.black}>{text}</Text>
-      </TouchableOpacity>
-    );
-  }
+    </TouchableOpacity>
+  );
+}
 
-  export function GrayButton({text}){
-    return(
-      <TouchableOpacity
-      //onPress = {buttonColorChange}
-       style={styles.GrayButton}
-      >
-      <Text style={styles.black}>{text}</Text>
-      </TouchableOpacity>
+export function AddButton({on}) {
+  return (
+    <TouchableOpacity onPress={on} style={styles.AddButton}>
+      <Text style={styles.add}>+</Text>
+    </TouchableOpacity>
     )
-  }
-
-
-  export function AddButton ({on}) {
-    return (
-        // <TouchableOpacity
-        // onPress = {on}
-        // style={styles.AddButton}>
-        // <Text style={styles.add}>+</Text>
-        // </TouchableOpacity>
-      
-      <View
-      style={styles.AddButton}>
-        <Text style={styles.add}>+</Text>
-
-      </View>
-    )
-  }
+}
 
 
 const styles = StyleSheet.create({
@@ -179,7 +152,13 @@ const styles = StyleSheet.create({
       height : 30,
       borderRadius : 10,
     },
-
-
-
+  grayButton: {
+    backgroundColor: '#FFFBE9',
+    //backgroundColor: '#f5f5f5',
+    width: 70,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  },
 });
