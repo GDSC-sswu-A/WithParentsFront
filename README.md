@@ -1,4 +1,6 @@
 # WithParentsFront
+[Server Repository](https://github.com/GDSC-sswu-A/WithParentsServer)
+
 ## How to run
 
 ### IOS
@@ -29,5 +31,6 @@
 5. Connect to the project location from the terminal.
 6. Excute the project
 - yarn android
+- npm run android
 - If an error occurs, run powershell in administrator mode, enter the following command, and 'yarn android',
   - Set-ExcutionPolicy Unrestricted
