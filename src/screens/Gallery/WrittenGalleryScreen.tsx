@@ -14,6 +14,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {useRecoilState} from 'recoil';
+import {clickImageDescription, clickImageUrl} from '../../atom/atom';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -21,22 +23,27 @@ const {width, height} = Dimensions.get('screen');
 
 export default function WrittenGalleryScreen({navigation}) {
   const [name, setName] = useState('');
+  const [clickImagUrl, setClickImageUrl] = useRecoilState(clickImageUrl);
+  const [clickdescription, setclickdescription] = useRecoilState(
+    clickImageDescription,
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.ContainerBackground}>
-        <View style={styles.textNav}>
-          <Text>미뇽이 | 2022/12/20</Text>
-        </View>
-        <View style={styles.selectPhoto}></View>
-        <View style={styles.userText}></View>
-        <View style={styles.TextBot}>
-          <Text> ___________________________________________</Text>
-          <View style={styles.icons}>
-            <GalleryDeleteModal></GalleryDeleteModal>
-          </View>
-        </View>
+      <Image
+        source={{
+          uri: clickImagUrl,
+        }}
+        style={styles.imageStyle}
+      />
+      <View style={styles.userText}>
+        <Text>{clickdescription}</Text>
       </View>
+      <View style={styles.TextBot}>
+        <Text> ___________________________________________</Text>
+        <GalleryDeleteModal></GalleryDeleteModal>
+      </View>
+      <View stlye={styles.iconTab}></View>
     </SafeAreaView>
   );
 }
@@ -45,25 +52,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#EFF3EA',
   },
-  ContainerBackground: {
-    flex: 1,
-    backgroundColor: '#E5E7E1',
-    borderRadius: 10,
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
+  imageStyle: {
+    flex: 4,
+    resizeMode: 'contain',
+    margin: 5,
   },
+
   textNav: {
     padding: 15,
-  },
-  selectPhoto: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'gray',
-    height: 100,
-    width: 280,
-    flex: 2.5,
   },
 
   userText: {
@@ -74,7 +72,14 @@ const styles = StyleSheet.create({
   },
 
   TextBot: {
-    flex: 0.8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1.2,
   },
-  icons: {},
+  iconTab: {
+    flex: 1.5,
+    width: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
   View,
@@ -8,36 +6,53 @@ import {
   Button,
   SafeAreaView,
   StyleSheet,
+  TextInput,
   Image,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 
 import {GreenButton} from '../../component/ButtonComponent';
-import DateSelectComponent from '../../component/DateSelectComponent';
-import InputText from '../../component/input';
-import UploadPhoto from '../../component/uploadPhoto';
+//import DateSelectComponent from '../../component/DateSelectComponent';
+import {PostGallery} from '../../common/galleryApi';
+import Uploadphoto from '../../component/Uploadphoto';
 
-export default function GalleryWriteScreen({navigation}) {
-  const toGoWrittenPage = () => {
-    navigation.navigate('WrittenGalleryScreen');
+export default function GalleryWriteScreen({navigation}, props) {
+  const [contentText, onChangeInput] = React.useState('');
+  const [imageUrl, setImageUrl] = React.useState('');
+
+  const toGoWrittenPage = async () => {
+    if (!imageUrl) {
+      Alert.alert('Error', 'Please input upload Button');
+    } else if (contentText == '') {
+      Alert.alert('Error', 'Please input contentText');
+    } else if (imageUrl && contentText) {
+      const result = await PostGallery(imageUrl, contentText);
+      console.log(result);
+      navigation.navigate('Gallery');
+    }
   };
-
-  const [name, setName] = useState('');
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.selectDate}>
+      {/*  <View style={styles.selectDate}>
         <DateSelectComponent></DateSelectComponent>
-      </View>
+  </View>*/}
       <View style={styles.border}></View>
       <View style={styles.selectPhoto}>
-        <UploadPhoto></UploadPhoto>
+        <Uploadphoto setImageUrl={setImageUrl}></Uploadphoto>
       </View>
       <View style={styles.writeMemo}>
-        <InputText></InputText>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeInput}
+          value={contentText}
+          placeholder="Think your happy moment :)"
+          textAlignVertical="top"
+        />
       </View>
       <View style={styles.continueBtn}>
-        <GreenButton text="continue" on={toGoWrittenPage} />
+        <GreenButton text="continue(3)" on={toGoWrittenPage} />
       </View>
     </SafeAreaView>
   );
@@ -48,12 +63,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
-  selectDate: {
-    flex: 1.3,
-    padding: 15,
-    left: 10,
-  },
-
   border: {
     borderBottomColor: 'darkgray',
     width: 350,
@@ -62,7 +71,7 @@ const styles = StyleSheet.create({
     bottom: 15,
   },
   selectPhoto: {
-    flex: 3.3,
+    flex: 10,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
@@ -76,14 +85,20 @@ const styles = StyleSheet.create({
     height: 100,
     width: 280,
   },
+  input: {
+    backgroundColor: '#EFF3EA',
+    height: 200,
+    width: 280,
+    padding: 18,
+  },
 
   writeMemo: {
-    flex: 5,
+    flex: 7.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
   continueBtn: {
-    flex: 1.3,
+    flex: 2.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
