@@ -59,3 +59,16 @@ export const mediTimeBtnAtom = atom<any>({
   key: 'mediTimeBtnAtom',
   default: [],
 });
+export const clickImageDescription = atom<any>({
+  key: 'clickImageDescription',
+  default: '',
+});
+
+export const clickImageUrl = atom<any>({
+  key: 'clickImageUrl',
+  default: '',
+});
+export const clickImageId = atom<Long>({
+  key: 'clickImageId',
+  default: '',
+});

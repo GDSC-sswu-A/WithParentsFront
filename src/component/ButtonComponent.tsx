@@ -71,7 +71,6 @@ export function AddButton({on}) {
     )
 }
 
-
 const styles = StyleSheet.create({
     GreenButton : {
         backgroundColor : "#6A7759",

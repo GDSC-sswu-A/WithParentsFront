@@ -16,7 +16,7 @@ import {RecoilRoot, useRecoilState} from 'recoil';
 import LoginHomeScreen from './src/screens/login/LoginHomeScreen';
 import SignUpScreen from './src/screens/login/SignUpScreen';
 import {StatusBar, Platform, Image} from 'react-native';
-
+import GalleryDeleteModal from './src/component/GalleryDeleteModal';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -149,6 +149,7 @@ function App() {
         },
       })}
       />
+
 
 
           <Stack.Screen
