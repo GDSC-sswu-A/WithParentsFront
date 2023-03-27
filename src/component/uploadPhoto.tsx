@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {SERVER_KEY} from '@env';
 
-const Uploadphoto2 = props => {
+const Uploadphoto = props => {
   const [filePath, setFilePath] = useState({});
   const [uploadSuccessMessage, setUploadSuccessMessage] = useState('');
   const [file, setFile] = useState();
@@ -216,4 +216,4 @@ const styles = StyleSheet.create({
     margin: 5,
   },
 });
-export default Uploadphoto2;
+export default Uploadphoto;

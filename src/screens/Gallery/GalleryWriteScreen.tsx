@@ -15,7 +15,7 @@ import {
 import {GreenButton} from '../../component/ButtonComponent';
 //import DateSelectComponent from '../../component/DateSelectComponent';
 import {PostGallery} from '../../common/galleryApi';
-import Uploadphoto from '../../component/Uploadphoto';
+import UploadPhoto from '../../component/uploadPhoto';
 
 export default function GalleryWriteScreen({navigation}, props) {
   const [contentText, onChangeInput] = React.useState('');
@@ -40,7 +40,7 @@ export default function GalleryWriteScreen({navigation}, props) {
   </View>*/}
       <View style={styles.border}></View>
       <View style={styles.selectPhoto}>
-        <Uploadphoto setImageUrl={setImageUrl}></Uploadphoto>
+        <UploadPhoto setImageUrl={setImageUrl}></UploadPhoto>
       </View>
       <View style={styles.writeMemo}>
         <TextInput
