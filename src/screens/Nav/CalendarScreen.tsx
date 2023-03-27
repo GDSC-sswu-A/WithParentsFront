@@ -15,7 +15,7 @@ export default function Calender({navigation}) {
       style={styles.bottom}
       onPress={() => navigation.navigate('AddCalendar')}
       >
-       <AddButton on={undefined} />
+       <AddButton on={() => navigation.navigate('AddCalendar')}  />
       </TouchableOpacity>
 
     </View>
