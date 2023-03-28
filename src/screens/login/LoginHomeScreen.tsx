@@ -6,6 +6,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+
 import {LoginButton} from '../../component/ButtonComponent';
 import axios from 'axios';
 import {useRecoilState} from 'recoil';
@@ -20,23 +21,45 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {userEmailAtom} from '../../atom/atom';
+import {
+  childCheckboxState,
+  parentCheckboxState,
+  userEmailAtom,
+  userNameState,
+} from '../../atom/atom';
+import {getUserInfo} from '../../common/FamilyApi';
 
 export default function LoginHomeScreen({navigation}) {
+  const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useRecoilState(userEmailAtom);
+
   const toGoSignUPBtn = () => {
-    return navigation.navigate('Signup');
+    if (userInfo.nickname && userInfo.familyPassword === '') {
+      navigation.navigate('CreateFamily');
+    } else if (userInfo.nickname && userInfo.familyPassword) {
+      navigation.navigate('Nav');
+    } else if (userInfo.nickname === '' && userInfo.familyPassword === '') {
+      navigation.navigate('Signup');
+    }
   };
 
-  const toGoLoginBtn = () => {
-    return navigation.navigate('Nav');
-  };
+  //유저정보 받아오기
+  useEffect(() => {
+    const init = async () => {
+      const res = await getUserInfo();
+      // console.log('INIT', res);
+      setUserInfo(res);
+    };
+    init();
+    //console.log('###', user);
+  }, []);
 
   //구글 로그인 코드
-  const [user, setUser] = useRecoilState(userEmailAtom);
 
   useEffect(() => {
     GoogleSignin.configure({
-      iosClientId: '1052651211735-6dt4lsb3g9bs5n0ok3onct0s4qc51gbo.apps.googleusercontent.com',
+      iosClientId:
+        '1052651211735-6dt4lsb3g9bs5n0ok3onct0s4qc51gbo.apps.googleusercontent.com',
       webClientId:
         '1052651211735-c39hr3egfh2rkan1s8s87l4321af2h4j.apps.googleusercontent.com',
       androidClientId:
@@ -50,7 +73,6 @@ export default function LoginHomeScreen({navigation}) {
   function tokenSubmit(idTokenData) {
     const url = 'http://3.37.21.121:8080/api/auth/googleLogin';
     return axios.post(url, idTokenData);
-    
   }
 
   //사용자가 로그인하도록 모달띄움 , 로그인되면 userinfo객체 반환
@@ -65,19 +87,19 @@ export default function LoginHomeScreen({navigation}) {
       //  console.log(userInfo.idToken);
       const idTokenData = {idToken: userInfo.idToken};
       const {data} = await tokenSubmit(idTokenData);
-      const jwt = data.jwtToken
-      const storeData = async ()=>{
-        try{
-           await AsyncStorage.setItem("token", jwt)
-           console.log("token 등록 완료")
-        }catch(error){
-            console.log(error)
+      const jwt = data.jwtToken;
+      const storeData = async () => {
+        try {
+          await AsyncStorage.setItem('token', jwt);
+          console.log('token 등록 완료');
+          console.log('유저정보', userInfo);
+        } catch (error) {
+          console.log(error);
         }
-    }
-    storeData();
-    
+      };
+      storeData();
+
       console.log(data, '전송완료');
-      
     } catch (error) {
       console.log('Message___', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -111,10 +133,10 @@ export default function LoginHomeScreen({navigation}) {
       if (error.code === statusCodes.SIGN_IN_REQUIRED) {
         alert('User has not signed in yet');
         console.log('User has not signed in yet');
-      } else {
+      } /*else {
         alert('Something went wrong');
         console.log('Something went wrong');
-      }
+      }*/
     }
   };
 

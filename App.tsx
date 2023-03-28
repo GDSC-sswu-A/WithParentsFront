@@ -1,15 +1,14 @@
-
 import React, {useEffect} from 'react';
 
-import SettingScreen from "./src/screens/SettingScreen";
-import CreateFamilyScreen from "./src/screens/CreateFamilyScreen";
-import JoinFamilyScreen from "./src/screens/JoinFamilyScreen";
-import GlobalNav from "./src/screens/GlobalNav";
-import AddCalendar from "./src/screens/Calendar/AddCalendar"
-import EditCalendar from "./src/screens/Calendar/EditCalendar";
-import GalleryWriteScreen from "./src/screens/Gallery/GalleryWriteScreen"
-import WrittenGalleryScreen from "./src/screens/Gallery/WrittenGalleryScreen";
-import AddmedipageScreen from "./src/screens/Medicine/AddMediPage";
+import SettingScreen from './src/screens/SettingScreen';
+import CreateFamilyScreen from './src/screens/CreateFamilyScreen';
+import JoinFamilyScreen from './src/screens/JoinFamilyScreen';
+import GlobalNav from './src/screens/GlobalNav';
+import AddCalendar from './src/screens/Calendar/AddCalendar';
+import EditCalendar from './src/screens/Calendar/EditCalendar';
+import GalleryWriteScreen from './src/screens/Gallery/GalleryWriteScreen';
+import WrittenGalleryScreen from './src/screens/Gallery/WrittenGalleryScreen';
+import AddmedipageScreen from './src/screens/Medicine/AddMediPage';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RecoilRoot, useRecoilState} from 'recoil';
@@ -127,30 +126,28 @@ function App() {
             })}
           />
           {/* calendar */}
-       <Stack.Screen
-      name="AddCalendar"
-      component={AddCalendar}
-      options={({navigation})=>({
-        title : 'New Event',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
-       <Stack.Screen
-      name="EditCalendar"
-      component={EditCalendar}
-      options={({navigation})=>({
-        title : 'Edit Event',
-        headerTintColor: '#FFFFFF',
-        headerStyle : {
-          backgroundColor :'#AEC195',
-        },
-      })}
-      />
-
-
+          <Stack.Screen
+            name="AddCalendar"
+            component={AddCalendar}
+            options={({navigation}) => ({
+              title: 'New Event',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
+          <Stack.Screen
+            name="EditCalendar"
+            component={EditCalendar}
+            options={({navigation}) => ({
+              title: 'Edit Event',
+              headerTintColor: '#FFFFFF',
+              headerStyle: {
+                backgroundColor: '#AEC195',
+              },
+            })}
+          />
 
           <Stack.Screen
             name="JoinFamily"

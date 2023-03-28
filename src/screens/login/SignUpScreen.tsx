@@ -15,12 +15,18 @@ import {
 } from 'react-native';
 import {useRecoilState} from 'recoil';
 import {PostUser} from '../../common/FamilyApi';
+import {
+  childCheckboxState,
+  parentCheckboxState,
+  userNameState,
+} from '../../atom/atom';
 
 export default function SignUpScreen({navigation}) {
   let bouncyCheckboxRef: BouncyCheckbox | null = null;
-  const [parentCheckbox, parentSetCheckbox] = useState(false);
-  const [childCheckbox, childSetcheckbox] = useState(false);
-  const [username, setuserName] = useState('');
+  const [parentCheckbox, parentSetCheckbox] =
+    useRecoilState(parentCheckboxState);
+  const [childCheckbox, childSetcheckbox] = useRecoilState(childCheckboxState);
+  const [username, setuserName] = useRecoilState(userNameState);
   const [isOk, setIsOk] = useState(false);
 
   useEffect(() => {
