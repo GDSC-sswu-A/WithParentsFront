@@ -11,8 +11,9 @@ interface ILocation {
   longitude : number;
 }
 export default function Map(navigation) {
-  const [location, setLocation] = useState<ILocation | undefined>(37.78825,-122.4324);
-
+  // const [location, setLocation] = useState<ILocation | undefined>(37.579209,127.059516);
+  const [lat, setLat] = useState(37.579209);
+  const [lon, setLon] = useState(127.05916)
   useEffect(() => {
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization('always');
@@ -20,10 +21,15 @@ export default function Map(navigation) {
     Geolocation.getCurrentPosition(
       position => {
         const {latitude, longitude} = position.coords;
-        setLocation({
-          latitude,
-          longitude,
-        });
+        console.log(latitude, longitude, "$$")
+        setLat(latitude)
+        setLon(longitude);
+        // setLocation({
+        //   latitude,
+        //   longitude,
+        // });
+        let location = {"latitude": lat, "longitude": lon}
+        console.log('?',location)
       },
       (e) => {
         console.log("error!!!!!!!!!!",e.code, e.message);
@@ -31,19 +37,20 @@ export default function Map(navigation) {
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     )
     const postlocation = async () => {
+      console.log('here', location)
       const result = await postLocationInfo(location);
   };
   postlocation();
     
-  }, []);
-  
+  }, [location]);
+  let location = {"latitude": lat, "longitude": lon}
   
   return (
     <View style={styles.container}>
       
       <Text style={styles.title}>Parent's location</Text>
       <View style={styles.map}>
-        <MapViewComponent location={location}/>
+       <MapViewComponent location={location}/>
     </View>
 
     </View>

@@ -4,8 +4,9 @@ import MapView, {Marker, PROVIDER_GOOGLE} from "react-native-maps"
 import { getLocationInfo, getLastTime } from '../common/MapApi';
 
 export default function MapViewComponent(location : any) {
+  console.log("com",location.location)
   const [parents, setParents] = useState([
-    {latitude: "", longitude: "", nickname: "test", userId: 0}
+    {latitude: location.location.latitude, longitude: location.location.longitude, nickname: "test", userId: 0}
   ]);
   const [open, setOpen] = useState(false);
   const [pick, setPick] = useState(null);
@@ -20,24 +21,25 @@ export default function MapViewComponent(location : any) {
   getlocation();
     const getTime = async () => {
       const result = await getLastTime();
-      console.log(result)
+      // console.log(result, ">>>>>>>>>>")
       setTime(result)
     }
     getTime();
  }, [pick]);
-
+ console.log(time, ">>>>>>>>>>")
  console.log(pick,"pick")
-  const Pick = (props) => {
-    return(
-      props.map((i)=>(
-          <TouchableOpacity>
-            <Text>{i.nickname}</Text>
-          </TouchableOpacity>
-      )
-    ))
-  }
+  // const Pick = (props) => {
+  //   return(
+  //     props.map((i)=>(
+  //         <TouchableOpacity>
+  //           <Text>{i.nickname}</Text>
+  //         </TouchableOpacity>
+  //     )
+  //   ))
+  // }
 
   console.log(parents, "MapCompo")
+  console.log(location, "HI")
     return (
         <>
           <View style={styles.container}>
@@ -56,14 +58,14 @@ export default function MapViewComponent(location : any) {
           style={styles.container}
           provider={PROVIDER_GOOGLE}
           initialRegion={{
-            latitude: pick? pick.latitude:location.latitude,
-            longitude: pick? pick.longitude:location.longitude,
+            latitude: pick? pick.latitude:location.location.latitude,
+            longitude: pick? pick.longitude:location.location.longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
         >
           <Marker
-            coordinate={{latitude: pick? pick.latitude:location.latitude,longitude: pick? pick.longitude:location.longitude}}
+            coordinate={{latitude: pick? pick.latitude:location.location.latitude,longitude: pick? pick.longitude:location.location.longitude}}
             title='Here'
             description="recent location"
           />
