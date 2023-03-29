@@ -57,7 +57,7 @@ export const mediTimeAtom3 = atom<any>({
 
 export const mediTimeBtnAtom = atom<any>({
   key: 'mediTimeBtnAtom',
-  default: [],
+  default: false,
 });
 export const clickImageDescription = atom<any>({
   key: 'clickImageDescription',

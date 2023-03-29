@@ -1,17 +1,10 @@
 import React, {useState} from 'react';
 import {View, Modal, StyleSheet, Text, TouchableHighlight} from 'react-native';
 import {useRecoilState} from 'recoil';
-import {mediTimeBtnAtom} from '../atom/atom';
-const date = new Date();
-//const [mediTimeBtn, setMediTimeBtn] = useRecoilState(mediTimeBtnAtom);
 
-const CheckModal = ({
-  showModal,
-  setShowModal,
-  children,
-  setMediTimeBtn,
-  mediTimeBtn,
-}) => {
+const date = new Date();
+
+const CheckModal = ({showModal, setShowModal, children, getClickComplete}) => {
   return (
     <View style={styles.centeredView}>
       <View style={styles.modal_bg}>
@@ -31,7 +24,8 @@ const CheckModal = ({
                     style={{...styles.openButton}}
                     onPress={() => {
                       setShowModal(!showModal);
-                      setMediTimeBtn(!mediTimeBtn);
+                      getClickComplete(true);
+                      //setclickComplete(!clickComplete);
                     }}>
                     <Text style={styles.textStyle}>Yes</Text>
                   </TouchableHighlight>

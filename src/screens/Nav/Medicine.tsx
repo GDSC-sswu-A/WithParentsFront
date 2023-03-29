@@ -11,7 +11,6 @@ import {
 import React, {useState, useEffect} from 'react';
 import {
   AddButton,
-  GrayButton,
   GreenButton,
   YellowGreenButton,
 } from '../../component/ButtonComponent';
@@ -24,13 +23,16 @@ import {mediTimeBtnAtom} from '../../atom/atom';
 
 export default function Medicine({navigation}) {
   const [userMedicines, setUserMedicines] = React.useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); //check모달 onoff
   const weekData = ['Mon', ' Tue', ' Wed', ' Thu', ' Fri', ' Sat', ' Sun'];
-  const [selectbtnValue, setBtnValue] = useState();
-  const [mediTimeBtn, setMediTimeBtn] = useState(false);
-  const [mediTimeList, setMediTimeList] = useRecoilState(mediTimeBtnAtom);
-  const date = new Date();
+  const [selectbtnValue, setBtnValue] = useState(); //시간 전달용
+  const [clickComplete, setclickComplete] = useState(false); //yes누르면 값 변경
+  const [isSelect, setSelect] = useState([false, false, false, false]);
 
+  const date = new Date();
+  const getClickComplete = () => {
+    setclickComplete(!clickComplete);
+  };
   const openModal = btnValue => {
     setShowModal(true);
     setBtnValue(btnValue);
@@ -40,17 +42,6 @@ export default function Medicine({navigation}) {
       const result = await getMedicineInfo(1);
       const medicineData = result.request._response;
       setUserMedicines(JSON.parse(medicineData));
-      //timedata 이중배열돌기..?
-      for (let i = 0; i < JSON.parse(medicineData).length; i++) {
-        setMediTimeList(prev => [
-          ...prev,
-          JSON.parse(medicineData)[i].dosingTimes,
-        ]);
-      }
-      /*setMediTimeList(
-        mediTimeList.filter((v, i) => mediTimeList.indexOf(v) === i),
-      );*/
-      console.log(mediTimeList);
     } catch (e) {
       console.log(e);
     }
@@ -61,7 +52,7 @@ export default function Medicine({navigation}) {
 
   const TogoAddMediPage = () => {
     navigation.navigate('Addmedicine');
-    console.log(mediTimeList);
+    console.log(userMedicines);
   };
 
   const deleteMediBtn = async mediId => {
@@ -72,27 +63,6 @@ export default function Medicine({navigation}) {
       console.log(e);
     }
   };
-
-  /*const createTimeArray = () => {
-    /* for (let i = 0; i < userMedicines.length; i++) {
-      let copy = [...newTimeArray];
-      setNewTimeArray(copy[i]);
-    }
-    console.log('timedata', newTimeArray);*/
-  /*for (let i = 0; i < userMedicines.length; i++) {
-      let array = userMedicines[i].dosingTime;
-      for (let k = 0; k < array.length; k++) {
-        setNewTimeArray(...newTimeArray, array[k]);
-
-            for (let i = 0; i < userMedicines.length; i++) {
-      newTimeArray.push(userMedicines[i].dosingTimes);
-    }
-    console.log(userMedicines[1].dosingTimes);
-    console.log(newTimeArray);
-      }
-    }
-  };
-  };*/
 
   const ListItem = ({userMedicines}) => {
     return (
@@ -144,17 +114,25 @@ export default function Medicine({navigation}) {
                     style={[
                       styles.buttonContainer,
                       {
-                        backgroundColor: userMedicines?.dosingTimes[i]
-                          ? '#FFFBE9'
-                          : 'gray',
+                        backgroundColor: isSelect[i] ? '#FFFBE9' : '#FFFBE9',
                       },
                     ]}
                     key={i}
                     onPress={() => {
                       openModal(content);
-                      console.log(content);
+                      console.log(clickComplete);
+
+                      setSelect({
+                        ...isSelect,
+                        [i]: !isSelect[i],
+                      });
+                      //  setMediTimeBtn(!mediTimeBtn);
                     }}>
-                    <Text>{content.substr(0, 5)}</Text>
+                    {isSelect[i] ? (
+                      <Text>complete</Text>
+                    ) : (
+                      <Text>{content.substr(0, 5)}</Text>
+                    )}
                   </Pressable>
                 </>
               );
@@ -167,25 +145,10 @@ export default function Medicine({navigation}) {
               children={selectbtnValue.substr(0, 5)}
               showModal={showModal}
               setShowModal={setShowModal}
-              setMediTimeBtn={setMediTimeBtn}
-              mediTimeBtn={mediTimeBtn}></CheckModal>
+              getClickComplete={getClickComplete}></CheckModal>
           )}
         </View>
         <View style={styles.mediIcons}>
-          {/*} {!userMedicines?.notificationStatus ? (
-            <TouchableOpacity
-              style={[styles.actionIcon]}
-              onPress={TogoAddMediPage}>
-              <ICON name="notifications-off" size={18} color={'white'}></ICON>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              style={[styles.actionIcon]}
-              onPress={TogoAddMediPage}>
-              <ICON name="notifications" size={18} color={'white'}></ICON>
-            </TouchableOpacity>
-          )}*/}
-
           <TouchableOpacity
             style={[styles.actionIcon, {backgroundColor: 'red'}]}
             onPressIn={() => {
@@ -229,7 +192,7 @@ const styles = StyleSheet.create({
   btnTab: {
     flexDirection: 'row',
     alignItems: 'center',
-    left: 200,
+    marginLeft: 180,
   },
   actionIcon: {
     height: 25,
@@ -249,7 +212,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   mediAddBtn: {
-    marginLeft: 20,
+    marginLeft: 15,
     marginBottom: 10,
   },
   userTab: {
@@ -278,6 +241,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 50,
+    backgroundColor: 'gray',
   },
   mediIcons: {
     flexDirection: 'row',
