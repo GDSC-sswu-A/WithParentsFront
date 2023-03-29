@@ -38,7 +38,7 @@ export default function LoginHomeScreen({navigation}) {
       navigation.navigate('CreateFamily');
     } else if (userInfo.nickname && userInfo.familyPassword) {
       navigation.navigate('Nav');
-    } else if (userInfo.nickname === '' && userInfo.familyPassword === '') {
+    } else  {
       navigation.navigate('Signup');
     }
   };

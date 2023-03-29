@@ -10,16 +10,20 @@ import {
 export default function RecentPhotoComponent(props) {
     // console.log(props.photo[0].imageUrl)
     // let recentPonto = props.photo[0].imageUrl;
-    const recentPhoto = {uri : props.photo[0].imageUrl}
+    const recentPhoto = props? {uri : props.photo[0].imageUrl} : null
     return (
-    <View style={styles.container}>
+        <>
+        {props? <View style={styles.container}>
         <Text style={styles.title}>recently Photo</Text>
         <Image 
         style={styles.image}
         resizeMode= 'contain'
         source = {recentPhoto}
         />
-    </View>
+    </View> : null
+    }
+        </>
+
     
     
   )
